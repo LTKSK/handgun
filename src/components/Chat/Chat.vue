@@ -3,6 +3,9 @@
   <div class="channel-name">
     Hello Chat at {{ channel }}
   </div>
+  <div class="review-target">
+    <image-item />
+  </div>
   <div class="view">
     <ul>
       <li v-for="channel in channels">
@@ -29,6 +32,7 @@ import {
     GET_CHANNELS
 } from '../../store/mutation-types'
 import MessageList from './MessageList'
+import Image from '../ReviewTarget/Image'
 export default {
   name: 'chat',
   data() {
@@ -38,6 +42,7 @@ export default {
     }
   },
   components: {
+    'image-item': Image,
     'message-list': MessageList
   },
   mounted() {
@@ -70,6 +75,9 @@ ul {
   text-align: center;
 }
 .message-form {
+  text-align: center;
+}
+.review-target {
   text-align: center;
 }
 </style>
