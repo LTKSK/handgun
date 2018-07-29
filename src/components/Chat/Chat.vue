@@ -13,9 +13,7 @@
     </ul>
   </div>
   <div>
-    <ul class="message-list">
-      <li v-for="msg in messages">{{ msg }}</li>
-    </ul>
+    <message-list v-bind:messages="messages"/>
   </div>
   <div class="message-form">
     <input type="text" v-model="message">
@@ -25,19 +23,39 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+import {
+    SET_MESSAGE,
+    GET_CHANNELS
+} from '../../store/mutation-types'
+import MessageList from './MessageList'
 export default {
   name: 'chat',
   data() {
     return {
       channel: this.$route.params.channelname,
-      channels: ["movie", "image"],
       message: "",
-      messages: [],
     }
   },
+  components: {
+    'message-list': MessageList
+  },
+  mounted() {
+    this.GET_CHANNELS()
+  },
+  computed: {
+    ...mapGetters([
+      'messages',
+      'channels'
+    ]),
+  },
   methods: {
+    ...mapActions([
+      SET_MESSAGE,
+      GET_CHANNELS
+    ]),
     send_message() {
-      this.messages.push(this.message);
+      this.SET_MESSAGE(this.message)
       this.message = "";
     }
   }
@@ -50,12 +68,6 @@ ul {
 }
 .channel-name {
   text-align: center;
-}
-.message-list {
-  text-align: center;
-  grid-area: 2/2;
-  height: 300px;
-  overflow: scroll;
 }
 .message-form {
   text-align: center;

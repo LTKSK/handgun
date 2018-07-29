@@ -9,3 +9,12 @@ export default {
   name: 'App'
 }
 </script>
+
+<style>
+body {
+    margin: 0;
+}
+#app {
+    font-family: 'Avenir', Helverica, Arial, sans-serif;
+}
+</style>
