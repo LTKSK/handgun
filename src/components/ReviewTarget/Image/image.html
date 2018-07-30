@@ -1,4 +1,23 @@
 <div>
   <div>Image: {{ name }}</div>
-  <canvas id="glcanvas" witdh="640" height="480"/>
+  <canvas id="glcanvas"/>
+  <script id="vs" type="x-shader/x-vertex">#version 300 es
+in vec3 vertexPosition;
+in vec4 color;
+out vec4 vColor;
+
+void main() {
+    vColor = color;
+    gl_Position = vec4(vertexPosition, 1.0);
+}
+  </script>
+  <script id="fs" type="x-shader/x-fragment">#version 300 es
+precision highp float;
+in vec4 vColor;
+out vec4 fragmentColor;
+
+void main() {
+    fragmentColor = vColor;
+}
+  </script>
 </div>
