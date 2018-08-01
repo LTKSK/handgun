@@ -1,7 +1,7 @@
 export default {
   name: "image-item",
   data() {
-    const initShaders = (gl) => {
+    const createShaderProgram = (gl) => {
       const vertexShaderSource = document.querySelector("#vs").text
       const fragmentShaderSource = document.querySelector("#fs").text
       // create shader program
@@ -33,46 +33,71 @@ export default {
         console.log(info)
       }
       gl.useProgram(program)
-
+      return program
+    }
+    const setupTexture = (gl) => {
+      const textureImage = new Image()
+      // get image source from id "rtimg(review target image)"
+      textureImage.src = document.querySelector("#rtimg").src
+      console.log(document.querySelector("#rtimg").src)
+      gl.bindTexture(gl.TEXTURE_2D, gl.createTexture())
+      gl.texImage2D(gl.TEXTURE_2D,    //format
+                    0,                //mipmap level
+                    gl.RGBA,          //internal color format
+                    gl.RGBA,          //color format
+                    gl.UNSIGNED_BYTE, //data format
+                    textureImage)     //texture
+      gl.generateMipmap(gl.TEXTURE_2D)
+    }
+    const setupBuffers = (gl) => {
+      const program = createShaderProgram(gl)
+      setupTexture(gl)
       //prepare buffers
       const vertexBuffer = gl.createBuffer()
-      const colorBuffer = gl.createBuffer()
+      const indexBuffer = gl.createBuffer()
+      // const colorBuffer = gl.createBuffer()
       const vertexAttribLocation = gl.getAttribLocation(program, "vertexPosition")
-      const colorAttribLocation = gl.getAttribLocation(program, "color")
+      const textureAttribLocation = gl.getAttribLocation(program, "texCoord")
       const VERTEX_SIZE = 3
-      const COLOR_SIZE = 4
+      const TEXTURE_SIZE = 2
+      const STRIDE = (VERTEX_SIZE + TEXTURE_SIZE) * Float32Array.BYTES_PER_ELEMENT
+      const POSITION_OFFSET = 0
+      // texture_offset is on after the position so *3
+      const TEXTURE_OFFSET = 3 * Float32Array.BYTES_PER_ELEMENT
       // should bind before binding buffer
       gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
       // enable 'in' variables
       gl.enableVertexAttribArray(vertexAttribLocation)
-      gl.vertexAttribPointer(vertexAttribLocation, VERTEX_SIZE, gl.FLOAT, false, 0, 0)
-      gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer)
-      gl.enableVertexAttribArray(colorAttribLocation)
-      gl.vertexAttribPointer(colorAttribLocation, COLOR_SIZE, gl.FLOAT, false, 0, 0)
-
+      gl.enableVertexAttribArray(textureAttribLocation)
+      gl.vertexAttribPointer(vertexAttribLocation, VERTEX_SIZE, gl.FLOAT, false, STRIDE, POSITION_OFFSET)
+      gl.vertexAttribPointer(textureAttribLocation, TEXTURE_SIZE, gl.FLOAT, false, STRIDE, TEXTURE_OFFSET)
+      // merge vertices and colors alternatively for to use interleaving
       const vertices = new Float32Array([
-        -0.5,  0.5, 0.0,
-        -0.5, -0.5, 0.0,
-         0.5,  0.5, 0.0,
-        -0.5, -0.5, 0.0,
-         0.5, -0.5, 0.0,
-         0.5,  0.5, 0.0
+        // upper left
+        -1.0,  1.0, 0.0,
+         0.0, 0.0,
+        // lower left
+        -1.0, -1.0, 0.0,
+         0.0, 1.0,
+        // upper right
+         1.0,  1.0, 0.0,
+         1.0, 0.0,
+        // lower right
+         1.0, -1.0, 0.0,
+         1.0, 1.0,
       ])
-      const colors = new Float32Array([
-        1.0, 0.0, 0.0, 1.0,
-        0.0, 1.0, 0.0, 1.0,
-        0.0, 0.0, 1.0, 1.0,
-        0.0, 1.0, 0.0, 1.0,
-        0.0, 0.0, 0.0, 1.0,
-        0.0, 0.0, 1.0, 1.0,
+      const indexes = new Uint16Array([
+        0, 1, 2,
+        1, 3, 2
       ])
 
       gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
       gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW)
-      gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer)
-      gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STATIC_DRAW)
-      const VERTEX_NUMS = 6
-      gl.drawArrays(gl.TRIANGLES, 0, VERTEX_NUMS)
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer)
+      gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indexes, gl.STATIC_DRAW)
+
+      const indexSize = indexes.length
+      gl.drawElements(gl.TRIANGLES, indexSize, gl.UNSIGNED_SHORT, 0)
       gl.flush()
     }
     const initWebGL = canvas => {
@@ -82,25 +107,26 @@ export default {
       }
       catch (e) { console.log(e) }
       if (!gl) {
-        alert("WebGLを初期化出来ませんでした。サポートされていないブラウザです")
+        alert("WebGL initialize failed. This browser is not supported.")
       }
       return gl
     }
     const start = () => {
       const canvas = document.querySelector("#glcanvas")
       canvas.width = 640
-      canvas.height = 480
+      canvas.height = 640
       const gl = initWebGL(canvas)
       if (gl) {
         gl.clearColor(0.0, 0.0, 0.0, 1.0)
         gl.enable(gl.DEPTH_TEST)
+        gl.enable(gl.CULL_FACE)
         gl.depthFunc(gl.LEQUAL)
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
-        initShaders(gl)
+        setupBuffers(gl)
       }
     }
     return {
-      name: "tmp",
+      name: "review",
       start: start,
     }
   },

@@ -1,23 +1,28 @@
 <div>
   <div>Image: {{ name }}</div>
   <canvas id="glcanvas"/>
+  <img src="../../ReviewTarget/assets/icon.jpg" style="display: none" id="rtimg">
   <script id="vs" type="x-shader/x-vertex">#version 300 es
 in vec3 vertexPosition;
 in vec4 color;
-out vec4 vColor;
+in vec2 texCoord;
+out vec2 textureCoord;
 
 void main() {
-    vColor = color;
+    textureCoord = texCoord;
     gl_Position = vec4(vertexPosition, 1.0);
 }
   </script>
   <script id="fs" type="x-shader/x-fragment">#version 300 es
 precision highp float;
 in vec4 vColor;
+
+uniform sampler2D tex;
+in vec2 textureCoord;
 out vec4 fragmentColor;
 
 void main() {
-    fragmentColor = vColor;
+    fragmentColor = texture(tex, textureCoord);
 }
   </script>
 </div>

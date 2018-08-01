@@ -21,7 +21,7 @@ export default {
 .msg-list {
   text-align: center;
   grid-area: 2/2;
-  height: 300px;
+  height: 100px;
   overflow: scroll;
 }
 </style>
