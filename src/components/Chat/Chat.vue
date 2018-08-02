@@ -6,14 +6,8 @@
   <div class="review-target">
     <image-item />
   </div>
-  <div class="view">
-    <ul>
-      <li v-for="channel in channels">
-        <router-link v-bind:to="{name: 'channel', params: {channelname: channel}}">
-          {{ channel }}
-        </router-link>
-      </li>
-    </ul>
+  <div>
+    <channel-list />
   </div>
   <div>
     <message-list v-bind:messages="messages"/>
@@ -29,9 +23,9 @@
 import { mapGetters, mapActions } from 'vuex'
 import {
     SET_MESSAGE,
-    GET_CHANNELS
 } from '../../store/mutation-types'
 import MessageList from './MessageList'
+import ChannelList from '../Channel/ChannelList'
 import Image from '../ReviewTarget/Image'
 export default {
   name: 'chat',
@@ -43,21 +37,17 @@ export default {
   },
   components: {
     'image-item': Image,
-    'message-list': MessageList
-  },
-  mounted() {
-    this.GET_CHANNELS()
+    'message-list': MessageList,
+    'channel-list': ChannelList,
   },
   computed: {
     ...mapGetters([
       'messages',
-      'channels'
     ]),
   },
   methods: {
     ...mapActions([
       SET_MESSAGE,
-      GET_CHANNELS
     ]),
     send_message() {
       this.SET_MESSAGE(this.message)
@@ -68,9 +58,6 @@ export default {
 </script>
 
 <style scoped>
-ul {
-  list-style: none;
-}
 .channel-name {
   text-align: center;
 }
