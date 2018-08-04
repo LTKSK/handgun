@@ -1,6 +1,6 @@
 <template>
   <ul class="msg-list">
-    <li v-for="msg in messages">{{ msg }}</li>
+    <li v-for="msg in messages" :key="msg">{{ msg }}</li>
   </ul>
 </template>
 
@@ -20,8 +20,8 @@ export default {
 <style scoped>
 .msg-list {
   text-align: center;
-  grid-area: 2/2;
-  height: 100px;
+  /* grid-area: 2/2; */
+  /* height: 100%; */
   overflow: scroll;
 }
 </style>

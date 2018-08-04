@@ -1,20 +1,22 @@
 <template>
-<div>
+<div class="view">
   <div class="channel-name">
     Hello Chat at {{ channel }}
   </div>
   <div class="review-target">
+    <div class="chat-elements">
+      <div>
+        <message-list v-bind:messages="messages"/>
+      </div>
+      <div class="message-form">
+        <input type="text" v-model="message">
+        <input type="button" value="send" v-on:click="send_message" />
+      </div>
+    </div>
     <image-item />
   </div>
   <div>
     <channel-list />
-  </div>
-  <div>
-    <message-list v-bind:messages="messages"/>
-  </div>
-  <div class="message-form">
-    <input type="text" v-model="message">
-    <input type="button" value="send" v-on:click="send_message" />
   </div>
 </div>
 </template>
@@ -58,6 +60,15 @@ export default {
 </script>
 
 <style scoped>
+ul {
+  list-style: none;
+}
+.view {
+  display: grid;
+}
+.chat-elements {
+  float: right;
+}
 .channel-name {
   text-align: center;
 }

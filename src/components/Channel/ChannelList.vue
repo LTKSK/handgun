@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li v-for="channel in channels">
+      <li v-for="channel in channels" :key="channel">
         <router-link v-bind:to="{name: 'channel', params: {channelname: channel}}">
           {{ channel }}
         </router-link>
