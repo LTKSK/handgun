@@ -1,7 +1,7 @@
 export default {
   name: "image-item",
-  data() {
-    const createShaderProgram = (gl) => {
+  methods: {
+    createShaderProgram(gl) {
       const vertexShaderSource = document.querySelector("#vs").text
       const fragmentShaderSource = document.querySelector("#fs").text
       // create shader program
@@ -34,12 +34,13 @@ export default {
       }
       gl.useProgram(program)
       return program
-    }
-    const setupTexture = (gl) => {
+    },
+
+    setupTexture(gl) {
       const textureImage = new Image()
       // get image source from id "rtimg(review target image)"
-      textureImage.src = document.querySelector("#rtimg").src
-      console.log(document.querySelector("#rtimg").src)
+      textureImage.src = document.querySelector("#review-target-img").src
+      console.log(document.querySelector("#review-target-img").src)
       gl.bindTexture(gl.TEXTURE_2D, gl.createTexture())
       gl.texImage2D(gl.TEXTURE_2D,    //format
                     0,                //mipmap level
@@ -48,10 +49,11 @@ export default {
                     gl.UNSIGNED_BYTE, //data format
                     textureImage)     //texture
       gl.generateMipmap(gl.TEXTURE_2D)
-    }
-    const setupBuffers = (gl) => {
-      const program = createShaderProgram(gl)
-      setupTexture(gl)
+    },
+
+    drawImage(gl) {
+      const program = this.createShaderProgram(gl)
+      this.setupTexture(gl)
       //prepare buffers
       const vertexBuffer = gl.createBuffer()
       const indexBuffer = gl.createBuffer()
@@ -96,11 +98,14 @@ export default {
       gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer)
       gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indexes, gl.STATIC_DRAW)
 
+      // draw
       const indexSize = indexes.length
       gl.drawElements(gl.TRIANGLES, indexSize, gl.UNSIGNED_SHORT, 0)
+      // gl.drawArrays(gl.LINE_STRIP)
       gl.flush()
-    }
-    const initWebGL = canvas => {
+    },
+
+    initWebGL(canvas) {
       let gl = null
       try {
         gl = canvas.getContext("webgl2")
@@ -111,26 +116,55 @@ export default {
       }
       return gl
     }
-    const start = () => {
+  },
+
+  data() {
+    const drawReviewTarget = () => {
       const canvas = document.querySelector("#glcanvas")
       canvas.width = 640
       canvas.height = 640
-      const gl = initWebGL(canvas)
+      const gl = this.initWebGL(canvas)
       if (gl) {
         gl.clearColor(0.0, 0.0, 0.0, 1.0)
         gl.enable(gl.DEPTH_TEST)
         gl.enable(gl.CULL_FACE)
         gl.depthFunc(gl.LEQUAL)
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
-        setupBuffers(gl)
+        this.drawImage(gl)
       }
+      // setTimeout(()=>{
+      //   drawReviewTarget()
+      // }, 60)
+    }
+    const eventSetup = () => {
+      const canvas = document.querySelector("#glcanvas")
+      // setup mouse callbacks
+      canvas.addEventListener("mouseup", ()=>{
+        console.log("mouse on")
+        this.on_click = false
+        console.log(this.on_click)
+      })
+      canvas.addEventListener("mousedown", ()=>{
+        console.log("mouse down")
+        this.on_click = true
+        console.log(this.on_click)
+      })
+      canvas.addEventListener("mousemove", (event)=>{
+        if(! this.on_click) {
+          return
+        }
+        console.log("mouse move")
+      })
     }
     return {
       name: "review",
-      start: start,
+      on_click: false,
+      drawReviewTarget,
+      eventSetup,
     }
   },
   mounted() {
-    this.start()
+    this.eventSetup()
+    this.drawReviewTarget()
   }
 }
