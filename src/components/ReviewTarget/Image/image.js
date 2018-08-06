@@ -1,9 +1,9 @@
 export default {
   name: "image-item",
   methods: {
-    createShaderProgram(gl) {
-      const vertexShaderSource = document.querySelector("#vs").text
-      const fragmentShaderSource = document.querySelector("#fs").text
+    createShaderProgram(gl, vs_id, fs_id) {
+      const vertexShaderSource = document.querySelector(vs_id).text
+      const fragmentShaderSource = document.querySelector(fs_id).text
       // create shader program
       const vertexShader= gl.createShader(gl.VERTEX_SHADER)
       gl.shaderSource(vertexShader, vertexShaderSource)
@@ -40,7 +40,6 @@ export default {
       const textureImage = new Image()
       // get image source from id "rtimg(review target image)"
       textureImage.src = document.querySelector("#review-target-img").src
-      console.log(document.querySelector("#review-target-img").src)
       gl.bindTexture(gl.TEXTURE_2D, gl.createTexture())
       gl.texImage2D(gl.TEXTURE_2D,    //format
                     0,                //mipmap level
@@ -52,12 +51,11 @@ export default {
     },
 
     drawImage(gl) {
-      const program = this.createShaderProgram(gl)
+      const program = this.createShaderProgram(gl, "#image-vs", "#image-fs")
       this.setupTexture(gl)
       //prepare buffers
       const vertexBuffer = gl.createBuffer()
       const indexBuffer = gl.createBuffer()
-      // const colorBuffer = gl.createBuffer()
       const vertexAttribLocation = gl.getAttribLocation(program, "vertexPosition")
       const textureAttribLocation = gl.getAttribLocation(program, "texCoord")
       const VERTEX_SIZE = 3
@@ -101,7 +99,50 @@ export default {
       // draw
       const indexSize = indexes.length
       gl.drawElements(gl.TRIANGLES, indexSize, gl.UNSIGNED_SHORT, 0)
-      // gl.drawArrays(gl.LINE_STRIP)
+      gl.flush()
+    },
+
+    drawLines(gl) {
+      const program = this.createShaderProgram(gl, "#line-vs", "#line-fs")
+      //prepare buffers
+      const vertexBuffer = gl.createBuffer()
+      const colorBuffer = gl.createBuffer()
+      const vertexAttribLocation = gl.getAttribLocation(program, "vertexPosition")
+      const colorAttribLocation = gl.getAttribLocation(program, "color")
+      const VERTEX_SIZE = 3
+      const COLOR_SIZE = 4
+      // should bind before binding buffer
+      gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
+      // enable 'in' variables
+      gl.enableVertexAttribArray(vertexAttribLocation)
+      gl.vertexAttribPointer(vertexAttribLocation, VERTEX_SIZE, gl.FLOAT, false, 0, 0)
+
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer)
+      gl.enableVertexAttribArray(colorAttribLocation)
+      gl.vertexAttribPointer(colorAttribLocation, COLOR_SIZE, gl.FLOAT, false, 0, 0)
+      const vertices = new Float32Array([
+        // upper left
+        -0.5,  0.5, 0.0,
+        // lower left
+        -0.5, -0.5, 0.0,
+        // upper right
+         0.5,  0.5, 0.0,
+      ])
+      const colors = new Float32Array([
+         1.0, 0.0, 0.0, 0.0,
+         1.0, 0.0, 0.0, 0.0,
+         1.0, 0.0, 0.0, 0.0
+      ])
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
+      gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW)
+      gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer)
+      gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STATIC_DRAW)
+
+      // draw
+      const vertex_size = vertices.length/3
+      gl.drawArrays(gl.LINE_STRIP, 0, vertex_size)
       gl.flush()
     },
 
@@ -115,28 +156,26 @@ export default {
         alert("WebGL initialize failed. This browser is not supported.")
       }
       return gl
-    }
-  },
+    },
 
-  data() {
-    const drawReviewTarget = () => {
+    drawReviewTarget() {
       const canvas = document.querySelector("#glcanvas")
       canvas.width = 640
       canvas.height = 640
       const gl = this.initWebGL(canvas)
-      if (gl) {
-        gl.clearColor(0.0, 0.0, 0.0, 1.0)
-        gl.enable(gl.DEPTH_TEST)
-        gl.enable(gl.CULL_FACE)
-        gl.depthFunc(gl.LEQUAL)
-        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
-        this.drawImage(gl)
+      if (!gl) {
+        return
       }
-      // setTimeout(()=>{
-      //   drawReviewTarget()
-      // }, 60)
-    }
-    const eventSetup = () => {
+      gl.clearColor(0.0, 0.0, 0.0, 1.0)
+      gl.enable(gl.DEPTH_TEST)
+      gl.enable(gl.CULL_FACE)
+      gl.depthFunc(gl.LEQUAL)
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+      this.drawImage(gl)
+      this.drawLines(gl)
+    },
+
+    eventSetup() {
       const canvas = document.querySelector("#glcanvas")
       // setup mouse callbacks
       canvas.addEventListener("mouseup", ()=>{
@@ -156,15 +195,15 @@ export default {
         console.log("mouse move")
       })
     }
+  },
+  data() {
     return {
       name: "review",
       on_click: false,
-      drawReviewTarget,
-      eventSetup,
     }
   },
   mounted() {
-    this.eventSetup()
     this.drawReviewTarget()
+    this.eventSetup()
   }
 }

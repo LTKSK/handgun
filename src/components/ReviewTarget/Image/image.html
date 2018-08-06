@@ -2,7 +2,7 @@
   <div>Image: {{ name }}</div>
   <canvas id="glcanvas"/>
   <img src="../../ReviewTarget/assets/icon.jpg" style="display: none" id="review-target-img">
-  <script id="vs" type="x-shader/x-vertex">#version 300 es
+  <script id="image-vs" type="x-shader/x-vertex">#version 300 es
 in vec3 vertexPosition;
 in vec4 color;
 in vec2 texCoord;
@@ -14,7 +14,7 @@ void main() {
     gl_Position = vec4(vertexPosition, 1.0);
 }
   </script>
-  <script id="fs" type="x-shader/x-fragment">#version 300 es
+  <script id="image-fs" type="x-shader/x-fragment">#version 300 es
 precision highp float;
 in vec4 vColor;
 
@@ -24,6 +24,26 @@ out vec4 fragmentColor;
 
 void main() {
     fragmentColor = texture(tex, textureCoord);
+}
+  </script>
+
+  <script id="line-vs" type="x-shader/x-vertex">#version 300 es
+in vec3 vertexPosition;
+in vec4 color;
+out vec4 vColor;
+
+void main() {
+    vColor = color;
+    gl_Position = vec4(vertexPosition, 1.0);
+}
+  </script>
+  <script id="line-fs" type="x-shader/x-fragment">#version 300 es
+precision highp float;
+in vec4 vColor;
+out vec4 fragmentColor;
+
+void main() {
+    fragmentColor = vColor;
 }
   </script>
 </div>
