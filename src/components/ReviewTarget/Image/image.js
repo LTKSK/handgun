@@ -117,23 +117,11 @@ export default {
       gl.enableVertexAttribArray(vertexAttribLocation)
       gl.vertexAttribPointer(vertexAttribLocation, VERTEX_SIZE, gl.FLOAT, false, 0, 0)
 
-
       gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer)
       gl.enableVertexAttribArray(colorAttribLocation)
       gl.vertexAttribPointer(colorAttribLocation, COLOR_SIZE, gl.FLOAT, false, 0, 0)
-      const vertices = new Float32Array([
-        // upper left
-        -0.5,  0.5, 0.0,
-        // lower left
-        -0.5, -0.5, 0.0,
-        // upper right
-         0.5,  0.5, 0.0,
-      ])
-      const colors = new Float32Array([
-         1.0, 0.0, 0.0, 0.0,
-         1.0, 0.0, 0.0, 0.0,
-         1.0, 0.0, 0.0, 0.0
-      ])
+      const vertices = new Float32Array(this.vertexs)
+      const colors = new Float32Array(this.colors)
 
       gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
       gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW)
@@ -141,12 +129,16 @@ export default {
       gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STATIC_DRAW)
 
       // draw
-      const vertex_size = vertices.length/3
+      const vertex_size = vertices.length / 3
+      console.log(vertex_size)
       gl.drawArrays(gl.LINE_STRIP, 0, vertex_size)
       gl.flush()
     },
 
-    initWebGL(canvas) {
+    initWebGL() {
+      const canvas = document.querySelector("#glcanvas")
+      canvas.width = 640
+      canvas.height = 640
       let gl = null
       try {
         gl = canvas.getContext("webgl2")
@@ -154,16 +146,6 @@ export default {
       catch (e) { console.log(e) }
       if (!gl) {
         alert("WebGL initialize failed. This browser is not supported.")
-      }
-      return gl
-    },
-
-    drawReviewTarget() {
-      const canvas = document.querySelector("#glcanvas")
-      canvas.width = 640
-      canvas.height = 640
-      const gl = this.initWebGL(canvas)
-      if (!gl) {
         return
       }
       gl.clearColor(0.0, 0.0, 0.0, 1.0)
@@ -171,35 +153,49 @@ export default {
       gl.enable(gl.CULL_FACE)
       gl.depthFunc(gl.LEQUAL)
       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+      this.gl = gl
+      return gl
+    },
+
+    drawReviewTarget() {
+      const gl = this.initWebGL()
       this.drawImage(gl)
-      this.drawLines(gl)
     },
 
     eventSetup() {
       const canvas = document.querySelector("#glcanvas")
       // setup mouse callbacks
-      canvas.addEventListener("mouseup", ()=>{
-        console.log("mouse on")
+      canvas.addEventListener("mouseup", () => {
         this.on_click = false
-        console.log(this.on_click)
       })
-      canvas.addEventListener("mousedown", ()=>{
-        console.log("mouse down")
+      canvas.addEventListener("mousedown", () => {
         this.on_click = true
-        console.log(this.on_click)
       })
-      canvas.addEventListener("mousemove", (event)=>{
+      canvas.addEventListener("mousemove", (event) => {
         if(! this.on_click) {
           return
         }
-        console.log("mouse move")
+        const rect = event.target.getBoundingClientRect()
+        const current_x = event.clientX - rect.left
+        const current_y = event.clientY - rect.top
+        this.vertexs.push(current_x / canvas.width)
+        this.vertexs.push(current_y / canvas.height)
+        this.vertexs.push(0.0)
+        for (let i=0; i<4; ++i){
+          this.colors.push(1.0)
+        }
+        this.drawImage(this.gl)
+        this.drawLines(this.gl)
       })
     }
   },
   data() {
     return {
+      gl: null,
       name: "review",
       on_click: false,
+      vertexs: [],
+      colors: [],
     }
   },
   mounted() {
