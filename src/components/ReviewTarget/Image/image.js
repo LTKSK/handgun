@@ -130,7 +130,6 @@ export default {
 
       // draw
       const vertex_size = vertices.length / 3
-      console.log(vertex_size)
       gl.drawArrays(gl.LINE_STRIP, 0, vertex_size)
       gl.flush()
     },
@@ -178,8 +177,11 @@ export default {
         const rect = event.target.getBoundingClientRect()
         const current_x = event.clientX - rect.left
         const current_y = event.clientY - rect.top
-        this.vertexs.push(current_x / canvas.width)
-        this.vertexs.push(current_y / canvas.height)
+
+        // current potisions normalized by canvas -0.5~0.5
+        this.vertexs.push((current_x / canvas.width)*2.0-1.0)
+        // to reverse y position because texture origin position is started from left upper
+        this.vertexs.push((1.0 - current_y / canvas.height)*2.0-1.0)
         this.vertexs.push(0.0)
         for (let i=0; i<4; ++i){
           this.colors.push(1.0)
