@@ -1,41 +1,7 @@
+import { createShaderProgram, initWebGL } from "../modules/webglutil"
 export default {
   name: "image-item",
   methods: {
-    createShaderProgram(gl, vs_id, fs_id) {
-      const vertexShaderSource = document.querySelector(vs_id).text
-      const fragmentShaderSource = document.querySelector(fs_id).text
-      // create shader program
-      const vertexShader= gl.createShader(gl.VERTEX_SHADER)
-      gl.shaderSource(vertexShader, vertexShaderSource)
-      gl.compileShader(vertexShader)
-      // check compile status
-      const vShaderComplieStatus = gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)
-      if(!vShaderComplieStatus) {
-        const info = gl.getShaderInfoLog(vertexShader)
-        console.log(info)
-      }
-      const fragmentShader= gl.createShader(gl.FRAGMENT_SHADER)
-      gl.shaderSource(fragmentShader, fragmentShaderSource)
-      gl.compileShader(fragmentShader)
-      // check compile status
-      const fShaderComplieStatus = gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)
-      if(!fShaderComplieStatus) {
-        const info = gl.getShaderInfoLog(fragmentShader)
-        console.log(info)
-      }
-      const program = gl.createProgram()
-      gl.attachShader(program, vertexShader)
-      gl.attachShader(program, fragmentShader)
-      gl.linkProgram(program)
-      const linkStatus = gl.getProgramParameter(program, gl.LINK_STATUS)
-      if (!linkStatus) {
-        const info = gl.getProgramInfoLog(program)
-        console.log(info)
-      }
-      gl.useProgram(program)
-      return program
-    },
-
     setupTexture(gl) {
       const textureImage = new Image()
       // get image source from id "rtimg(review target image)"
@@ -51,7 +17,7 @@ export default {
     },
 
     drawImage(gl) {
-      const program = this.createShaderProgram(gl, "#image-vs", "#image-fs")
+      const program = createShaderProgram(gl, "#image-vs", "#image-fs")
       this.setupTexture(gl)
       //prepare buffers
       const vertexBuffer = gl.createBuffer()
@@ -102,35 +68,16 @@ export default {
       gl.flush()
     },
 
-    initWebGL() {
-      const canvas = document.querySelector("#glcanvas")
-      canvas.width = 640
-      canvas.height = 640
-      let gl = null
-      try {
-        gl = canvas.getContext("webgl2")
-      }
-      catch (e) { console.log(e) }
-      if (!gl) {
-        alert("WebGL initialize failed. This browser is not supported.")
-        return
-      }
-      gl.clearColor(0.0, 0.0, 0.0, 1.0)
-      gl.enable(gl.DEPTH_TEST)
-      gl.enable(gl.CULL_FACE)
-      gl.depthFunc(gl.LEQUAL)
-      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
-      this.gl = gl
-      return gl
-    },
-
     drawReviewTarget() {
-      const gl = this.initWebGL()
+      const canvas = document.querySelector("#glcanvas")
+      const gl = initWebGL(canvas)
+      this.gl = gl
+      // const gl = this.initWebGL()
       this.drawImage(gl)
     },
 
     drawLines(gl) {
-      const program = this.createShaderProgram(gl, "#line-vs", "#line-fs")
+      const program = createShaderProgram(gl, "#line-vs", "#line-fs")
       //prepare buffers
       const vertexBuffer = gl.createBuffer()
       const colorBuffer = gl.createBuffer()
