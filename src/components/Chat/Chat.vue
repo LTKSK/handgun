@@ -11,7 +11,7 @@
     <message-list v-bind:messages="messages"/>
     <div class="message-form">
       <input type="text" v-model="message">
-      <input type="button" value="send" v-on:click="send_message" />
+      <input type="button" value="send" v-on:click="sendMessage" />
     </div>
   </div>
 </div>
@@ -46,7 +46,7 @@ export default {
     ...mapActions([
       SET_MESSAGE,
     ]),
-    send_message() {
+    sendMessage() {
       this.SET_MESSAGE(this.message)
       this.message = "";
     }

@@ -2,6 +2,10 @@
   <div>Image: {{ name }}</div>
   <canvas id="glcanvas"/>
   <img src="../../ReviewTarget/assets/icon.jpg" style="display: none" id="review-target-img">
+  <p>
+    <input type="button" value="Reset" v-on:click="resetLayer">
+    <input type="button" value="Save" v-on:click="saveLayer">
+  </p>
   <script id="image-vs" type="x-shader/x-vertex">#version 300 es
 in vec3 vertexPosition;
 in vec4 color;
