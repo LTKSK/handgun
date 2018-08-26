@@ -110,7 +110,7 @@ export function drawLines(gl, layer) {
   const colorBuffer = gl.createBuffer()
   const vertexAttribLocation = gl.getAttribLocation(program, "vertexPosition")
   const colorAttribLocation = gl.getAttribLocation(program, "color")
-  const VERTEX_SIZE = 3
+  const VERTEX_SIZE = 2
   const COLOR_SIZE = 4
   // should bind before binding buffer
   gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
@@ -123,7 +123,7 @@ export function drawLines(gl, layer) {
   gl.vertexAttribPointer(colorAttribLocation, COLOR_SIZE, gl.FLOAT, false, 0, 0)
 
   const vertices = new Float32Array(layer.vertices)
-  const vertex_count = vertices.length / 3
+  const vertex_count = vertices.length / 2
   const color_list = []
   for (let i=0; i<vertex_count; ++i) {
     Array.prototype.push.apply(color_list, layer.color)
