@@ -52,7 +52,11 @@ export default {
   mounted() {
     const canvas = document.querySelector("#glcanvas")
     this.gl = initWebGL(canvas)
-    drawImage(this.gl)
     this.eventSetup()
+    // When review target is loaded, do resetLayer
+    const doc = document.querySelector("#review-target-img")
+    doc.onload = () => {
+      this.resetLayer()
+    }
   }
 }

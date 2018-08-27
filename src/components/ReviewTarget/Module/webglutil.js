@@ -1,14 +1,11 @@
-const setupTexture = (gl, texture_src_id) => {
-  const textureImage = new Image()
-  // get image source from id "rtimg(review target image)"
-  textureImage.src = document.querySelector(texture_src_id).src
+const setupTexture = (gl, texture_image) => {
   gl.bindTexture(gl.TEXTURE_2D, gl.createTexture())
   gl.texImage2D(gl.TEXTURE_2D,    //format
                 0,                //mipmap level
                 gl.RGBA,          //internal color format
                 gl.RGBA,          //color format
                 gl.UNSIGNED_BYTE, //data format
-                textureImage)     //texture
+                texture_image)    //texture
   gl.generateMipmap(gl.TEXTURE_2D)
 }
 
@@ -54,7 +51,10 @@ export function drawImage(gl) {
   gl.depthFunc(gl.LEQUAL)
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
   const program = createShaderProgram(gl, "#image-vs", "#image-fs")
-  setupTexture(gl, "#review-target-img")
+  const image = new Image()
+  // get image source from id "rtimg(review target image)"
+  image.src = document.querySelector("#review-target-img").src
+  setupTexture(gl, image)
   //prepare buffers
   const vertexBuffer = gl.createBuffer()
   const indexBuffer = gl.createBuffer()
