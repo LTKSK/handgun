@@ -129,7 +129,6 @@ export function drawLines(gl, layer) {
     Array.prototype.push.apply(color_list, layer.color)
   }
   const colors = new Float32Array(color_list)
-
   gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
   gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.DYNAMIC_DRAW)
   gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer)

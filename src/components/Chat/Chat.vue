@@ -1,7 +1,6 @@
 <template>
 <div class="view">
   <div class="channel-name">
-    Hello Chat at {{ channel }}
     <channel-list />
   </div>
   <div class="review-target">

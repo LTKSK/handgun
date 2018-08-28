@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="channel-list">
     <ul>
       <li v-for="channel in channels" :key="channel">
         <router-link v-bind:to="{name: 'channel', params: {channelname: channel}}">
@@ -7,6 +7,9 @@
         </router-link>
       </li>
     </ul>
+    <div class="new-channel-form">
+      hogehoge
+    </div>
   </div>
 </template>
 
@@ -17,9 +20,8 @@ import {
 } from '../../store/mutation-types'
 export default {
   data() {
-    name: 'channels'
     return {
-      cannnel: this.$route.params.cahnnelname
+      name: 'channels'
     }
   },
   mounted() {
@@ -41,5 +43,12 @@ export default {
 <style scoped>
 ul {
   list-style: none;
+}
+.channel-list {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+.new-channel-form {
+  text-align: center;
 }
 </style>

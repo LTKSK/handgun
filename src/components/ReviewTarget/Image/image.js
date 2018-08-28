@@ -42,7 +42,6 @@ export default {
   data() {
     return {
       gl: null,
-      name: "review",
       on_click: false,
       current_layer_num: 0,
       layers: [new Layer()],
