@@ -1,13 +1,24 @@
-import { SET_MESSAGE, GET_CHANNELS } from './mutation-types'
+import {
+  SET_MESSAGE,
+  GET_CHANNELS,
+  ADD_CHANNEL,
+} from './mutation-types'
 
 
-const chat_path = 'http://localhost:5000/chats'
+const channels_path = 'http://localhost:5000/channels'
 
 
-async function fetch_chats(){
-  const response = await fetch(chat_path)
+async function fetchChannels(){
+  const response = await fetch(channels_path)
   const json = await response.json()
-  return json.map(chat => chat.name)
+  return json.map(channel => channel.name)
+}
+
+async function postChannel(channel_name){
+  const response = await fetch(channels_path+"/"+channel_name,
+                               {method: "POST"})
+  console.log(response)
+  return response.ok
 }
 
 export default {
@@ -20,8 +31,16 @@ export default {
     commit(SET_MESSAGE, message_data)
   },
   [GET_CHANNELS]({ commit }) {
-    fetch_chats().then(chats => {
-      commit(GET_CHANNELS, chats)
+    fetchChannels().then(channels => {
+      commit(GET_CHANNELS, channels)
+    })
+  },
+  [ADD_CHANNEL]({ commit }, channel) {
+    // if post success, call commit.
+    postChannel(channel).then(is_ok => {
+      if(is_ok) {
+        commit(ADD_CHANNEL, channel)
+      }
     })
   }
 }

@@ -8,7 +8,7 @@ Vue.use(Vuex)
 
 const state = {
     messages: [],
-    channels: []
+    channels: [],
 }
 
 export default new Vuex.Store({

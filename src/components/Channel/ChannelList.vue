@@ -8,7 +8,8 @@
       </li>
     </ul>
     <div class="new-channel-form">
-      hogehoge
+      <input type="text" v-model="new_channel_name">
+      <input type="button" value="add" v-on:click="ADD_CHANNEL(new_channel_name)" />
     </div>
   </div>
 </template>
@@ -16,12 +17,14 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import {
-    GET_CHANNELS
+    GET_CHANNELS,
+    ADD_CHANNEL,
 } from '../../store/mutation-types'
 export default {
   data() {
     return {
-      name: 'channels'
+      name: 'channels',
+      new_channel_name: '',
     }
   },
   mounted() {
@@ -34,7 +37,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      GET_CHANNELS
+      GET_CHANNELS,
+      ADD_CHANNEL,
     ]),
   }
 }

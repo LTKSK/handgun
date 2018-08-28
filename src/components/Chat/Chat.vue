@@ -27,7 +27,6 @@ export default {
   name: 'chat',
   data() {
     return {
-      channel: this.$route.params.channelname,
       message: "",
     }
   },
