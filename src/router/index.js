@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Chat from '@/components/Chat/Chat'
-import ChannelList from '@/components/Channel/ChannelList'
+import Channel from '@/components/Channel/Channel'
 
 Vue.use(Router)
 
@@ -11,7 +11,7 @@ export default new Router({
     {
       path: '/',
       name: 'root',
-      component: ChannelList
+      component: Channel
     },
     {
       path: '/channel/:channelname',
