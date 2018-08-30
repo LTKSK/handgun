@@ -1,17 +1,24 @@
 <template>
   <div class="add-channel-form">
-    <input type="text" v-model="channel_name">
-    <input type="button" value="add" v-on:click="ADD_CHANNEL(new_channel_name)" />
+    <input type="text" v-model="channel">
+    <input type="button" value="add" v-on:click="ADD_CHANNEL(channel)" />
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import { ADD_CHANNEL } from '../../store/mutation-types'
 export default {
   data() {
     return {
       name: 'channel_form',
-      channel_name: '',
+      channel: '',
     }
+  },
+  methods: {
+    ...mapActions([
+      ADD_CHANNEL,
+    ])
   }
 }
 </script>

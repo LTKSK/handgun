@@ -36,6 +36,17 @@ export default {
       // overwrite line polygons by drawImage
       drawImage(this.gl)
       this.layers[this.current_layer_num].reset()
+    },
+    fileSelected(file_data) {
+      const files = file_data.target.files || file_data.dataTransfer.files
+      if (files.length == 0) {
+        return
+      }
+      const reader = new FileReader()
+      reader.onload = loaded_data => {
+        this.to_upload_file = loaded_data.target.result
+      }
+      reader.readAsDataURL(files[0])
     }
   },
 
@@ -43,6 +54,7 @@ export default {
     return {
       gl: null,
       on_click: false,
+      to_upload_file: null,
       current_layer_num: 0,
       layers: [new Layer()],
     }

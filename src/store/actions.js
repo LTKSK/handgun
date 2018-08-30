@@ -4,9 +4,7 @@ import {
   ADD_CHANNEL,
 } from './mutation-types'
 
-
 const channels_path = 'http://localhost:5000/channels'
-
 
 async function fetchChannels(){
   const response = await fetch(channels_path)
@@ -17,7 +15,6 @@ async function fetchChannels(){
 async function postChannel(channel_name){
   const response = await fetch(channels_path+"/"+channel_name,
                                {method: "POST"})
-  console.log(response)
   return response.ok
 }
 

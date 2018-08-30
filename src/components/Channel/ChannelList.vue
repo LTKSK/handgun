@@ -12,14 +12,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import {
-    GET_CHANNELS,
-    ADD_CHANNEL,
-} from '../../store/mutation-types'
+import { GET_CHANNELS } from '../../store/mutation-types'
 export default {
   data() {
     return {
-      name: 'channels',
+      name: 'channel-list',
     }
   },
   mounted() {
@@ -33,7 +30,6 @@ export default {
   methods: {
     ...mapActions([
       GET_CHANNELS,
-      ADD_CHANNEL,
     ]),
   }
 }
