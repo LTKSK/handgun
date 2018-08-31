@@ -45,6 +45,11 @@ export default {
       const reader = new FileReader()
       reader.onload = loaded_data => {
         this.to_upload_file = loaded_data.target.result
+        // When review target is loaded, do resetLayer
+        const target = document.querySelector("#review-target-img")
+        target.onload = () => {
+          this.resetLayer()
+        }
       }
       reader.readAsDataURL(files[0])
     }
@@ -64,10 +69,5 @@ export default {
     const canvas = document.querySelector("#glcanvas")
     this.gl = initWebGL(canvas)
     this.eventSetup()
-    // When review target is loaded, do resetLayer
-    const doc = document.querySelector("#review-target-img")
-    doc.onload = () => {
-      this.resetLayer()
-    }
   }
 }

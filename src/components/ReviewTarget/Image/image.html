@@ -4,7 +4,7 @@
     <input type="file" v-on:change="fileSelected">
   </div>
   <div class="check-review-target">
-    <img src="../../ReviewTarget/assets/icon.jpg" style="display: none" id="review-target-img">
+    <img v-bind:src="to_upload_file" style="display: none" id="review-target-img">
     <p>
       <input type="button" value="Reset" v-on:click="resetLayer">
       <input type="button" value="Save" v-on:click="saveLayer">
