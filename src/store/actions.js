@@ -3,20 +3,11 @@ import {
   GET_CHANNELS,
   ADD_CHANNEL,
 } from './mutation-types'
+import {
+  fetchChannels,
+  postChannel
+} from '../module/webappRepository'
 
-const channels_path = 'http://localhost:5000/channels'
-
-async function fetchChannels(){
-  const response = await fetch(channels_path)
-  const json = await response.json()
-  return json.map(channel => channel.name)
-}
-
-async function postChannel(channel_name){
-  const response = await fetch(channels_path+"/"+channel_name,
-                               {method: "POST"})
-  return response.ok
-}
 
 export default {
   [SET_MESSAGE]({ commit }, message) {

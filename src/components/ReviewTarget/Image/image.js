@@ -3,6 +3,7 @@ import {
   drawLines,
   initWebGL
 } from "../Module/webglutil"
+import { uploadFile } from "../../../module/webappRepository"
 import { Layer } from "../Module/layer"
 export default {
   name: "image-item",
@@ -52,6 +53,8 @@ export default {
         }
       }
       reader.readAsDataURL(files[0])
+      console.log(files[0])
+      uploadFile(files[0])
     }
   },
 

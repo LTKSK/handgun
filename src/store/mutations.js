@@ -6,12 +6,12 @@ import {
 
 export default {
     [SET_MESSAGE](state, message) {
-        state.messages.push(message)
+      state.messages.push(message)
     },
     [GET_CHANNELS](state, channels) {
-        state.channels = channels
+      state.channels = channels
     },
     [ADD_CHANNEL](state, channel) {
-        state.channels.push(channel)
+      state.channels.push(channel)
     }
 }
