@@ -2,9 +2,9 @@ import {
   drawImage,
   drawLines,
   initWebGL
-} from "../Module/webglutil"
-import { uploadFile } from "../../../module/webappRepository"
-import { Layer } from "../Module/layer"
+} from "../webglutil"
+import { uploadFile } from "@/module/webappRepository"
+import { Layer } from "../layer"
 export default {
   name: "image-item",
   methods: {
