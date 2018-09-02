@@ -1,10 +1,10 @@
 <div>
   <canvas id="glcanvas"/>
-  <div class="input-form" v-if="to_upload_file===null">
+  <div class="input-form" v-if="current_image===null">
     <input type="file" v-on:change="fileSelected">
   </div>
   <div class="check-review-target">
-    <img v-bind:src="to_upload_file" style="display: none" id="review-target-img">
+    <img v-bind:src="current_image" style="display: none" id="review-target-img">
     <p>
       <input type="button" value="Reset" v-on:click="resetLayer">
       <input type="button" value="Save" v-on:click="saveLayer">

@@ -31,6 +31,7 @@ export default {
     },
     saveLayer() {
       // todo
+      uploadFile(this.to_upload_file)
       // save layer data to db
     },
     resetLayer() {
@@ -45,7 +46,7 @@ export default {
       }
       const reader = new FileReader()
       reader.onload = loaded_data => {
-        this.to_upload_file = loaded_data.target.result
+        this.current_image = loaded_data.target.result
         // When review target is loaded, do resetLayer
         const target = document.querySelector("#review-target-img")
         target.onload = () => {
@@ -53,8 +54,7 @@ export default {
         }
       }
       reader.readAsDataURL(files[0])
-      console.log(files[0])
-      uploadFile(files[0])
+      this.to_upload_file = files[0]
     }
   },
 
@@ -62,6 +62,7 @@ export default {
     return {
       gl: null,
       on_click: false,
+      current_image: null,
       to_upload_file: null,
       current_layer_num: 0,
       layers: [new Layer()],
