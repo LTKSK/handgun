@@ -30,7 +30,6 @@ export default {
       })
     },
     saveLayer() {
-      uploadFile(this.to_upload_file, this.$route.params.channelname)
       // todo
       // save layer data to db
     },

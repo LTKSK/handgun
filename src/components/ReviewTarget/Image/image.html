@@ -1,9 +1,9 @@
 <div>
-  <canvas id="glcanvas"/>
   <div class="input-form" v-if="current_image===null">
     <input type="file" v-on:change="fileSelected">
   </div>
-  <div class="check-review-target">
+  <div class="check-review-target" v-show="current_image!==null">
+    <canvas id="glcanvas"/>
     <img v-bind:src="current_image" style="display: none" id="review-target-img">
     <p>
       <input type="button" value="Reset" v-on:click="resetLayer">

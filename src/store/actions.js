@@ -5,7 +5,7 @@ import {
 } from './mutation-types'
 import {
   fetchChannels,
-  postChannel
+  postChannel,
 } from '../module/webappRepository'
 
 
@@ -23,11 +23,17 @@ export default {
       commit(GET_CHANNELS, channels)
     })
   },
-  [ADD_CHANNEL]({ commit }, channel) {
+  [ADD_CHANNEL]({ commit }, payload) {
+    if(payload.channel === ""){
+      return
+    }
+    if(payload.file == undefined){
+      return
+    }
     // if post success, call commit.
-    postChannel(channel).then(is_ok => {
+    postChannel(payload.channel, payload.file).then(is_ok => {
       if(is_ok) {
-        commit(ADD_CHANNEL, channel)
+        commit(ADD_CHANNEL, payload.channel)
       }
     })
   }
