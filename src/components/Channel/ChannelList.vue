@@ -12,7 +12,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { GET_CHANNELS } from '../../store/mutation-types'
+import { GET_CHANNELS } from '@/store/mutation-types'
 export default {
   data() {
     return {
