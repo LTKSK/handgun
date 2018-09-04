@@ -7,6 +7,17 @@ import { getReviewTarget } from "@/module/webappRepository"
 import { Layer } from "../layer"
 export default {
   name: "image-item",
+
+  data() {
+    return {
+      gl: null,
+      on_click: false,
+      current_image_src: null,
+      current_layer_num: 0,
+      layers: [new Layer()],
+    }
+  },
+
   methods: {
     eventSetup() {
       const canvas = document.querySelector("#glcanvas")
@@ -25,7 +36,7 @@ export default {
         }
         const current_layer = this.layers[this.current_layer_num]
         current_layer.addVertexFromMouseEvent(event)
-        drawImage(this.gl, this.current_image)
+        drawImage(this.gl, this.current_image_src)
         drawLines(this.gl, current_layer)
       })
     },
@@ -35,19 +46,9 @@ export default {
     },
     resetLayer() {
       // overwrite line polygons by drawImage
-      drawImage(this.gl, this.current_image)
+      drawImage(this.gl, this.current_image_src)
       this.layers[this.current_layer_num].reset()
     },
-  },
-
-  data() {
-    return {
-      gl: null,
-      on_click: false,
-      current_image: null,
-      current_layer_num: 0,
-      layers: [new Layer()],
-    }
   },
 
   mounted() {
@@ -58,7 +59,8 @@ export default {
     .then(blob => {
       const reader = new FileReader()
       reader.onload = loaded_data => {
-        this.current_image = loaded_data.target.result
+        this.current_image_src = loaded_data.target.result
+        console.log(this.current_image_src)
         this.resetLayer()
       }
       reader.readAsDataURL(blob)
