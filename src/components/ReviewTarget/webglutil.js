@@ -44,16 +44,14 @@ const createShaderProgram = (gl, vs_id, fs_id) => {
   return program
 }
 
-export function drawImage(gl, image_src) {
+export function drawImage(gl, image) {
   gl.clearColor(0.0, 0.0, 0.0, 1.0)
   gl.enable(gl.DEPTH_TEST)
   gl.enable(gl.CULL_FACE)
   gl.depthFunc(gl.LEQUAL)
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
   const program = createShaderProgram(gl, "#image-vs", "#image-fs")
-  // get image source from id "rtimg(review target image)"
-  const image = new Image()
-  image.src = image_src
+  // get image source from id "review target image"
   setupTexture(gl, image)
   //prepare buffers
   const vertexBuffer = gl.createBuffer()

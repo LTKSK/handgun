@@ -1,5 +1,8 @@
 <template>
   <div class="channel-list">
+    <router-link v-bind:to="{name: 'root'}">
+      Home
+    </router-link>
     <ul>
       <li v-for="channel in channels" v-bind:key="channel">
         <router-link v-bind:to="{name: 'channel', params: {channelname: channel}}">
