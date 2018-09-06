@@ -121,9 +121,8 @@ export function drawLines(gl, layer) {
   gl.vertexAttribPointer(colorAttribLocation, COLOR_SIZE, gl.FLOAT, false, 0, 0)
 
   const vertices = new Float32Array(layer.vertices)
-  const vertex_count = vertices.length / 2
   const color_list = []
-  for (let i=0; i<vertex_count; ++i) {
+  for (let i=0; i<vertices.length / 2; ++i) {
     Array.prototype.push.apply(color_list, layer.color)
   }
   const colors = new Float32Array(color_list)
@@ -134,7 +133,7 @@ export function drawLines(gl, layer) {
   // draw
   for (let index=0; index<layer.start_indices.length; ++index){
     const first = layer.start_indices[index]
-    const last = layer.vertex_counts[index]
+    const last = layer.vertex_count[index]
     gl.drawArrays(gl.LINE_STRIP, first, last)
   }
   gl.flush()

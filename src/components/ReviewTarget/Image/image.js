@@ -20,34 +20,38 @@ export default {
     }
   },
   methods: {
+    mouseup(){
+      this.on_click = false
+      this.layers[this.current_layer_num].beginAddPolygon()
+    },
+    mousedown(){
+      this.on_click = true
+      this.layers[this.current_layer_num].endAddPolygon()
+    },
+    mousemove(event){
+      if(!this.on_click) {
+        return
+      }
+      const current_layer = this.layers[this.current_layer_num]
+      // console.log(current_layer)
+      current_layer.addVertexFromMouseEvent(event)
+      drawImage(this.gl, this.current_image)
+      drawLines(this.gl, current_layer)
+    },
     canvasEventSetup(canvas) {
       // setup mouse callbacks
-      canvas.addEventListener("mouseup", () => {
-        this.on_click = false
-        this.layers[this.current_layer_num].beginAddPolygon()
-      })
-      canvas.addEventListener("mousedown", () => {
-        this.on_click = true
-        this.layers[this.current_layer_num].endAddPolygon()
-      })
-      canvas.addEventListener("mousemove", (event) => {
-        if(! this.on_click) {
-          return
-        }
-        const current_layer = this.layers[this.current_layer_num]
-        current_layer.addVertexFromMouseEvent(event)
-        drawImage(this.gl, this.current_image)
-        drawLines(this.gl, current_layer)
-      })
+      canvas.addEventListener("mouseup", this.mouseup)
+      canvas.addEventListener("mousedown", this.mousedown)
+      canvas.addEventListener("mousemove", this.mousemove)
     },
     saveLayer() {
       // todo
       // save layer data to db
     },
     resetLayer() {
+      this.layers[this.current_layer_num].reset()
       // overwrite line polygons by drawImage
       drawImage(this.gl, this.current_image)
-      this.layers[this.current_layer_num].reset()
     },
     setup() {
       const canvas = document.querySelector(".glcanvas")
