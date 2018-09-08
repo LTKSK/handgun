@@ -3,7 +3,7 @@ import {
   drawLines,
   initWebGL
 } from "../webglutil"
-import { getReviewTarget } from "@/module/webappRepository"
+import { getReviewTarget } from "@/module/webapiRepository"
 import { Layer } from "../layer"
 export default {
   name: "image-item",
@@ -45,8 +45,7 @@ export default {
       canvas.addEventListener("mousemove", this.mousemove)
     },
     saveLayer() {
-      // todo
-      // save layer data to db
+      // todo: save layer data to db
     },
     resetLayer() {
       this.layers[this.current_layer_num].reset()

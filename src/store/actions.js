@@ -6,17 +6,26 @@ import {
 import {
   fetchChannels,
   postChannel,
-} from '../module/webappRepository'
+  postMessageData,
+} from '../module/webapiRepository'
 
 
 export default {
-  [SET_MESSAGE]({ commit }, message) {
+  [SET_MESSAGE]({ commit }, payload) {
     const message_data = {
-      "value": message,
+      "value": payload.message,
+      // todo: set date data.
       "date": "2018-08-01T12:00:00.110Z",
+      // todo: set user data from authorization.
       "user": "Anonymouse",
     }
-    commit(SET_MESSAGE, message_data)
+    // チャンネル名が必要
+    postMessageData(payload.channel_name, message_data)
+      .then(is_ok => {
+        if(is_ok){
+          commit(SET_MESSAGE, message_data)
+        }
+      })
   },
   [GET_CHANNELS]({ commit }) {
     fetchChannels().then(channels => {

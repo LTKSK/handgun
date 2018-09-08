@@ -45,7 +45,8 @@ export default {
       SET_MESSAGE,
     ]),
     sendMessage() {
-      this.SET_MESSAGE(this.message)
+      this.SET_MESSAGE({"channel_name": this.$route.params.channelname,
+                        "message":this.message})
       this.message = "";
     }
   }
