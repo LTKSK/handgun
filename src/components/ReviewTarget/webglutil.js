@@ -133,7 +133,7 @@ export function drawLines(gl, layer) {
   // draw
   for (let index=0; index<layer.start_indices.length; ++index){
     const first = layer.start_indices[index]
-    const last = layer.vertex_count[index]
+    const last = layer.vertex_counts[index]
     gl.drawArrays(gl.LINE_STRIP, first, last)
   }
   gl.flush()

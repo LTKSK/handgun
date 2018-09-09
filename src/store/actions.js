@@ -9,6 +9,7 @@ import {
   postMessage,
   fetchChannels,
   postChannel,
+  postReviewTarget,
 } from '../module/webapiRepository'
 
 
@@ -47,9 +48,14 @@ export default {
       return
     }
     // if post success, call commit.
-    postChannel(payload.channel, payload.file).then(is_ok => {
+    postChannel(payload.channel).then(is_ok => {
       if(is_ok) {
-        commit(ADD_CHANNEL, payload.channel)
+        postReviewTarget(payload.channel, payload.file)
+          .then(is_ok => {
+            if(is_ok){
+              commit(ADD_CHANNEL, payload.channel)
+            }
+          })
       }
     })
   }

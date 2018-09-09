@@ -4,7 +4,7 @@ export class Layer {
     this.vertices = []
     this.polygon_count = 0
     this.start_indices = []
-    this.vertex_count = []
+    this.vertex_counts = []
   }
 
   reset() {
@@ -12,7 +12,7 @@ export class Layer {
     this.vertices = []
     this.polygon_count = 0
     this.start_indices = []
-    this.vertex_count = []
+    this.vertex_counts = []
   }
 
   beginAddPolygon() {
@@ -20,12 +20,12 @@ export class Layer {
   }
 
   endAddPolygon() {
-    this.vertex_count.push(0)
+    this.vertex_counts.push(0)
     this.start_indices.push(this.vertices.length / 2)
   }
 
   addVertexFromMouseEvent(event) {
-    ++this.vertex_count[this.polygon_count]
+    ++this.vertex_counts[this.polygon_count]
     // current potisions normalized by canvas -0.5~0.5
     const rect = event.target.getBoundingClientRect()
     const current_x = event.clientX - rect.left
