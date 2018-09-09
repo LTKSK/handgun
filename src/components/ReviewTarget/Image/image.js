@@ -3,7 +3,11 @@ import {
   drawLines,
   initWebGL
 } from "../webglutil"
-import { fetchReviewTarget } from "@/module/webapiRepository"
+import {
+  fetchReviewTarget,
+  fetchLayer,
+  putLayer,
+} from "@/module/webapiRepository"
 import { Layer } from "../layer"
 export default {
   name: "image-item",
@@ -16,7 +20,7 @@ export default {
       on_click: false,
       current_image: null,
       current_layer_num: 0,
-      layer: new Layer(),
+      layer: null,
     }
   },
   methods: {
@@ -44,6 +48,7 @@ export default {
     },
     saveLayer() {
       // todo: save layer data to db
+      putLayer(this.$route.params.channelname, this.layer)
     },
     resetLayer() {
       this.layer.reset()
@@ -51,16 +56,33 @@ export default {
       drawImage(this.gl, this.current_image)
     },
     setup() {
+      // webgl setup
       const canvas = document.querySelector(".glcanvas")
       this.gl = initWebGL(canvas)
-      this.canvasEventSetup(canvas)
+      // layer setup
+      fetchLayer(this.$route.params.channelname)
+        .then(layer => {
+          if (Object.keys(layer).length == 0){
+            this.layer = new Layer([1.0, 1.0, 1.0, 1.0], [], 0, [], [])
+          }
+          else{
+            this.layer = new Layer(layer.color,
+                                   layer.vertices,
+                                   layer.polygon_count,
+                                   layer.start_indices,
+                                   layer.vertex_counts)
+          }
+          // event setup
+          this.canvasEventSetup(canvas)
+        })
+      // review-target setup
       fetchReviewTarget(this.$route.params.channelname)
         .then(blob => {
           this.current_image = new Image()
           const url = URL.createObjectURL(blob)
           this.current_image.src = url
           this.current_image.onload = () => {
-            this.resetLayer()
+            drawImage(this.gl, this.current_image)
           }
       })
     }

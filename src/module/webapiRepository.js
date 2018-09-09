@@ -30,8 +30,7 @@ export async function fetchReviewTarget(channel_name){
 
 export async function fetchMessages(channel_name){
    const response = await fetch(`${channels_url}/${channel_name}/messages`)
-   const json = await response.json()
-   return json
+   return response.json()
 }
 
 export async function postMessage(channel_name, message_data){
@@ -40,9 +39,23 @@ export async function postMessage(channel_name, message_data){
                                 body: JSON.stringify(message_data)})
   return response.ok
 }
+
 // export async function postLayer(channel_name, layer){
 //   const response = await fetch(`${channels_url}/${channel_name}/review-target/layer`,
-//                                {method: "PUT",
+//                                {method: "POST",
 //                                 body: JSON.stringify(layer)})
 //   return response.ok
 // }
+
+export async function putLayer(channel_name, layer){
+  const response = await fetch(`${channels_url}/${channel_name}/review-target/layer`,
+                               {method: "PUT",
+                                body: JSON.stringify(layer)})
+  return response.ok
+}
+
+export async function fetchLayer(channel_name){
+  const response = await fetch(`${channels_url}/${channel_name}/review-target/layer`)
+  const json = await response.json()
+  return json
+}
