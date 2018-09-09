@@ -18,10 +18,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { SET_MESSAGE } from '../../store/mutation-types'
 import MessageList from './MessageList'
 import ChannelList from '../Channel/ChannelList'
 import Image from '../ReviewTarget/Image'
+import {
+  GET_MESSAGES,
+  ADD_MESSAGE
+} from '@/store/mutation-types'
 
 export default {
   name: 'chat',
@@ -29,6 +32,9 @@ export default {
     return {
       message: "",
     }
+  },
+  mounted() {
+    this.GET_MESSAGES(this.$route.params.channelname)
   },
   components: {
     'image-item': Image,
@@ -42,10 +48,12 @@ export default {
   },
   methods: {
     ...mapActions([
-      SET_MESSAGE,
+      GET_MESSAGES,
+      ADD_MESSAGE,
     ]),
     sendMessage() {
-      this.SET_MESSAGE({"channel_name": this.$route.params.channelname,
+      this.ADD_MESSAGE({"channel_name": this.$route.params.channelname,
+                        "index": this.messages.length,
                         "message":this.message})
       this.message = "";
     }

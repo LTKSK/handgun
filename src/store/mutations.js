@@ -1,11 +1,15 @@
 import {
-  SET_MESSAGE,
+  GET_MESSAGES,
+  ADD_MESSAGE,
   GET_CHANNELS,
   ADD_CHANNEL,
 } from './mutation-types'
 
 export default {
-  [SET_MESSAGE](state, message) {
+  [GET_MESSAGES](state, messages) {
+    state.messages = messages
+  },
+  [ADD_MESSAGE](state, message) {
     state.messages.push(message)
   },
   [GET_CHANNELS](state, channels) {

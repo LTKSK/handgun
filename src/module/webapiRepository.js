@@ -16,18 +16,18 @@ export async function postChannel(channel_name, file){
   return response.ok
 }
 
-export async function postMessageData(channel_name, message_data){
+export async function fetchMessages(channel_name){
+  const response = await fetch(`${channels_url}/${channel_name}/messages`)
+  const json = await response.json()
+  return json
+}
+
+export async function postMessage(channel_name, message_data){
   const response = await fetch(`${channels_url}/${channel_name}/messages`,
                                {method: "POST",
                                 body: JSON.stringify(message_data)})
   return response.ok
 }
-
-// export async function fetchMessages(channel_name){
-//   const response = await fetch(`${channels_url}/${channel_name}/messages/`)
-//   const json = await response.json()
-//   return json
-// }
 
 export async function getReviewTarget(channel_name){
   const response = await fetch(`${review_targets_url}/${channel_name}`)
