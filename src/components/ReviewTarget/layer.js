@@ -1,8 +1,8 @@
 export class Layer {
-  constructor(color, vertices, polygon_count, start_indices, vertex_counts) {
+  constructor(color, polygon_count, vertices, start_indices, vertex_counts) {
     this.color = color
-    this.vertices = vertices
     this.polygon_count = polygon_count
+    this.vertices = vertices
     this.start_indices = start_indices
     this.vertex_counts = vertex_counts
   }

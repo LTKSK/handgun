@@ -59,31 +59,38 @@ export default {
       // webgl setup
       const canvas = document.querySelector(".glcanvas")
       this.gl = initWebGL(canvas)
-      // layer setup
-      fetchLayer(this.$route.params.channelname)
-        .then(layer => {
-          if (Object.keys(layer).length == 0){
-            this.layer = new Layer([1.0, 1.0, 1.0, 1.0], [], 0, [], [])
-          }
-          else{
-            this.layer = new Layer(layer.color,
-                                   layer.vertices,
-                                   layer.polygon_count,
-                                   layer.start_indices,
-                                   layer.vertex_counts)
-          }
-          // event setup
-          this.canvasEventSetup(canvas)
-        })
       // review-target setup
       fetchReviewTarget(this.$route.params.channelname)
         .then(blob => {
           this.current_image = new Image()
           const url = URL.createObjectURL(blob)
           this.current_image.src = url
-          this.current_image.onload = () => {
+          return new Promise(resolve => {
+            this.current_image.onload = () => {
+              resolve()
+            }
+          })
+      // after image loaded.
+      }).then(() => {
+        // layer setup
+        fetchLayer(this.$route.params.channelname)
+          .then(layer => {
+            if (Object.keys(layer).length == 0){
+              this.layer = new Layer([1.0, 1.0, 1.0, 1.0], 0, [], [], [])
+            }
+            else {
+              this.layer = new Layer(layer.color,
+                                    layer.polygon_count,
+                                    layer.vertices,
+                                    layer.start_indices,
+                                    layer.vertex_counts)
+            }
+            // event setup
+            this.canvasEventSetup(canvas)
+            // canvas setup by loaded image and loaded layer.
             drawImage(this.gl, this.current_image)
-          }
+            drawLines(this.gl, this.layer)
+          })
       })
     }
   },
