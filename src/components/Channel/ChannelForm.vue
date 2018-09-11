@@ -1,12 +1,12 @@
 <template>
   <div class="add-channel-form">
-    <img v-bind:src="thumbnail">
-    <input type="file" v-on:change="fileSelected">
     <div>
       <input type="text" v-model="channel">
       <input type="button" value="Create channel"
        v-on:click="ADD_CHANNEL({channel, file})" />
     </div>
+    <img class="thumbnail" v-bind:src="thumbnail" v-show="thumbnail">
+    <input type="file" v-on:change="fileSelected" v-show="!file">
   </div>
 </template>
 
@@ -45,5 +45,9 @@ export default {
 <style>
 .add-channel-form {
   text-align: center;
+}
+.thumbnail {
+  width: 512px;
+  height: auto;
 }
 </style>
