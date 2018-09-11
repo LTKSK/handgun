@@ -141,8 +141,6 @@ export function drawLines(gl, layer) {
 
 // initialize web gl instance
 export function initWebGL(canvas) {
-  canvas.width = 640
-  canvas.height = 640
   let gl = null
   try {
     gl = canvas.getContext("webgl2")

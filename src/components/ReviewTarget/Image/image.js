@@ -40,11 +40,15 @@ export default {
       drawImage(this.gl, this.current_image)
       drawLines(this.gl, this.layer)
     },
-    canvasEventSetup(canvas) {
+    canvasSetup(canvas) {
       // setup mouse callbacks
       canvas.addEventListener("mouseup", this.mouseup)
       canvas.addEventListener("mousedown", this.mousedown)
       canvas.addEventListener("mousemove", this.mousemove)
+      canvas.width = 640
+      canvas.height = 640 * this.current_image.height / this.current_image.width
+      this.gl = initWebGL(canvas)
+      console.log(this.current_image.width, this.current_image.height)
     },
     saveLayer() {
       // todo: save layer data to db
@@ -58,7 +62,6 @@ export default {
     setup() {
       // webgl setup
       const canvas = document.querySelector(".glcanvas")
-      this.gl = initWebGL(canvas)
       // review-target setup
       fetchReviewTarget(this.$route.params.channelname)
         .then(blob => {
@@ -80,13 +83,13 @@ export default {
             }
             else {
               this.layer = new Layer(layer.color,
-                                    layer.polygon_count,
-                                    layer.vertices,
-                                    layer.start_indices,
-                                    layer.vertex_counts)
+                                     layer.polygon_count,
+                                     layer.vertices,
+                                     layer.start_indices,
+                                     layer.vertex_counts)
             }
             // event setup
-            this.canvasEventSetup(canvas)
+            this.canvasSetup(canvas)
             // canvas setup by loaded image and loaded layer.
             drawImage(this.gl, this.current_image)
             drawLines(this.gl, this.layer)

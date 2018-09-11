@@ -16,14 +16,14 @@ export async function postChannel(channel_name){
 export async function postReviewTarget(channel_name, file){
   const form = new FormData()
   form.append(file.name, file)
-  const response = await fetch(`${channels_url}/${channel_name}/review-target`,
+  const response = await fetch(`${channels_url}/${channel_name}/review-targets`,
                                {method: "POST",
                                 body: form})
   return response.ok
 }
 
 export async function fetchReviewTarget(channel_name){
-  const response = await fetch(`${channels_url}/${channel_name}/review-target`)
+  const response = await fetch(`${channels_url}/${channel_name}/review-targets`)
   const blob = await response.blob()
   return blob
 }
@@ -40,22 +40,15 @@ export async function postMessage(channel_name, message_data){
   return response.ok
 }
 
-// export async function postLayer(channel_name, layer){
-//   const response = await fetch(`${channels_url}/${channel_name}/review-target/layer`,
-//                                {method: "POST",
-//                                 body: JSON.stringify(layer)})
-//   return response.ok
-// }
-
 export async function putLayer(channel_name, layer){
-  const response = await fetch(`${channels_url}/${channel_name}/review-target/layer`,
+  const response = await fetch(`${channels_url}/${channel_name}/review-targets/layer`,
                                {method: "PUT",
                                 body: JSON.stringify(layer)})
   return response.ok
 }
 
 export async function fetchLayer(channel_name){
-  const response = await fetch(`${channels_url}/${channel_name}/review-target/layer`)
+  const response = await fetch(`${channels_url}/${channel_name}/review-targets/layer`)
   const json = await response.json()
   return json
 }
