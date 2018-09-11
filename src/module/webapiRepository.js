@@ -28,16 +28,16 @@ export async function fetchReviewTarget(channel_name){
   return blob
 }
 
-export async function fetchMessages(channel_name){
-   const response = await fetch(`${channels_url}/${channel_name}/messages`)
-   return response.json()
-}
-
 export async function postMessage(channel_name, message_data){
   const response = await fetch(`${channels_url}/${channel_name}/messages`,
                                {method: "POST",
                                 body: JSON.stringify(message_data)})
   return response.ok
+}
+
+export async function fetchMessages(channel_name){
+   const response = await fetch(`${channels_url}/${channel_name}/messages`)
+   return response.json()
 }
 
 export async function putLayer(channel_name, layer){

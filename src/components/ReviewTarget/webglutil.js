@@ -10,30 +10,30 @@ const setupTexture = (gl, texture_image) => {
 }
 
 const createShaderProgram = (gl, vs_id, fs_id) => {
-  const vertexShaderSource = document.querySelector(vs_id).text
-  const fragmentShaderSource = document.querySelector(fs_id).text
+  const vertex_shader_source = document.querySelector(vs_id).text
+  const fragment_shader_source = document.querySelector(fs_id).text
   // create shader program
-  const vertexShader= gl.createShader(gl.VERTEX_SHADER)
-  gl.shaderSource(vertexShader, vertexShaderSource)
-  gl.compileShader(vertexShader)
+  const vertex_shader= gl.createShader(gl.VERTEX_SHADER)
+  gl.shaderSource(vertex_shader, vertex_shader_source)
+  gl.compileShader(vertex_shader)
   // check compile status
-  const vShaderComplieStatus = gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)
-  if(!vShaderComplieStatus) {
-    const info = gl.getShaderInfoLog(vertexShader)
+  const vertex_shader_compile_status = gl.getShaderParameter(vertex_shader, gl.COMPILE_STATUS)
+  if(!vertex_shader_compile_status) {
+    const info = gl.getShaderInfoLog(vertex_shader)
     console.log(info)
   }
-  const fragmentShader= gl.createShader(gl.FRAGMENT_SHADER)
-  gl.shaderSource(fragmentShader, fragmentShaderSource)
-  gl.compileShader(fragmentShader)
+  const fragment_shader= gl.createShader(gl.FRAGMENT_SHADER)
+  gl.shaderSource(fragment_shader, fragment_shader_source)
+  gl.compileShader(fragment_shader)
   // check compile status
-  const fShaderComplieStatus = gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)
-  if(!fShaderComplieStatus) {
-    const info = gl.getShaderInfoLog(fragmentShader)
+  const fragment_shader_compile_status = gl.getShaderParameter(fragment_shader, gl.COMPILE_STATUS)
+  if(!fragment_shader_compile_status) {
+    const info = gl.getShaderInfoLog(fragment_shader)
     console.log(info)
   }
   const program = gl.createProgram()
-  gl.attachShader(program, vertexShader)
-  gl.attachShader(program, fragmentShader)
+  gl.attachShader(program, vertex_shader)
+  gl.attachShader(program, fragment_shader)
   gl.linkProgram(program)
   const linkStatus = gl.getProgramParameter(program, gl.LINK_STATUS)
   if (!linkStatus) {
@@ -49,14 +49,15 @@ export function drawImage(gl, image) {
   gl.enable(gl.DEPTH_TEST)
   gl.enable(gl.CULL_FACE)
   gl.depthFunc(gl.LEQUAL)
+  gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
   const program = createShaderProgram(gl, "#image-vs", "#image-fs")
   // get image source from id "review target image"
   setupTexture(gl, image)
   //prepare buffers
-  const vertexBuffer = gl.createBuffer()
-  const indexBuffer = gl.createBuffer()
-  const vertexAttribLocation = gl.getAttribLocation(program, "vertexPosition")
+  const vertex_buffer = gl.createBuffer()
+  const index_buffer = gl.createBuffer()
+  const vertex_attrib_location = gl.getAttribLocation(program, "vertexPosition")
   const textureAttribLocation = gl.getAttribLocation(program, "texCoord")
   const VERTEX_SIZE = 3
   const TEXTURE_SIZE = 2
@@ -65,11 +66,11 @@ export function drawImage(gl, image) {
   // texture_offset is on after the position so *3
   const TEXTURE_OFFSET = 3 * Float32Array.BYTES_PER_ELEMENT
   // should bind before binding buffer
-  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
+  gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer)
   // enable 'in' variables
-  gl.enableVertexAttribArray(vertexAttribLocation)
+  gl.enableVertexAttribArray(vertex_attrib_location)
   gl.enableVertexAttribArray(textureAttribLocation)
-  gl.vertexAttribPointer(vertexAttribLocation, VERTEX_SIZE, gl.FLOAT, false, STRIDE, POSITION_OFFSET)
+  gl.vertexAttribPointer(vertex_attrib_location, VERTEX_SIZE, gl.FLOAT, false, STRIDE, POSITION_OFFSET)
   gl.vertexAttribPointer(textureAttribLocation, TEXTURE_SIZE, gl.FLOAT, false, STRIDE, TEXTURE_OFFSET)
   // merge vertices and colors alternatively for to use interleaving
   const vertices = new Float32Array([
@@ -90,35 +91,34 @@ export function drawImage(gl, image) {
     0, 1, 2,
     1, 3, 2
   ])
-  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
+  gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer)
   gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW)
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer)
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, index_buffer)
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indexes, gl.STATIC_DRAW)
 
   // draw
-  const indexSize = indexes.length
-  gl.drawElements(gl.TRIANGLES, indexSize, gl.UNSIGNED_SHORT, 0)
+  gl.drawElements(gl.TRIANGLES, indexes.length, gl.UNSIGNED_SHORT, 0)
   gl.flush()
 }
 
 export function drawLines(gl, layer) {
   const program = createShaderProgram(gl, "#line-vs", "#line-fs")
   //prepare buffers
-  const vertexBuffer = gl.createBuffer()
-  const colorBuffer = gl.createBuffer()
-  const vertexAttribLocation = gl.getAttribLocation(program, "vertexPosition")
-  const colorAttribLocation = gl.getAttribLocation(program, "color")
+  const vertex_buffer = gl.createBuffer()
+  const color_buffer = gl.createBuffer()
+  const vertex_attrib_location = gl.getAttribLocation(program, "vertexPosition")
+  const color_attrib_location = gl.getAttribLocation(program, "color")
   const VERTEX_SIZE = 2
   const COLOR_SIZE = 4
   // should bind before binding buffer
-  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
+  gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer)
   // enable 'in' variables
-  gl.enableVertexAttribArray(vertexAttribLocation)
-  gl.vertexAttribPointer(vertexAttribLocation, VERTEX_SIZE, gl.FLOAT, false, 0, 0)
+  gl.enableVertexAttribArray(vertex_attrib_location)
+  gl.vertexAttribPointer(vertex_attrib_location, VERTEX_SIZE, gl.FLOAT, false, 0, 0)
 
-  gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer)
-  gl.enableVertexAttribArray(colorAttribLocation)
-  gl.vertexAttribPointer(colorAttribLocation, COLOR_SIZE, gl.FLOAT, false, 0, 0)
+  gl.bindBuffer(gl.ARRAY_BUFFER, color_buffer)
+  gl.enableVertexAttribArray(color_attrib_location)
+  gl.vertexAttribPointer(color_attrib_location, COLOR_SIZE, gl.FLOAT, false, 0, 0)
 
   const vertices = new Float32Array(layer.vertices)
   const color_list = []
@@ -126,9 +126,9 @@ export function drawLines(gl, layer) {
     Array.prototype.push.apply(color_list, layer.color)
   }
   const colors = new Float32Array(color_list)
-  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
+  gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer)
   gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.DYNAMIC_DRAW)
-  gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer)
+  gl.bindBuffer(gl.ARRAY_BUFFER, color_buffer)
   gl.bufferData(gl.ARRAY_BUFFER, colors, gl.DYNAMIC_DRAW)
   // draw
   for (let index=0; index<layer.start_indices.length; ++index){
