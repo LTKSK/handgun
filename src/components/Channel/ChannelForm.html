@@ -1,0 +1,11 @@
+<el-container class="add-channel-form">
+  <el-header>
+    <input type="text" v-model="channel">
+    <input type="button" value="Create channel"
+      v-on:click="ADD_CHANNEL({channel, file})" />
+  </el-header>
+  <el-main>
+    <img class="thumbnail" v-bind:src="thumbnail" v-show="thumbnail">
+    <el-input type="file" v-on:change="fileSelected" v-show="!file" />
+  </el-main>
+</el-container>

@@ -106,15 +106,15 @@ export function drawLines(gl, layer) {
   //prepare buffers
   const vertex_buffer = gl.createBuffer()
   const color_buffer = gl.createBuffer()
-  const vertex_attrib_location = gl.getAttribLocation(program, "vertexPosition")
+  const line_position_attrib_location = gl.getAttribLocation(program, "linePosition")
   const color_attrib_location = gl.getAttribLocation(program, "color")
-  const VERTEX_SIZE = 2
+  const LINE_POSITION_SIZE = 2
   const COLOR_SIZE = 4
   // should bind before binding buffer
   gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer)
   // enable 'in' variables
-  gl.enableVertexAttribArray(vertex_attrib_location)
-  gl.vertexAttribPointer(vertex_attrib_location, VERTEX_SIZE, gl.FLOAT, false, 0, 0)
+  gl.enableVertexAttribArray(line_position_attrib_location)
+  gl.vertexAttribPointer(line_position_attrib_location, LINE_POSITION_SIZE, gl.FLOAT, false, 0, 0)
 
   gl.bindBuffer(gl.ARRAY_BUFFER, color_buffer)
   gl.enableVertexAttribArray(color_attrib_location)

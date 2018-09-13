@@ -1,2 +1,2 @@
-<template src="./image.html" />
-<script src="./image.js" />
+<template src="./Image.html" />
+<script src="./Image.js" />

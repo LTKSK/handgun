@@ -20,7 +20,6 @@ void main() {
   </script>
   <script id="image-fs" type="x-shader/x-fragment">#version 300 es
 precision highp float;
-in vec4 vColor;
 
 uniform sampler2D tex;
 in vec2 textureCoord;
@@ -32,13 +31,13 @@ void main() {
   </script>
 
   <script id="line-vs" type="x-shader/x-vertex">#version 300 es
-in vec2 vertexPosition;
+in vec2 linePosition;
 in vec4 color;
 out vec4 vColor;
 
 void main() {
     vColor = color;
-    gl_Position = vec4(vertexPosition, 0.0, 1.0);
+    gl_Position = vec4(linePosition, 0.0, 1.0);
 }
   </script>
   <script id="line-fs" type="x-shader/x-fragment">#version 300 es

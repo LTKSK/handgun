@@ -1,8 +1,8 @@
 <template>
-  <div class="channel">
+  <el-container class="channel">
     <channel-list />
     <channel-form />
-  </div>
+  </el-container>
 </template>
 
 <script>

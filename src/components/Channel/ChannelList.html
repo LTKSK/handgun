@@ -1,0 +1,14 @@
+<el-container class="channel-list">
+  <el-aside>
+    <ul>
+      <router-link v-bind:to="{name: 'root'}">
+        <li>Home</li>
+      </router-link>
+      <li v-for="channel in channels" v-bind:key="channel">
+        <router-link v-bind:to="{name: 'channel', params: {channelname: channel}}">
+          {{ channel }}
+        </router-link>
+      </li>
+    </ul>
+  </el-aside>
+</el-container>
