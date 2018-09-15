@@ -41,12 +41,6 @@ export default {
     })
   },
   [ADD_CHANNEL]({ commit }, payload) {
-    if(payload.channel === ""){
-      return
-    }
-    if(payload.file == undefined){
-      return
-    }
     // if post success, call commit.
     postChannel(payload.channel).then(is_ok => {
       if(is_ok) {

@@ -9,6 +9,11 @@ export default {
       files: [],
     }
   },
+  computed: {
+    disabled() {
+      return this.file === null || this.channel === ""
+    }
+  },
   methods: {
     ...mapActions([
       ADD_CHANNEL,

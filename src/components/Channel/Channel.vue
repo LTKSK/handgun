@@ -1,6 +1,6 @@
 <template>
   <el-container class="channel">
-    <el-aside>
+    <el-aside width="150px">
       <channel-list />
     </el-aside>
     <el-main>
@@ -28,8 +28,4 @@ export default {
 .el-aside {
   padding: 0;
 }
-/* .channel {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-} */
 </style>
