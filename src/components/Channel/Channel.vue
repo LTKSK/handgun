@@ -1,30 +1,35 @@
 <template>
   <el-container class="channel">
-    <channel-list />
-    <channel-form />
+    <el-aside>
+      <channel-list />
+    </el-aside>
+    <el-main>
+      <channel-form />
+    </el-main>
   </el-container>
 </template>
 
 <script>
-import ChannelForm from './ChannelForm'
-import ChannelList from './ChannelList'
+import ChannelForm from './ChannelForm.vue'
+import ChannelList from './ChannelList.vue'
 export default {
+  name: 'channel',
   data() {
-    return {
-      name: 'channel',
-    }
+    return {}
   },
   components: {
     'channel-form': ChannelForm,
     'channel-list': ChannelList
   },
-
 }
 </script>
 
 <style>
-.channel {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
+.el-aside {
+  padding: 0;
 }
+/* .channel {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+} */
 </style>

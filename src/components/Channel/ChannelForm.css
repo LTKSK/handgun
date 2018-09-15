@@ -1,7 +1,10 @@
-.add-channel-form {
+.channel-form {
   text-align: center;
 }
-.thumbnail {
-  width: 512px;
-  height: auto;
+
+.el-button {
+  width: 100%;
+}
+.el-input {
+  width: 100%;
 }

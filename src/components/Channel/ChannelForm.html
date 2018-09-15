@@ -1,11 +1,21 @@
-<el-container class="add-channel-form">
-  <el-header>
-    <input type="text" v-model="channel">
-    <input type="button" value="Create channel"
-      v-on:click="ADD_CHANNEL({channel, file})" />
-  </el-header>
+<el-container class="channel-form">
   <el-main>
-    <img class="thumbnail" v-bind:src="thumbnail" v-show="thumbnail">
-    <el-input type="file" v-on:change="fileSelected" v-show="!file" />
+    <el-upload
+      drag
+      action=""
+      list-type="picture"
+      v-bind:limit="1"
+      v-bind:file-list="files"
+      v-bind:auto-upload="false"
+      v-bind:on-change="fileSelected"
+      v-bind:on-remove="fileReset"
+      v-bind:on-exceed="filesExceed">
+      <i class="el-icon-upload"></i>
+      <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
+    </el-upload>
+    <el-input placeholder="Please input new channel name" v-model="channel" />
+    <el-button type="primary" click="ADD_CHANNEL({channel, file})" >
+      Create new channel
+    </el-button>
   </el-main>
 </el-container>
