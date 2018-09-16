@@ -1,3 +1,4 @@
+// todo url from config or env.
 const channels_url = 'http://localhost:5000/channels'
 
 export async function fetchChannels(){

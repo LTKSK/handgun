@@ -17,11 +17,26 @@ ul {
 .review-target {
   text-align: center;
 }
-.el-input {
-  width: 50%;
+.grid-content {
+    min-height: 25px;
+    padding: 0 6px;
+}
+.user {
+    font-weight: bold;
+    font-size: 12px;
+}
+.date {
+    font-size: 12px;
 }
 .msg-list {
   text-align: left;
   height: 100%;
-  overflow: scroll;
+  /* overflow: scroll; */
 }
+.message-area {
+    width: 100%;
+}
+.el-button {
+    height: 34px;
+}
+

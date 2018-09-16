@@ -8,13 +8,16 @@ import {
 
 export default {
   name: 'chat',
+  watch:{
+    '$route': 'getMessages',
+  },
   data() {
     return {
       message: "",
     }
   },
   mounted() {
-    this.GET_MESSAGES(this.$route.params.channelname)
+    this.getMessages()
   },
   components: {
     'image-item': Image,
@@ -30,6 +33,9 @@ export default {
       GET_MESSAGES,
       ADD_MESSAGE,
     ]),
+    getMessages() {
+      this.GET_MESSAGES(this.$route.params.channelname)
+    },
     sendMessage() {
       this.ADD_MESSAGE({"channel_name": this.$route.params.channelname,
                         "index": this.messages.length,
