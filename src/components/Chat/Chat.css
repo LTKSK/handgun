@@ -3,9 +3,10 @@ ul {
 }
 .view {
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
 }
 .chat-elements {
+  height: 100vh;
   float: right;
 }
 .channel-name {
@@ -18,25 +19,24 @@ ul {
   text-align: center;
 }
 .grid-content {
-    min-height: 25px;
-    padding: 0 6px;
+  min-height: 25px;
+  padding: 0 6px;
 }
 .user {
-    font-weight: bold;
-    font-size: 12px;
+  font-weight: bold;
+  font-size: 12px;
 }
 .date {
     font-size: 12px;
 }
 .msg-list {
   text-align: left;
-  height: 100%;
   /* overflow: scroll; */
+  height: 90vh;
 }
 .message-area {
-    width: 100%;
+  width: 100%;
 }
 .el-button {
-    height: 34px;
+  height: 34px;
 }
-
