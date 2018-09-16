@@ -31,7 +31,6 @@ ul {
 }
 .msg-list {
   text-align: left;
-  /* overflow: scroll; */
   height: 90vh;
 }
 .message-area {
