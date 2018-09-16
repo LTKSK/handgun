@@ -1,0 +1,27 @@
+ul {
+  list-style: none;
+}
+.view {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+}
+.chat-elements {
+  float: right;
+}
+.channel-name {
+  text-align: center;
+}
+.message-form {
+  text-align: center;
+}
+.review-target {
+  text-align: center;
+}
+.el-input {
+  width: 50%;
+}
+.msg-list {
+  text-align: left;
+  height: 100%;
+  overflow: scroll;
+}

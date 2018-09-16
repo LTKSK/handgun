@@ -1,0 +1,43 @@
+<el-container class="view">
+  <el-aside class="channel-name">
+    <channel-list />
+  </el-aside>
+  <div class="review-target">
+    <image-item />
+  </div>
+  <div class="chat-elements">
+    <el-main>
+      <ul class="msg-list">
+        <li v-for="msg in messages" v-bind:key="msg.index">
+          <!-- <el-row>
+            <el-col v-bind:span="3">
+              <img src="./icon">
+            </el-col>
+            <el-col v-bind:span="21">
+              <el-row>
+                <el-col v-bind:span="3">
+                </el-col>
+                <el-col v-bind:span="21">
+                </el-col>
+              </el-row>
+            </el-col>
+          </el-row> -->
+          <!-- <el-container>
+            <el-herder>
+              <el-header>
+              </el-header>
+          </el-container> -->
+          {{ msg.user }}
+          {{ msg.date }}
+          {{ msg.value }}
+        </li>
+      </ul>
+    </el-main>
+    <el-footer class="message-form">
+      <el-input placeholder="Input new message" v-model="message" />
+      <el-button type="primary" v-on:click="sendMessage">
+        Send message
+      </el-button>
+    </el-footer>
+  </div>
+</el-container>
