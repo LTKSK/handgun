@@ -10,6 +10,11 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    current_channel() {
+      return this.$route.paramas.channelname
+    }
+  },
   components: {
     'image-item': Image,
     'channel-list': ChannelList,

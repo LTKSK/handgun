@@ -2,8 +2,11 @@
   <el-aside class="channel-name">
     <channel-list />
   </el-aside>
-  <div class="review-target">
+  <el-main>
+    <el-row>
+      {{ current_channel }}
+    </el-row>
     <image-item />
-  </div>
+  </el-main>
   <message-list />
 </el-container>
