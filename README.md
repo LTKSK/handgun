@@ -1,7 +1,8 @@
 # handgun
 
 > This project is 'review tool' on web browser.
-> This project must be used with ['handgun_api'](https://github.com/LTKSK/handgun_api)
+
+> This project must be used with ['handgun_api'](https://github.com/LTKSK/handgun_api).
 
 ## Build Setup
 

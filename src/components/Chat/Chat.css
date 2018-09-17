@@ -1,17 +1,6 @@
 ul {
   list-style: none;
 }
-.view {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-}
-.chat-elements {
-  height: 100vh;
-  float: right;
-}
-.channel-name {
-  text-align: center;
-}
 .message-form {
   text-align: center;
 }
@@ -21,4 +10,8 @@ ul {
 .grid-content {
   min-height: 25px;
   padding: 0 6px;
+}
+.el-header {
+  text-align: center;
+  height: 20vh;
 }

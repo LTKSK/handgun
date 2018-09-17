@@ -1,14 +1,18 @@
-<el-container class="view">
-  <el-aside class="channel-name">
+<el-container>
+  <el-aside>
     <channel-list />
   </el-aside>
   <el-container>
-    <el-main>
-      <el-row>
-        {{ channel }}
-      </el-row>
-      <image-item />
-    </el-main>
+    <el-header height="5px">
+      {{ channel }}
+    </el-header>
+    <el-container>
+      <el-col v-bind:span="16">
+        <image-item />
+      </el-col>
+      <el-col v-bind:span="8">
+        <message-list />
+      </el-col>
+    </el-container>
   </el-container>
-  <message-list />
 </el-container>
