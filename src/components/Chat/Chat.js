@@ -4,15 +4,12 @@ import Image from '../ReviewTarget/Image'
 
 export default {
   name: 'chat',
-  watch:{
-    '$route': 'getMessages',
-  },
   data() {
     return {}
   },
   computed: {
-    current_channel() {
-      return this.$route.paramas.channelname
+    channel: function() {
+      return this.$route.params.channelname
     }
   },
   components: {

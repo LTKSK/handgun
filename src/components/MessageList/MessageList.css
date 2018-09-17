@@ -3,10 +3,7 @@ ul {
 }
 .msg-list {
   text-align: left;
-  height: 90vh;
-}
-.message-area {
-  width: 100%;
+  height: 100vh;
 }
 .el-button {
   height: 34px;
@@ -18,4 +15,3 @@ ul {
 .date {
   font-size: 12px;
 }
-

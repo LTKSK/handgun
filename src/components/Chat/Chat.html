@@ -2,11 +2,13 @@
   <el-aside class="channel-name">
     <channel-list />
   </el-aside>
-  <el-main>
-    <el-row>
-      {{ current_channel }}
-    </el-row>
-    <image-item />
-  </el-main>
+  <el-container>
+    <el-main>
+      <el-row>
+        {{ channel }}
+      </el-row>
+      <image-item />
+    </el-main>
+  </el-container>
   <message-list />
 </el-container>
