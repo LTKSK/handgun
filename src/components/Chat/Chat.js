@@ -1,5 +1,5 @@
 import { mapGetters, mapActions } from 'vuex'
-import ChannelList from '@/components/Channel/ChannelList'
+import ChannelList from '@/components/ChannelList'
 import Image from '../ReviewTarget/Image'
 import {
   GET_MESSAGES,
