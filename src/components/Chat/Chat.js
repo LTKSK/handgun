@@ -1,10 +1,6 @@
-import { mapGetters, mapActions } from 'vuex'
 import ChannelList from '@/components/ChannelList'
+import MessageList from '@/components/MessageList'
 import Image from '../ReviewTarget/Image'
-import {
-  GET_MESSAGES,
-  ADD_MESSAGE
-} from '@/store/mutation-types'
 
 export default {
   name: 'chat',
@@ -12,35 +8,11 @@ export default {
     '$route': 'getMessages',
   },
   data() {
-    return {
-      message: "",
-    }
-  },
-  mounted() {
-    this.getMessages()
+    return {}
   },
   components: {
     'image-item': Image,
     'channel-list': ChannelList,
+    'message-list': MessageList,
   },
-  computed: {
-    ...mapGetters([
-      'messages',
-    ]),
-  },
-  methods: {
-    ...mapActions([
-      GET_MESSAGES,
-      ADD_MESSAGE,
-    ]),
-    getMessages() {
-      this.GET_MESSAGES(this.$route.params.channelname)
-    },
-    sendMessage() {
-      this.ADD_MESSAGE({"channel_name": this.$route.params.channelname,
-                        "index": this.messages.length,
-                        "message":this.message})
-      this.message = "";
-    }
-  }
 }

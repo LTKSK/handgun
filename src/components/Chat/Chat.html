@@ -5,45 +5,5 @@
   <div class="review-target">
     <image-item />
   </div>
-  <div class="chat-elements">
-    <el-container class="msg-list">
-      <el-main>
-        <ul>
-          <li v-for="msg in messages" v-bind:key="msg.index">
-            <el-row>
-              <!-- todo: icon from msg user data -->
-              <el-col v-bind:span="3"> <i class="el-icon-upload"></i> </el-col>
-              <el-col v-bind:span="21">
-                <el-row>
-                  <el-col v-bind:span="6">
-                    <div class="grid-content"> <div class="user">{{ msg.user }}</div> </div>
-                  </el-col>
-                  <el-col v-bind:span="18">
-                    <div class="grid-content"> <div class="date">{{ msg.date }}</div> </div>
-                  </el-col>
-                </el-row>
-                <el-row>
-                  <el-col v-bind:span="24">
-                    <div class="grid-content"> <div class="message">{{ msg.value }}</div> </div>
-                  </el-col>
-                </el-row>
-              </el-col>
-            </el-row>
-          </li>
-        </ul>
-      </el-main>
-      <el-footer class="message-form">
-        <el-row>
-          <el-col v-bind:span="18">
-            <el-input type="textarea" autosize placeholder="Input new message" v-model="message" />
-          </el-col>
-          <el-col v-bind:span="6">
-            <el-button type="primary" v-bind:disabled="!message" v-on:click="sendMessage">
-              Send
-            </el-button>
-          </el-col>
-        </el-row>
-      </el-footer>
-    </el-container>
-  </div>
+  <message-list />
 </el-container>
