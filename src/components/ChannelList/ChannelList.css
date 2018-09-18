@@ -3,15 +3,15 @@ ul {
   padding: 0;
 }
 .el-aside {
-    background-color: #4a3a3a;
-    text-align: center;
-    width: 150px!important;
+  background-color: #4a3a3a;
+  text-align: center;
+  width: 150px!important;
 }
 .el-aside a {
-    color: #ffffff;
-    text-decoration:none;
-    font-weight: bold;
+  color: #ffffff;
+  text-decoration:none;
+  font-weight: bold;
 }
 .el-container {
-    height: 100vh;
+  height: 100vh;
 }

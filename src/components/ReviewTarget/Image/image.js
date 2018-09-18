@@ -43,9 +43,12 @@ export default {
     canvasSetup() {
       // webgl setup
       const canvas = document.querySelector(".glcanvas")
-      // todo: canvas.width to be user selectable.
-      canvas.width = 640
-      canvas.height = 640 * this.current_image.height / this.current_image.width
+      const canvas_container = document.querySelector(".canvas-container")
+
+      // Width -4 because canvas-container's padding is 2px*(right+left)
+      const container_width = canvas_container.clientWidth - 4
+      canvas.width = container_width
+      canvas.height = container_width * this.current_image.height / this.current_image.width
       this.gl = initWebGL(canvas)
       // setup mouse callbacks
       canvas.addEventListener("mouseup", this.mouseup)
