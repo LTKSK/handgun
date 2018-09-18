@@ -1,6 +1,9 @@
 .canvas-container {
   padding: 2px
 }
+.el-main {
+  text-align: center;
+}
 .el-button {
   width: 100%;
 }

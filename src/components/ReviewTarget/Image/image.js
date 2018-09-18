@@ -18,42 +18,44 @@ export default {
     return {
       gl: null,
       on_click: false,
-      current_image: null,
+      image: null,
       current_layer_num: 0,
       layer: null,
     }
   },
   methods: {
-    mouseup(){
+    _mouseup(){
       this.on_click = false
       this.layer.beginAddPolygon()
     },
-    mousedown(){
+    _mousedown(){
       this.on_click = true
       this.layer.endAddPolygon()
     },
-    mousemove(event){
+    _mousemove(event){
       if(!this.on_click) {
         return
       }
       this.layer.addVertexFromMouseEvent(event)
-      drawImage(this.gl, this.current_image)
+      drawImage(this.gl, this.image)
       drawLines(this.gl, this.layer)
     },
     canvasSetup() {
       // webgl setup
       const canvas = document.querySelector(".glcanvas")
       const canvas_container = document.querySelector(".canvas-container")
-
       // Width -4 because canvas-container's padding is 2px*(right+left)
-      const container_width = canvas_container.clientWidth - 4
-      canvas.width = container_width
-      canvas.height = container_width * this.current_image.height / this.current_image.width
+      const canvas_width = this.image.width > canvas_container.clientWidth
+                           ? canvas_container.clientWidth - 4
+                           : this.image.width - 4
+
+      canvas.width = canvas_width
+      canvas.height = canvas_width * this.image.height / this.image.width
       this.gl = initWebGL(canvas)
       // setup mouse callbacks
-      canvas.addEventListener("mouseup", this.mouseup)
-      canvas.addEventListener("mousedown", this.mousedown)
-      canvas.addEventListener("mousemove", this.mousemove)
+      canvas.addEventListener("mouseup", this._mouseup)
+      canvas.addEventListener("mousedown", this._mousedown)
+      canvas.addEventListener("mousemove", this._mousemove)
     },
     saveLayer() {
       putLayer(this.$route.params.channelname, this.layer)
@@ -61,17 +63,17 @@ export default {
     resetLayer() {
       this.layer.reset()
       // overwrite line polygons by drawImage
-      drawImage(this.gl, this.current_image)
+      drawImage(this.gl, this.image)
     },
     setup() {
       // review-target setup
       fetchReviewTarget(this.$route.params.channelname)
         .then(blob => {
-          this.current_image = new Image()
+          this.image = new Image()
           const url = URL.createObjectURL(blob)
-          this.current_image.src = url
+          this.image.src = url
           return new Promise(resolve => {
-            this.current_image.onload = () => {
+            this.image.onload = () => {
               resolve()
             }
           })
@@ -93,7 +95,7 @@ export default {
             // canvas setup
             this.canvasSetup()
             // write loaded image and loaded layer.
-            drawImage(this.gl, this.current_image)
+            drawImage(this.gl, this.image)
             drawLines(this.gl, this.layer)
           })
       })
