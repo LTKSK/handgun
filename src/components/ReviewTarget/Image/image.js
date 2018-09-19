@@ -47,7 +47,7 @@ export default {
       // Width -4 because canvas-container's padding is 2px*(right+left)
       const canvas_width = this.image.width > canvas_container.clientWidth
                            ? canvas_container.clientWidth - 4
-                           : this.image.width - 4
+                           : this.image.width
 
       canvas.width = canvas_width
       canvas.height = canvas_width * this.image.height / this.image.width

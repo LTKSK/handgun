@@ -8,10 +8,18 @@ ul {
   width: 150px!important;
 }
 .el-aside a {
-  color: #ffffff;
   text-decoration:none;
   font-weight: bold;
 }
 .el-container {
   height: 100vh;
+}
+.el-menu-item-group {
+  text-align: left
+}
+.home-button{
+  color: #111111;
+}
+.channel-button {
+  color: #111111;
 }

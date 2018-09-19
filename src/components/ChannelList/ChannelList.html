@@ -1,14 +1,24 @@
 <el-container class="channel-list">
   <el-aside>
-    <ul>
-      <router-link v-bind:to="{name: 'root'}">
-        <li>Home</li>
-      </router-link>
-      <li v-for="channel in channels" v-bind:key="channel">
-        <router-link v-bind:to="{name: 'channel', params: {channelname: channel}}">
-          {{ channel }}
+    <el-menu mode="vertical" default-active="0">
+      <el-menu-item index="1">
+        <router-link v-bind:to="{name: 'root'}">
+          <span class="home-button">Home</span>
         </router-link>
-      </li>
-    </ul>
+      </el-menu-item>
+      <el-submenu index="2">
+        <template slot="title">
+          <!-- todo: add icon -->
+          <span>Channels</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item v-for="channel in channels" v-bind:key="channel" index="channel">
+            <router-link v-bind:to="{name: 'channel', params: {channelname: channel}}">
+              <span class="channel-button">{{ channel }}</span>
+            </router-link>
+          </el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+    </el-menu>
   </el-aside>
 </el-container>
