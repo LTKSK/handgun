@@ -1,6 +1,6 @@
 <el-container class="channel-list">
   <el-aside>
-    <el-menu mode="vertical" default-active="0">
+    <el-menu mode="vertical" v-bind:default-openeds="['2']">
       <el-menu-item index="1">
         <router-link v-bind:to="{name: 'root'}">
           <span class="home-button">Home</span>
@@ -9,7 +9,7 @@
       <el-submenu index="2">
         <template slot="title">
           <!-- todo: add icon -->
-          <span>Channels</span>
+          <span style="font-weight: bold;">Channels</span>
         </template>
         <el-menu-item-group>
           <el-menu-item v-for="channel in channels" v-bind:key="channel" index="channel">

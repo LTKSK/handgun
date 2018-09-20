@@ -3,7 +3,6 @@ ul {
   padding: 0;
 }
 .el-aside {
-  background-color: #4a3a3a;
   text-align: center;
   width: 150px!important;
 }
@@ -15,7 +14,10 @@ ul {
   height: 100vh;
 }
 .el-menu-item-group {
-  text-align: left
+  text-align: left;
+}
+.el-menu-item {
+  height: 40px;
 }
 .home-button{
   color: #111111;
