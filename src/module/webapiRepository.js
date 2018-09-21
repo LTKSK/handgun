@@ -1,5 +1,17 @@
 // todo url from config or env.
 const channels_url = 'http://localhost:5000/channels'
+const users_url = 'http://localhost:5000/users'
+
+export async function registerUser(username, password){
+  const user_data = {
+    username,
+    password
+  }
+  const response = await fetch(`${users_url}`,
+                               {method: "POST",
+                                body: JSON.stringify(user_data)})
+  return response.json()
+}
 
 export async function fetchChannels(){
   const response = await fetch(channels_url)

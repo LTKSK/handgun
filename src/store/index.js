@@ -9,6 +9,7 @@ Vue.use(Vuex)
 const state = {
     messages: [],
     channels: [],
+    user: null,
 }
 
 export default new Vuex.Store({

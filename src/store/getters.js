@@ -4,3 +4,4 @@ export const messages = state => state.messages.sort((a, b) => {
   return 0
 })
 export const channels = state => state.channels
+export const user = state => state.user

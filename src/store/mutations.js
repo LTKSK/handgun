@@ -1,4 +1,5 @@
 import {
+  REGISTER_USER,
   GET_MESSAGES,
   ADD_MESSAGE,
   GET_CHANNELS,
@@ -6,6 +7,9 @@ import {
 } from './mutation-types'
 
 export default {
+  [REGISTER_USER](state, user) {
+    state.user = user
+  },
   [GET_MESSAGES](state, messages) {
     state.messages = messages
   },

@@ -1,0 +1,9 @@
+<div>
+  <el-input placeholder="Please your name" v-model="username" />
+  <el-input placeholder="Please your password" v-model="password" />
+  <el-button type="primary"
+             v-bind:disabled="disabled"
+             v-on:click="register()" >
+    Register
+  </el-button>
+</div>
