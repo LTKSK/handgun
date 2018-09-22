@@ -4,7 +4,15 @@ export default {
     return {
       username: "",
       password: "",
-      disabled: true,
+      disabled: false,
+    }
+  },
+  methods: {
+    go_to_register_form() {
+      this.$router.push("/register")
+    },
+    login(){
+
     }
   }
 }

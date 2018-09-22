@@ -41,12 +41,15 @@ export default {
     ...mapActions([
       REGISTER_USER,
     ]),
+    _go_to_login_form() {
+      this.$router.push({path: "/login"})
+    },
     registration_succeeded() {
       this.$notify({
         title: "Success!",
         message: "Registration succeeded",
         type: 'success'
-      });
+      }).onClose = this._go_to_login_form
     },
     register(form_name) {
       this.$refs[form_name].validate((is_valid) => {

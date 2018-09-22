@@ -1,7 +1,13 @@
 <div>
-  <el-input placeholder="Please your name" v-model="username" />
+  <el-input placeholder="Input your name" v-model="username" />
+  <el-input placeholder="Input your password" v-model="password" />
   <el-button type="primary"
-             v-bind:disabled="disabled" >
+             v-bind:disabled="disabled"
+             v-on:click="login">
     Login
+  </el-button>
+  <el-button type="info"
+             v-on:click="go_to_register_form" >
+    Go to Register
   </el-button>
 </div>
