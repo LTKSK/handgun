@@ -2,3 +2,6 @@
   text-align: center;
   width: 100vw;
 }
+.el-input {
+  font-weight: bold;
+}
