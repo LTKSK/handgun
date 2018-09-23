@@ -13,25 +13,33 @@ export default {
           {
             required: true,
             message: "username is required",
-            trigger: 'blur'
+            trigger: "blur"
           },
           {
-            message: "Please dont input space only",
+            message: "Please dont input only space",
             whitespace: true,
-            trigger: 'blur'
+            trigger: "blur"
+          },
+          {
+            validator: (rule, value, callback) => {
+              if(! /^[a-zA-Z0-9]\w*[a-zA-Z0-9]$/.test(value)){
+                callback(new Error("You can only use aplhanumeric characters and '_' for username"))
+              }
+              callback()
+            },
+            trigger: "blur"
           }
         ],
         password: [
           {
             required: true,
             message: "password is required",
-            trigger: 'blur'
+            trigger: "blur"
           },
           {
             min: 8,
-            max: 24,
-            message: "password must be between 8 to 24 characters",
-            trigger: 'blur'
+            message: "password must be higher than 8 characters",
+            trigger: "blur"
           }
         ],
       }
