@@ -11,7 +11,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: LoginForm
     },
@@ -21,14 +21,18 @@ export default new Router({
       component: RegisterForm
     },
     {
-      path: '/',
-      name: 'root',
+      path: '/Channel',
+      name: 'channel',
       component: Channel
     },
     {
       path: '/channel/:channelname',
-      name: 'channel',
+      name: 'chat',
       component: Chat
+    },
+    {
+      path: '*',
+      component: LoginForm
     }
   ]
 })

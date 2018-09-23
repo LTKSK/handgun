@@ -10,6 +10,7 @@ const state = {
     messages: [],
     channels: [],
     user: null,
+    jwt: "",
 }
 
 export default new Vuex.Store({

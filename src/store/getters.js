@@ -5,3 +5,6 @@ export const messages = state => state.messages.sort((a, b) => {
 })
 export const channels = state => state.channels
 export const user = state => state.user
+export const header = state => {
+  return {"Authorization": `Bearer ${state.jwt}`}
+}

@@ -5,17 +5,18 @@ export default {
   data() {
     return {}
   },
-  mounted() {
-    this.GET_CHANNELS()
-  },
   computed: {
     ...mapGetters([
-      'channels'
+      'channels',
+      'header'
     ]),
   },
   methods: {
     ...mapActions([
       GET_CHANNELS,
     ]),
+  },
+  mounted() {
+    this.GET_CHANNELS(this.header)
   }
 }

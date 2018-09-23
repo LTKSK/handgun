@@ -1,12 +1,12 @@
 import {
-  REGISTER_USER,
+  LOGIN,
   GET_MESSAGES,
   ADD_MESSAGE,
   GET_CHANNELS,
   ADD_CHANNEL,
 } from './mutation-types'
 import {
-  registerUser,
+  login,
   fetchMessages,
   postMessage,
   fetchChannels,
@@ -16,10 +16,10 @@ import {
 
 
 export default {
-  [REGISTER_USER]({ commit }, payload) {
-    registerUser(payload.username, payload.password)
-      .then(user => {
-        commit(REGISTER_USER, user)
+  [LOGIN]({ commit }, payload) {
+    login(payload.username, payload.password)
+      .then(token => {
+        commit(LOGIN, {jwt: token, user: payload.username})
       })
   },
   [GET_MESSAGES]({ commit }, channel_name) {
@@ -43,8 +43,8 @@ export default {
         }
       })
   },
-  [GET_CHANNELS]({ commit }) {
-    fetchChannels().then(channels => {
+  [GET_CHANNELS]({ commit }, headers) {
+    fetchChannels(headers).then(channels => {
       commit(GET_CHANNELS, channels)
     })
   },

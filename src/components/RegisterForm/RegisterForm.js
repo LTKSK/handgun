@@ -1,5 +1,6 @@
-import { mapActions } from 'vuex'
-import { REGISTER_USER } from '@/store/mutation-types'
+import {
+  registerUser,
+} from '@/module/webapiRepository'
 export default {
   name: "register-form",
   data() {
@@ -46,9 +47,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      REGISTER_USER,
-    ]),
     _go_to_login_form() {
       this.$router.push({path: "/login"})
     },
@@ -62,8 +60,7 @@ export default {
     register(form_name) {
       this.$refs[form_name].validate((is_valid) => {
         if (is_valid) {
-          this.REGISTER_USER({"username": this.form.username,
-                              "password": this.form.password})
+          registerUser(this.form.username, this.form.password)
           this.registration_succeeded()
         } else {
           return false;

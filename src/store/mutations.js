@@ -1,14 +1,16 @@
 import {
-  REGISTER_USER,
+  LOGIN,
   GET_MESSAGES,
   ADD_MESSAGE,
   GET_CHANNELS,
   ADD_CHANNEL,
 } from './mutation-types'
 
+
 export default {
-  [REGISTER_USER](state, user) {
-    state.user = user
+  [LOGIN](state, payload) {
+    state.jwt = payload.jwt
+    state.user = payload.jser
   },
   [GET_MESSAGES](state, messages) {
     state.messages = messages
