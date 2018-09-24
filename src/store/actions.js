@@ -16,11 +16,14 @@ import {
 
 
 export default {
-  [LOGIN]({ commit }, payload) {
-    login(payload.username, payload.password)
-      .then(token => {
-        commit(LOGIN, {jwt: token, user: payload.username})
-      })
+  async [LOGIN]({ commit }, payload) {
+    const response = await login(payload.username, payload.password)
+    if (! response.ok) {
+      return false
+    }
+    const json = await response.json()
+    commit(LOGIN, {jwt: json.token, user: payload.username})
+    return true
   },
   [GET_MESSAGES]({ commit }, channel_name) {
     fetchMessages(channel_name).then(messages => {

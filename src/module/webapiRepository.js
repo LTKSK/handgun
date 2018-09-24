@@ -11,7 +11,7 @@ export async function registerUser(username, password){
   const response = await fetch(users_url,
                                {method: "POST",
                                 body: JSON.stringify(user_data)})
-  return response.json()
+  return response.ok
 }
 
 export async function login(username, password){
@@ -22,8 +22,7 @@ export async function login(username, password){
   const response = await fetch(login_url,
                                {method: "POST",
                                 body: JSON.stringify(user_data)})
-  const json = await response.json()
-  return json.token
+  return response
 }
 
 export async function fetchChannels(headers){

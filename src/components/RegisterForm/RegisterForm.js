@@ -47,23 +47,34 @@ export default {
     }
   },
   methods: {
-    _go_to_login_form() {
+    _goToLoginForm() {
       this.$router.push({path: "/login"})
     },
-    registration_succeeded() {
+    registrationSucceeded() {
       this.$notify({
         title: "Success!",
         message: "Registration succeeded",
-        type: 'success'
-      }).onClose = this._go_to_login_form
+        type: "success"
+      }).onClose = this._goToLoginForm
+    },
+    registrationFailed() {
+      this.$notify({
+        title: "Failed!",
+        message: "Registration failed",
+        type: "error"
+      })
     },
     register(form_name) {
       this.$refs[form_name].validate((is_valid) => {
         if (is_valid) {
           registerUser(this.form.username, this.form.password)
-          this.registration_succeeded()
-        } else {
-          return false;
+            .then(succeeded => {
+              if (succeeded) {
+                this.registrationSucceeded()
+              } else {
+                this.registrationFailed()
+              }
+            })
         }
       });
     }

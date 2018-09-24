@@ -14,23 +14,36 @@ export default {
     ...mapActions([
       LOGIN
     ]),
-    go_to_register_form() {
+    goToRegisterForm() {
       this.$router.push("/register")
     },
-    _go_to_channel() {
+    _goToChannel() {
       this.$router.push({path: "/channel"})
     },
-    login_succeeded() {
+    loginSucceeded() {
       this.$notify({
         title: "Success!",
         message: "Login succeeded",
         type: 'success'
-      }).onClose = this._go_to_channel
+      }).onClose = this._goToChannel
+    },
+    loginFailed() {
+      this.$notify({
+        title: "Failded!",
+        message: "Login failed!",
+        type: 'error'
+      })
     },
     login(){
       this.LOGIN({username: this.form.username,
                   password: this.form.password})
-      this.login_succeeded()
+        .then(result => {
+          if(! result) {
+            this.loginFailed()
+            return
+          }
+          this.loginSucceeded()
+        })
     }
   }
 }
