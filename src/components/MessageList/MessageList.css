@@ -6,9 +6,11 @@ ul {
   height: 100vh;
 }
 .user {
+  text-align: left;
   font-weight: bold;
   font-size: 14px;
 }
 .date {
+  text-align: right;
   font-size: 12px;
 }
