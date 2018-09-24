@@ -4,14 +4,39 @@ export default {
   name: 'channel-form',
   data() {
     return {
-      channel: '',
+      form: {
+        channel: '',
+      },
       file: null,
       files: [],
+      rules: {
+        channel: [
+          {
+            required: true,
+            message: "channel name is required",
+            trigger: "blur"
+          },
+          {
+            message: "Please dont input only space",
+            whitespace: true,
+            trigger: "blur"
+          },
+          {
+            validator: (rule, value, callback) => {
+              if(! /^[a-zA-Z0-9]\w*[a-zA-Z0-9]$/.test(value)){
+                callback(new Error("You can only use aplhanumeric characters and '_' for username"))
+              }
+              callback()
+            },
+            trigger: "blur"
+          }
+        ]
+      }
     }
   },
   computed: {
     disabled() {
-      return this.file === null || this.channel === ""
+      return this.file === null
     }
   },
   methods: {
@@ -19,7 +44,8 @@ export default {
       ADD_CHANNEL,
     ]),
     _goToAddedChannel(){
-      this.$router.push({name: "chat", params: {"channelname": this.channel}})
+      this.$router.push({name: "chat",
+                         params: {"channelname": this.form.channel}})
     },
     addChannelSucceeded() {
       this.$notify({
@@ -36,14 +62,19 @@ export default {
       })
     },
     addChannel() {
-      this.ADD_CHANNEL({file: this.file, channel: this.channel})
-        .then(succeed => {
-          if(succeed){
-            this.addChannelSucceeded()
-            return
-          }
-          this.addChannelFailed()
-        })
+      this.$refs["form"].validate((is_valid) => {
+        if (! is_valid) {
+          return
+        }
+        this.ADD_CHANNEL({file: this.file, channel: this.form.channel})
+          .then(succeed => {
+            if(succeed){
+              this.addChannelSucceeded()
+              return
+            }
+            this.addChannelFailed()
+          })
+      })
     },
     fileSelected(file, fileList) {
       this.file = file.raw
