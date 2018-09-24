@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from '@/store'
 import Router from 'vue-router'
 import Chat from '@/components/Chat'
 import Channel from '@/components/Channel'
@@ -7,7 +8,7 @@ import LoginForm from '@/components/LoginForm/';
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -21,9 +22,9 @@ export default new Router({
       component: RegisterForm
     },
     {
-      path: '/Channel',
+      path: '/channel',
       name: 'channel',
-      component: Channel
+      component: Channel,
     },
     {
       path: '/channel/:channelname',
@@ -36,3 +37,14 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  // if user has logged in, redirect to channel
+  if (to.path === "/" && store.getters.user){
+   next({path: "/channel", query: {redirect: to.fullPath}})
+   return
+  }
+  next()
+})
+
+export default router

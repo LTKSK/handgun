@@ -14,7 +14,7 @@
       <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
     </el-upload>
     <el-input placeholder="Please input new channel name" v-model="channel" />
-    <el-button type="primary" v-bind:disabled="disabled" v-on:click="ADD_CHANNEL({channel, file})" >
+    <el-button type="primary" v-bind:disabled="disabled" v-on:click="addChannel" >
       Create new channel
     </el-button>
   </el-main>

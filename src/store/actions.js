@@ -50,17 +50,17 @@ export default {
       commit(GET_CHANNELS, channels)
     })
   },
-  [ADD_CHANNEL]({ commit }, payload) {
+  async [ADD_CHANNEL]({ commit }, payload) {
     // if post success, call commit.
-    postChannel(payload.channel).then(is_ok => {
-      if(is_ok) {
-        postReviewTarget(payload.channel, payload.file)
-          .then(is_ok => {
-            if(is_ok){
-              commit(ADD_CHANNEL, payload.channel)
-            }
-          })
-      }
-    })
+    let post_succeed = await postChannel(payload.channel)
+    if(! post_succeed) {
+      return false
+    }
+    post_succeed = await postReviewTarget(payload.channel, payload.file)
+    if(! post_succeed){
+      return false
+    }
+    commit(ADD_CHANNEL, payload.channel)
+    return true
   },
 }
