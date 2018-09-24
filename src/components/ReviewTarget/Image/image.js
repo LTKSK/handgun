@@ -57,8 +57,29 @@ export default {
       canvas.addEventListener("mousedown", this._mousedown)
       canvas.addEventListener("mousemove", this._mousemove)
     },
+    _saveSucceeded() {
+      this.$notify({
+        title: "Success!",
+        message: "Save layer data succeeded",
+        type: "success"
+      })
+    },
+    _saveFailed() {
+      this.$notify({
+        title: "Failed!",
+        message: "Registration failed",
+        type: "error"
+      })
+    },
     saveLayer() {
       putLayer(this.$route.params.channelname, this.layer)
+        .then(succeeded => {
+          if (succeeded) {
+            this._saveSucceeded()
+            return
+          }
+          this._saveFailed()
+        })
     },
     resetLayer() {
       this.layer.reset()

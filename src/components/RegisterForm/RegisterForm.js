@@ -50,14 +50,14 @@ export default {
     _goToLoginForm() {
       this.$router.push({path: "/login"})
     },
-    registrationSucceeded() {
+    _registrationSucceeded() {
       this.$notify({
         title: "Success!",
         message: "Registration succeeded",
         type: "success"
       }).onClose = this._goToLoginForm
     },
-    registrationFailed() {
+    _registrationFailed() {
       this.$notify({
         title: "Failed!",
         message: "Registration failed",
@@ -70,9 +70,9 @@ export default {
           registerUser(this.form.username, this.form.password)
             .then(succeeded => {
               if (succeeded) {
-                this.registrationSucceeded()
+                this._registrationSucceeded()
               } else {
-                this.registrationFailed()
+                this._registrationFailed()
               }
             })
         }
