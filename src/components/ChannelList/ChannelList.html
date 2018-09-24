@@ -1,22 +1,24 @@
 <el-container class="channel-list">
   <el-aside>
     <el-menu mode="vertical" v-bind:default-openeds="['2']">
-      <el-menu-item index="1">
-        <router-link v-bind:to="{name: 'login'}">
+      <router-link v-bind:to="{name: 'login'}">
+        <el-menu-item index="1">
           <span class="home-button">Home</span>
-        </router-link>
-      </el-menu-item>
+        </el-menu-item>
+      </router-link>
       <el-submenu index="2">
         <template slot="title">
           <!-- todo: add icon -->
           <span style="font-weight: bold;">Channels</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item v-for="channel in channels" v-bind:key="channel" index="channel">
-            <router-link v-bind:to="{name: 'chat', params: {channelname: channel}}">
+          <router-link v-for="channel in channels"
+                       v-bind:key="channel"
+                       v-bind:to="{name: 'chat', params: {channelname: channel}}">
+            <el-menu-item index="channel">
               <span class="channel-button">{{ channel }}</span>
-            </router-link>
-          </el-menu-item>
+            </el-menu-item>
+          </router-link>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>

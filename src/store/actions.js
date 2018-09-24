@@ -14,7 +14,6 @@ import {
   postReviewTarget,
 } from '../module/webapiRepository'
 
-
 export default {
   async [LOGIN]({ commit }, payload) {
     const response = await login(payload.username, payload.password)
