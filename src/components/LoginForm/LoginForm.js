@@ -20,14 +20,14 @@ export default {
     _goToChannel() {
       this.$router.push({path: "/channel"})
     },
-    loginSucceeded() {
+    _loginSucceeded() {
       this.$notify({
         title: "Success!",
         message: "Login succeeded",
         type: 'success'
       }).onClose = this._goToChannel
     },
-    loginFailed() {
+    _loginFailed() {
       this.$notify({
         title: "Failded!",
         message: "Login failed!",
@@ -39,10 +39,10 @@ export default {
                   password: this.form.password})
         .then(result => {
           if(! result) {
-            this.loginFailed()
+            this._loginFailed()
             return
           }
-          this.loginSucceeded()
+          this._loginSucceeded()
         })
     }
   }

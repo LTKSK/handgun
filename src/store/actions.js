@@ -13,6 +13,7 @@ import {
   postChannel,
   postReviewTarget,
 } from '../module/webapiRepository'
+import moment from 'moment'
 
 export default {
   async [LOGIN]({ commit }, payload) {
@@ -33,8 +34,7 @@ export default {
     const message_data = {
       "index": payload.index,
       "value": payload.message,
-      // todo: set date data.
-      "date": "2018-08-01T12:00:00.110Z",
+      "date": moment().utc().toISOString(),
       "user": payload.user,
     }
     postMessage(payload.channel_name, message_data)
