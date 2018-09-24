@@ -13,7 +13,7 @@
         </template>
         <el-menu-item-group>
           <el-menu-item v-for="channel in channels" v-bind:key="channel" index="channel">
-            <router-link v-bind:to="{name: 'channel', params: {channelname: channel}}">
+            <router-link v-bind:to="{name: 'chat', params: {channelname: channel}}">
               <span class="channel-button">{{ channel }}</span>
             </router-link>
           </el-menu-item>

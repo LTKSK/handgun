@@ -36,8 +36,7 @@ export default {
       "value": payload.message,
       // todo: set date data.
       "date": "2018-08-01T12:00:00.110Z",
-      // todo: set user data from authorization.
-      "user": "Anonymouse",
+      "user": payload.user,
     }
     postMessage(payload.channel_name, message_data)
       .then(is_ok => {

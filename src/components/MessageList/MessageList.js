@@ -19,7 +19,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'messages',
+      "messages",
+      "user",
     ]),
   },
   methods: {
@@ -33,7 +34,8 @@ export default {
     sendMessage() {
       this.ADD_MESSAGE({"channel_name": this.$route.params.channelname,
                         "index": this.messages.length,
-                        "message":this.message})
+                        "message":this.message,
+                        "user": this.user})
       this.message = "";
     }
   }

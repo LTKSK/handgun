@@ -10,7 +10,7 @@ import {
 export default {
   [LOGIN](state, payload) {
     state.jwt = payload.jwt
-    state.user = payload.jser
+    state.user = payload.user
   },
   [GET_MESSAGES](state, messages) {
     state.messages = messages
