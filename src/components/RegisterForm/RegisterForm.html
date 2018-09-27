@@ -1,6 +1,5 @@
 <div class="register-form">
-  <el-upload drag
-             class="avatar-uploader"
+  <el-upload class="avatar-uploader"
              action=""
              v-bind:auto-upload="false"
              v-bind:show-file-list="false"
@@ -20,6 +19,7 @@
     </el-form-item>
   </el-form>
   <el-button type="primary"
+             v-bind:disabled="!file"
              v-on:click="register('form')" >
     Register
   </el-button>

@@ -5,8 +5,7 @@ export default {
   name: "register-form",
   data() {
     return {
-      files: [],
-      image: null,
+      file: null,
       form: {
         username: "",
         password: "",
@@ -50,7 +49,7 @@ export default {
   },
   methods: {
     fileSelected(file) {
-      this.image = URL.createObjectURL(file.raw)
+      this.file = URL.createObjectURL(file.raw)
     },
     _goToLoginForm() {
       this.$router.push({path: "/login"})
