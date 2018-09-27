@@ -4,7 +4,7 @@
              v-bind:auto-upload="false"
              v-bind:show-file-list="false"
              v-bind:on-change="fileSelected">
-    <img v-if="image" v-bind:src="image" class="avatar">
+    <img v-if="file" v-bind:src="file" class="avatar">
     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
   </el-upload>
   <el-form v-bind:model="form" v-bind:rules="rules" ref="form" label-width="120px" >
