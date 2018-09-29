@@ -14,6 +14,16 @@ export async function registerUser(username, password){
   return response.ok
 }
 
+export async function registerUserIcon(username, file){
+  const form = new FormData()
+  form.append(file.name, file)
+  const response = await fetch(`${users_url}/${username}/icon`,
+                               {method: "POST",
+                                body: form})
+  return response.ok
+}
+
+
 export async function login(username, password){
   const user_data = {
     username,
