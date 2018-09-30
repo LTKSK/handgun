@@ -4,8 +4,9 @@
              v-bind:auto-upload="false"
              v-bind:show-file-list="false"
              v-bind:on-change="fileSelected">
-    <img v-if="file" v-bind:src="file" class="avatar">
-    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+    <img v-if="image_src" v-bind:src="image_src" class="avatar">
+    <div v-else class="el-icon-picture avatar-uploader-icon" />
+    <div>select your icon</div>
   </el-upload>
   <el-form v-bind:model="form" v-bind:rules="rules" ref="form" label-width="120px" >
     <el-form-item label="Username" prop="username">
@@ -19,7 +20,7 @@
     </el-form-item>
   </el-form>
   <el-button type="primary"
-             v-bind:disabled="!file"
+             v-bind:disabled="!image_src"
              v-on:click="register('form')" >
     Register
   </el-button>

@@ -14,15 +14,14 @@ export async function registerUser(username, password){
   return response.ok
 }
 
-export async function registerUserIcon(username, file){
+export async function registerUserIcon(username, icon_data){
   const form = new FormData()
-  form.append(file.name, file)
+  form.append(`${username}_icon`, icon_data)
   const response = await fetch(`${users_url}/${username}/icon`,
                                {method: "POST",
                                 body: form})
   return response.ok
 }
-
 
 export async function login(username, password){
   const user_data = {
