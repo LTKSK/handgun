@@ -4,6 +4,7 @@ import {
   ADD_MESSAGE,
   GET_CHANNELS,
   ADD_CHANNEL,
+  ADD_ICON,
 } from './mutation-types'
 
 
@@ -23,5 +24,8 @@ export default {
   },
   [ADD_CHANNEL](state, channel) {
     state.channels.push(channel)
+  },
+  [ADD_ICON](state, payload) {
+    state.icons[payload.username] = payload.icon
   }
 }

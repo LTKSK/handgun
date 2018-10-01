@@ -4,6 +4,7 @@ import {
   ADD_MESSAGE,
   GET_CHANNELS,
   ADD_CHANNEL,
+  ADD_ICON,
 } from './mutation-types'
 import {
   login,
@@ -61,5 +62,9 @@ export default {
     }
     commit(ADD_CHANNEL, payload.channel)
     return true
+  },
+  [ADD_ICON]({ commit }, payload) {
+    commit(ADD_ICON, {username: payload.username,
+                      icon: payload.icon})
   },
 }

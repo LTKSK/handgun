@@ -10,3 +10,6 @@
 .el-container {
   height: 100vh;
 }
+.user-icon {
+  padding: 2px;
+}

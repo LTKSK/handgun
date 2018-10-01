@@ -3,7 +3,7 @@ const channels_url = 'http://localhost:5000/channels'
 const users_url = 'http://localhost:5000/users'
 const login_url = 'http://localhost:5000/login'
 
-export async function registerUser(username, password){
+export async function postUser(username, password){
   const user_data = {
     username,
     password
@@ -14,13 +14,19 @@ export async function registerUser(username, password){
   return response.ok
 }
 
-export async function registerUserIcon(username, icon_data){
+export async function postUserIcon(username, icon_data){
   const form = new FormData()
   form.append(`${username}_icon`, icon_data)
-  const response = await fetch(`${users_url}/${username}/icon`,
+  const response = await fetch(`${users_url}/icons/${username}`,
                                {method: "POST",
                                 body: form})
   return response.ok
+}
+
+export async function fetchUserIcon(username){
+  const response = await fetch(`${users_url}/icons/${username}`)
+  const blob = await response.blob()
+  return blob
 }
 
 export async function login(username, password){

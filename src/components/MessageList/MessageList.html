@@ -3,9 +3,10 @@
     <ul>
       <li v-for="msg in messages" v-bind:key="msg.index">
         <el-row>
-          <!-- todo: icon from msg user data -->
-          <el-col v-bind:span="3"> <i class="el-icon-upload"></i> </el-col>
-          <el-col v-bind:span="21">
+          <el-col v-bind:span="6" v-if="isCurrent(msg.user)">
+            <img class="user-icon" v-bind:src="getIconSource(msg.user)" />
+          </el-col>
+          <el-col v-bind:span="18">
             <el-row>
               <el-col v-bind:span="8">
                 <div class="grid-content"> <div class="user">{{ msg.user }}</div> </div>
@@ -19,6 +20,9 @@
                 <div class="grid-content"> <div class="message">{{ msg.value }}</div> </div>
               </el-col>
             </el-row>
+          </el-col>
+          <el-col v-bind:span="6" v-if="!isCurrent(msg.user)">
+            <img class="user-icon" v-bind:src="getIconSource(msg.user)" />
           </el-col>
         </el-row>
       </li>

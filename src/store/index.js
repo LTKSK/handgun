@@ -11,6 +11,7 @@ const state = {
     channels: [],
     user: null,
     jwt: "",
+    icons: {},
 }
 
 export default new Vuex.Store({

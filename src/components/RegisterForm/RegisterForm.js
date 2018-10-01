@@ -1,6 +1,6 @@
 import {
-  registerUser,
-  registerUserIcon,
+  postUser,
+  postUserIcon,
 } from '@/module/webapiRepository'
 export default {
   name: "register-form",
@@ -63,7 +63,7 @@ export default {
       image.src = URL.createObjectURL(file.raw)
       image.onload = () => {
         this.image_src = new Image()
-        this.image_src = this._resize_image(image, file.raw.type, 256, 256)
+        this.image_src = this._resize_image(image, file.raw.type, 64, 64)
       }
     },
     _goToLoginForm() {
@@ -98,11 +98,11 @@ export default {
     register(form_name) {
       this.$refs[form_name].validate((is_valid) => {
         if (is_valid) {
-          registerUser(this.form.username, this.form.password)
+          postUser(this.form.username, this.form.password)
             .then(succeeded => {
               if (succeeded) {
                 const image_data = this._image_src_to_blob(this.image_src)
-                return registerUserIcon(this.form.username, image_data)
+                return postUserIcon(this.form.username, image_data)
               }
               return false
             })
