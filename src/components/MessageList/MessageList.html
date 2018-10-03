@@ -3,7 +3,7 @@
     <ul>
       <li v-for="msg in messages" v-bind:key="msg.index">
         <el-row>
-          <el-col v-bind:span="6" v-if="isCurrent(msg.user)">
+          <el-col v-bind:span="6">
             <img class="user-icon" v-bind:src="getIconSource(msg.user)" />
           </el-col>
           <el-col v-bind:span="18">
@@ -20,9 +20,6 @@
                 <div class="grid-content"> <div class="message">{{ msg.value }}</div> </div>
               </el-col>
             </el-row>
-          </el-col>
-          <el-col v-bind:span="6" v-if="!isCurrent(msg.user)">
-            <img class="user-icon" v-bind:src="getIconSource(msg.user)" />
           </el-col>
         </el-row>
       </li>

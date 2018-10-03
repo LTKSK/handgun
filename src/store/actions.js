@@ -52,7 +52,7 @@ export default {
   },
   async [ADD_CHANNEL]({ commit }, payload) {
     // if post success, call commit.
-    let post_succeed = await postChannel(payload.channel)
+    let post_succeed = await postChannel(payload.channel, payload.headers)
     if(! post_succeed) {
       return false
     }

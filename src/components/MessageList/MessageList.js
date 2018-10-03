@@ -32,9 +32,6 @@ export default {
       ADD_MESSAGE,
       ADD_ICON,
     ]),
-    isCurrent(username) {
-      return this.user == username
-    },
     getMessages() {
       this.GET_MESSAGES(this.$route.params.channelname)
     },

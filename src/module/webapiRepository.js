@@ -48,10 +48,19 @@ export async function fetchChannels(headers){
   return json.map(channel => channel.name)
 }
 
-export async function postChannel(channel_name){
+export async function postChannel(channel_name, headers){
   const response = await fetch(channels_url,
                                {method: "POST",
+                                headers: headers,
                                 body: JSON.stringify({name: channel_name})})
+  return response.ok
+}
+
+export async function postChannelUser(channel_name, user_name, headers){
+  const response = await fetch(`${channels_url}/${channel_name}/users`,
+                               {method: "POST",
+                                headers: headers,
+                                body: JSON.stringify({user_name: user_name})})
   return response.ok
 }
 

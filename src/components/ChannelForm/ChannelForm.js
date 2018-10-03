@@ -1,4 +1,4 @@
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { ADD_CHANNEL } from '@/store/mutation-types'
 export default {
   name: 'channel-form',
@@ -37,7 +37,10 @@ export default {
   computed: {
     disabled() {
       return this.file === null
-    }
+    },
+    ...mapGetters([
+      'header'
+    ]),
   },
   methods: {
     ...mapActions([
@@ -66,7 +69,9 @@ export default {
         if (! is_valid) {
           return
         }
-        this.ADD_CHANNEL({file: this.file, channel: this.form.channel})
+        this.ADD_CHANNEL({file: this.file,
+                          channel: this.form.channel,
+                          headers: this.header})
           .then(succeed => {
             if(succeed){
               this.addChannelSucceeded()
