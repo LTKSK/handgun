@@ -56,11 +56,11 @@ export async function postChannel(channel_name, headers){
   return response.ok
 }
 
-export async function postChannelUser(channel_name, user_name, headers){
+export async function putChannelUsers(channel_name, user_names, headers){
   const response = await fetch(`${channels_url}/${channel_name}/users`,
-                               {method: "POST",
+                               {method: "PUT",
                                 headers: headers,
-                                body: JSON.stringify({user_name: user_name})})
+                                body: JSON.stringify({user_name: user_names})})
   return response.ok
 }
 
