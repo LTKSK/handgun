@@ -4,7 +4,14 @@
 
 > This project must be used with ['handgun_api'](https://github.com/LTKSK/handgun_api).
 
+
 ## Build Setup
+At First, you should activate 'handgun_api' on same host.
+because 'handgun' access to 'handgun_api' on localhost.
+
+
+This setting will be changed by config file. But not yet.
+
 
 ``` bash
 # install dependencies
