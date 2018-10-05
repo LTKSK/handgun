@@ -4,7 +4,8 @@ import Router from 'vue-router'
 import Chat from '@/components/Chat'
 import Channel from '@/components/Channel'
 import RegisterForm from '@/components/RegisterForm'
-import LoginForm from '@/components/LoginForm/';
+import LoginForm from '@/components/LoginForm';
+import InviteForm from '@/components/InviteForm';
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ const router = new Router({
       path: '/channel/:channelname',
       name: 'chat',
       component: Chat
+    },
+    {
+      path: '/invite',
+      name: 'invite',
+      component: InviteForm
     },
     {
       path: '*',

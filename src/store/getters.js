@@ -14,7 +14,8 @@ export const messages = state => {
   return state.messages
 }
 export const channels = state => state.channels
-export const user = state => state.user
+export const logged_in_user = state => state.logged_in_user
+export const users = state => state.users
 export const header = state => {
   return {"Authorization": `Bearer ${state.jwt}`}
 }

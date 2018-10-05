@@ -5,6 +5,7 @@ import {
   GET_CHANNELS,
   ADD_CHANNEL,
   ADD_ICON,
+  GET_USERS,
 } from './mutation-types'
 
 
@@ -27,5 +28,8 @@ export default {
   },
   [ADD_ICON](state, payload) {
     state.icons[payload.username] = payload.icon
-  }
+  },
+  [GET_USERS](state, users) {
+    state.users = users
+  },
 }

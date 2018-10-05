@@ -9,7 +9,8 @@ Vue.use(Vuex)
 const state = {
     messages: [],
     channels: [],
-    user: null,
+    logged_in_user: null,
+    users: null,
     jwt: "",
     icons: {},
 }

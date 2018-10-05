@@ -14,6 +14,11 @@ export async function postUser(username, password){
   return response.ok
 }
 
+export async function fetchUsers(){
+  const response = await fetch(users_url)
+  return response.json()
+}
+
 export async function postUserIcon(username, icon_data){
   const form = new FormData()
   form.append(`${username}_icon`, icon_data)

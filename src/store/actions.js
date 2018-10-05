@@ -5,6 +5,7 @@ import {
   GET_CHANNELS,
   ADD_CHANNEL,
   ADD_ICON,
+  GET_USERS,
 } from './mutation-types'
 import {
   login,
@@ -13,6 +14,7 @@ import {
   fetchChannels,
   postChannel,
   postReviewTarget,
+  fetchUsers,
 } from '../module/webapiRepository'
 import moment from 'moment'
 
@@ -66,5 +68,10 @@ export default {
   [ADD_ICON]({ commit }, payload) {
     commit(ADD_ICON, {username: payload.username,
                       icon: payload.icon})
+  },
+  [GET_USERS]({ commit }) {
+    const users = fetchUsers()
+    console.log(users)
+    commit(GET_USERS, users)
   },
 }

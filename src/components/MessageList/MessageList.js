@@ -22,7 +22,7 @@ export default {
   computed: {
     ...mapGetters([
       "messages",
-      "user",
+      "logged_in_user",
       "icon",
     ]),
   },
@@ -50,7 +50,7 @@ export default {
       this.ADD_MESSAGE({"channel_name": this.$route.params.channelname,
                         "index": this.messages.length,
                         "message":this.message,
-                        "user": this.user})
+                        "user": this.logged_in_user})
       this.message = "";
     }
   }

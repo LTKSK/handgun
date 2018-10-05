@@ -1,5 +1,17 @@
 <div class="invite-form">
-  <div v-for="user in users" v-bind:key="user">
-    {{ user }}
+  <div>
+    Check invite users
+  </div>
+  <div v-for="user in users_data" v-bind:key="user.name">
+    <el-row>
+      <el-col v-bind:span="2">
+        <img class="user-icon" v-bind:src="getIconSource(user.name)" />
+      </el-col>
+      <el-col v-bind:span="22">
+        <el-checkbox border v-model="user.enabled">
+          {{ user.name }}
+        </el-checkbox>
+      </el-col>
+    </el-row>
   </div>
 </div>
