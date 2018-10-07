@@ -69,9 +69,8 @@ export default {
     commit(ADD_ICON, {username: payload.username,
                       icon: payload.icon})
   },
-  [GET_USERS]({ commit }) {
-    const users = fetchUsers()
-    console.log(users)
+  async [GET_USERS]({ commit }) {
+    const users = await fetchUsers()
     commit(GET_USERS, users)
   },
 }

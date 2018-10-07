@@ -5,10 +5,7 @@ export default {
   name: 'invite-form',
   data() {
     return {
-      users_data: [{name: "test",
-                    enabled: true},
-                   {name: "test_user1",
-                    enabled: true}],
+      users_data: [],
     }
   },
   computed: {
@@ -40,5 +37,12 @@ export default {
   },
   mounted() {
     this.GET_USERS()
+      .then(() => {
+        this.users_data = []
+        for(let user of this.users) {
+          this.users_data.push({name: user.name,
+                                enabled: false})
+        }
+      })
   }
 }

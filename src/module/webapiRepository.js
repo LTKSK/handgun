@@ -16,7 +16,8 @@ export async function postUser(username, password){
 
 export async function fetchUsers(){
   const response = await fetch(users_url)
-  return response.json()
+  const json = await response.json()
+  return json
 }
 
 export async function postUserIcon(username, icon_data){
