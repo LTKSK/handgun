@@ -1,6 +1,5 @@
 import { mapGetters, mapActions } from 'vuex'
-import { ADD_ICON, GET_USERS } from '@/store/mutation-types'
-import { fetchUserIcon } from '@/module/webapiRepository'
+import { GET_ICON, GET_USERS } from '@/store/mutation-types'
 export default {
   name: 'invite-form',
   data() {
@@ -17,31 +16,26 @@ export default {
   },
   methods: {
     ...mapActions([
-      ADD_ICON,
+      GET_ICON,
       GET_USERS,
     ]),
     getIconSource(username) {
-      let icon_data = this.icon(username)
-      if (icon_data) {
-        return URL.createObjectURL(icon_data)
-      }
-      fetchUserIcon(username)
-        .then(icon => {
-          this.ADD_ICON({username, icon})
-          return icon
-        })
+      return this.icon(username)
     },
     inviteUser() {
       // todo invite
     }
   },
   mounted() {
+    this.users_data = []
     this.GET_USERS()
       .then(() => {
-        this.users_data = []
         for(let user of this.users) {
-          this.users_data.push({name: user.name,
-                                enabled: false})
+          this.GET_ICON(user.name)
+            .then(() => {
+              this.users_data.push({name: user.name,
+                                    enabled: false})
+            })
         }
       })
   }

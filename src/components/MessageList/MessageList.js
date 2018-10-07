@@ -2,22 +2,22 @@ import { mapGetters, mapActions } from 'vuex'
 import {
   GET_MESSAGES,
   ADD_MESSAGE,
-  ADD_ICON,
+  GET_ICON,
 } from '@/store/mutation-types'
-import { fetchUserIcon } from '@/module/webapiRepository'
 
 export default {
   name: 'message-list',
   watch:{
-    '$route': 'getMessages',
+    '$route': 'setupMessages',
   },
   data() {
     return {
       message: "",
+      user_icons: {},
     }
   },
   mounted() {
-    this.getMessages()
+    this.setupMessages()
   },
   computed: {
     ...mapGetters([
@@ -30,21 +30,16 @@ export default {
     ...mapActions([
       GET_MESSAGES,
       ADD_MESSAGE,
-      ADD_ICON,
+      GET_ICON,
     ]),
-    getMessages() {
-      this.GET_MESSAGES(this.$route.params.channelname)
+    setupMessages: async function() {
+      await this.GET_MESSAGES(this.$route.params.channelname)
+      for(let user of Array.from(new Set(this.messages.map(message => message.user)))) {
+        this.GET_ICON(user)
+      }
     },
     getIconSource(username) {
-      let icon_data = this.icon(username)
-      if (icon_data) {
-        return URL.createObjectURL(icon_data)
-      }
-      fetchUserIcon(username)
-        .then(icon => {
-          this.ADD_ICON({username, icon})
-          return icon
-        })
+      return this.icon(username)
     },
     sendMessage() {
       this.ADD_MESSAGE({"channel_name": this.$route.params.channelname,

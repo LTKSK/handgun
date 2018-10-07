@@ -46,7 +46,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   // if user has logged in, redirect to channel
-  if (to.path === "/" && store.getters.user){
+  if (to.path === "/" && store.getters.logged_in_user){
    next({path: "/channel", query: {redirect: to.fullPath}})
    return
   }

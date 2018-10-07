@@ -32,7 +32,7 @@ export async function postUserIcon(username, icon_data){
 export async function fetchUserIcon(username){
   const response = await fetch(`${users_url}/icons/${username}`)
   const blob = await response.blob()
-  return blob
+  return URL.createObjectURL(blob)
 }
 
 export async function login(username, password){

@@ -4,7 +4,7 @@ import {
   ADD_MESSAGE,
   GET_CHANNELS,
   ADD_CHANNEL,
-  ADD_ICON,
+  GET_ICON,
   GET_USERS,
 } from './mutation-types'
 
@@ -12,7 +12,7 @@ import {
 export default {
   [LOGIN](state, payload) {
     state.jwt = payload.jwt
-    state.user = payload.user
+    state.logged_in_user = payload.user
   },
   [GET_MESSAGES](state, messages) {
     state.messages = messages
@@ -26,7 +26,7 @@ export default {
   [ADD_CHANNEL](state, channel) {
     state.channels.push(channel)
   },
-  [ADD_ICON](state, payload) {
+  [GET_ICON](state, payload) {
     state.icons[payload.username] = payload.icon
   },
   [GET_USERS](state, users) {

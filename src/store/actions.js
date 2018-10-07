@@ -4,7 +4,7 @@ import {
   ADD_MESSAGE,
   GET_CHANNELS,
   ADD_CHANNEL,
-  ADD_ICON,
+  GET_ICON,
   GET_USERS,
 } from './mutation-types'
 import {
@@ -15,6 +15,7 @@ import {
   postChannel,
   postReviewTarget,
   fetchUsers,
+  fetchUserIcon,
 } from '../module/webapiRepository'
 import moment from 'moment'
 
@@ -65,9 +66,9 @@ export default {
     commit(ADD_CHANNEL, payload.channel)
     return true
   },
-  [ADD_ICON]({ commit }, payload) {
-    commit(ADD_ICON, {username: payload.username,
-                      icon: payload.icon})
+  async [GET_ICON]({ commit }, username) {
+    const icon = await fetchUserIcon(username)
+    commit(GET_ICON, {username, icon})
   },
   async [GET_USERS]({ commit }) {
     const users = await fetchUsers()
