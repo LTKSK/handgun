@@ -1,4 +1,7 @@
-import { mapGetters, mapActions } from 'vuex'
+import {
+  mapGetters,
+  mapActions
+} from 'vuex'
 import {
   GET_MESSAGES,
   ADD_MESSAGE,

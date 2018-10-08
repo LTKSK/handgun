@@ -1,7 +1,17 @@
-import { mapGetters, mapActions } from 'vuex'
-import { GET_ICON, GET_USERS } from '@/store/mutation-types'
+import {
+  mapGetters,
+  mapActions
+} from 'vuex'
+import {
+  GET_ICON,
+  GET_USERS
+} from '@/store/mutation-types'
+import {
+  putChannelUsers,
+} from '@/module/webapiRepository'
 export default {
   name: 'invite-form',
+  props: ["channelname"],
   data() {
     return {
       users_data: [],
@@ -11,6 +21,7 @@ export default {
     ...mapGetters([
       "logged_in_user",
       "users",
+      "header",
       "icon",
     ]),
   },
@@ -22,21 +33,23 @@ export default {
     getIconSource(username) {
       return this.icon(username)
     },
-    inviteUser() {
-      // todo invite
+    invite() {
+      const enabled_users = this.users_data.filter(user => user.enabled)
+      console.log(this.channelname, enabled_users, this.header)
+      // todo: get channelname from parent component
+      // putChannelUsers(this.channelname, enabled_users, this.header)
+    },
+    setupUsers: async function() {
+      this.users_data = []
+      await this.GET_USERS()
+      for(let user of this.users) {
+        await this.GET_ICON(user.name)
+        this.users_data.push({name: user.name,
+                              enabled: false})
+      }
     }
   },
   mounted() {
-    this.users_data = []
-    this.GET_USERS()
-      .then(() => {
-        for(let user of this.users) {
-          this.GET_ICON(user.name)
-            .then(() => {
-              this.users_data.push({name: user.name,
-                                    enabled: false})
-            })
-        }
-      })
+    this.setupUsers()
   }
 }

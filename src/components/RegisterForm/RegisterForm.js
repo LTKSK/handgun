@@ -56,7 +56,6 @@ export default {
       const context = canvas.getContext("2d")
       context.drawImage(image, 0, 0, width, height)
       return canvas.toDataURL(mime_type)
-
     },
     fileSelected(file) {
       const image = new Image()
