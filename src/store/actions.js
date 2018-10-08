@@ -29,10 +29,9 @@ export default {
     commit(LOGIN, {jwt: json.token, user: payload.username})
     return true
   },
-  [GET_MESSAGES]({ commit }, channel_name) {
-    fetchMessages(channel_name).then(messages => {
-      commit(GET_MESSAGES, messages)
-    })
+  async [GET_MESSAGES]({ commit }, channel_name) {
+    const messages = await fetchMessages(channel_name)
+    commit(GET_MESSAGES, messages)
   },
   [ADD_MESSAGE]({ commit }, payload) {
     const message_data = {

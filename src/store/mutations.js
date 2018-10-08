@@ -27,6 +27,10 @@ export default {
     state.channels.push(channel)
   },
   [GET_ICON](state, payload) {
+    // this code means emit to vue what 'state.icons' change
+    state.icons = {
+      ...state.icons,
+    }
     state.icons[payload.username] = payload.icon
   },
   [GET_USERS](state, users) {

@@ -1,6 +1,6 @@
 import ChannelList from '@/components/ChannelList'
 import MessageList from '@/components/MessageList'
-import Image from '../ReviewTarget/Image'
+import Image from '@/components/ReviewTarget/Image'
 
 export default {
   name: 'chat',
