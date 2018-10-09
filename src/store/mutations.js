@@ -1,5 +1,6 @@
 import {
   LOGIN,
+  LOGOUT,
   GET_MESSAGES,
   ADD_MESSAGE,
   GET_CHANNELS,
@@ -13,6 +14,10 @@ export default {
   [LOGIN](state, payload) {
     state.jwt = payload.jwt
     state.logged_in_user = payload.user
+  },
+  [LOGOUT](state) {
+    state.jwt = ""
+    state.logged_in_user = null
   },
   [GET_MESSAGES](state, messages) {
     state.messages = messages

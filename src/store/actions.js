@@ -1,5 +1,6 @@
 import {
   LOGIN,
+  LOGOUT,
   GET_MESSAGES,
   ADD_MESSAGE,
   GET_CHANNELS,
@@ -28,6 +29,9 @@ export default {
     const json = await response.json()
     commit(LOGIN, {jwt: json.token, user: payload.username})
     return true
+  },
+  async [LOGOUT]({ commit }) {
+    commit(LOGOUT)
   },
   async [GET_MESSAGES]({ commit }, channel_name) {
     const messages = await fetchMessages(channel_name)
