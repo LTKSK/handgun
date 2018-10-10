@@ -38,7 +38,7 @@ export default {
     setupMessages: async function() {
       await this.GET_MESSAGES(this.channel)
       for(let user of Array.from(new Set(this.messages.map(message => message.user)))) {
-         await this.GET_ICON(user)
+         this.GET_ICON(user)
       }
     },
     sendMessage() {
