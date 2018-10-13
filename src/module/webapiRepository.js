@@ -1,7 +1,19 @@
-// todo url from config or env.
+// todo url from config or environ.
 const channels_url = 'http://localhost:5000/channels'
 const users_url = 'http://localhost:5000/users'
 const login_url = 'http://localhost:5000/login'
+
+async function fetch_with_error_handling(url, options) {
+  const response = await fetch(url, options)
+  if (response.ok) {
+    return response
+  }
+  if (response.status == 400) throw Error("BAD_REQUEST")
+  if (response.status == 401) throw Error("UNAUTHORIZED")
+  if (response.status == 404) throw Error("NOT_FOUND")
+  if (response.status == 500) throw Error("INTERNAL_SERVER_ERROR")
+  throw Error("something errro occerrd.")
+}
 
 export async function postUser(username, password){
   const user_data = {
@@ -48,7 +60,7 @@ export async function login(username, password){
 
 export async function fetchChannels(headers){
   const response = await fetch(channels_url,
-                               {method: "GET",
+                              {method: "GET",
                                 headers: headers})
   const json = await response.json()
   return json.map(channel => channel.name)
