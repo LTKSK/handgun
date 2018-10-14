@@ -1,5 +1,5 @@
 <template>
-  <el-button type="primary" v-on:click="logout">
+  <el-button type="info" v-on:click="logout">
     Logout
   </el-button>
 </template>
@@ -17,10 +17,22 @@ export default {
       LOGOUT,
     ]),
     logout() {
-      this.LOGOUT()
-        .then(() => {
-          this.$router.push({path: "/"})
-        })
+      this.$confirm(
+        "Do you want to logout?",
+        "Warning",
+        {
+          confirmButtonText: "Logout",
+          cancelButtonText: "Cancel",
+          type: "warning",
+        }
+      )
+      .then(() => {
+        this.LOGOUT()
+          .then(() => {
+            this.$router.push({path: "/"})
+          })
+      })
+      .catch(error => {})
     },
   }
 }
