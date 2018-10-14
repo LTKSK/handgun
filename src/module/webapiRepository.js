@@ -4,8 +4,8 @@ const users_url = 'http://localhost:5000/users'
 const login_url = 'http://localhost:5000/login'
 
 async function fetchWithErrorHandring(url, options) {
-  const response = await fetch(url, options).catch(error => {
-    throw new Error(error)
+  const response = await fetch(url, options).catch(() => {
+    throw new Error("Can't connect to server")
   })
   if (response.ok) {
     return response
@@ -14,6 +14,7 @@ async function fetchWithErrorHandring(url, options) {
   if (response.status == 401) throw new Error("UNAUTHORIZED")
   if (response.status == 403) throw new Error("FORBIDDEN")
   if (response.status == 404) throw new Error("NOT_FOUND")
+  if (response.status == 409) throw new Error("CONFLICT")
   if (response.status == 500) throw new Error("INTERNAL_SERVER_ERROR")
   throw new Error("something erorr occerrd.")
 }
@@ -55,9 +56,9 @@ export async function login(username, password){
     username,
     password
   }
-  const response = await fetch(login_url,
-                               {method: "POST",
-                                body: JSON.stringify(user_data)})
+  const response = await fetchWithErrorHandring(login_url,
+                                               {method: "POST",
+                                                 body: JSON.stringify(user_data)})
   return response
 }
 

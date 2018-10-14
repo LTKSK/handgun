@@ -27,22 +27,21 @@ export default {
         type: 'success'
       }).onClose = this._goToChannel
     },
-    _loginFailed() {
+    _loginFailed(error) {
       this.$notify({
         title: "Failded!",
-        message: "Login failed!",
+        message: `Login failed! ${error.message}`,
         type: 'error'
       })
     },
     login(){
       this.LOGIN({username: this.form.username,
                   password: this.form.password})
-        .then(result => {
-          if(! result) {
-            this._loginFailed()
-            return
-          }
+        .then(() => {
           this._loginSucceeded()
+        })
+        .catch(error => {
+          this._loginFailed(error)
         })
     }
   }

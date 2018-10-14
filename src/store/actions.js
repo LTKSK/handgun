@@ -23,12 +23,8 @@ import moment from 'moment'
 export default {
   async [LOGIN]({ commit }, payload) {
     const response = await login(payload.username, payload.password)
-    if (! response.ok) {
-      return false
-    }
     const json = await response.json()
     commit(LOGIN, {jwt: json.token, user: payload.username})
-    return true
   },
   async [LOGOUT]({ commit }) {
     commit(LOGOUT)
