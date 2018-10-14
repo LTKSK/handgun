@@ -40,29 +40,17 @@ export default {
       "date": moment().utc().toISOString(),
       "user": payload.user,
     }
-    postMessage(payload.channel_name, message_data)
-      .then(is_ok => {
-        if(is_ok){
-          commit(ADD_MESSAGE, message_data)
-        }
-      })
+    await postMessage(payload.channel_name, message_data)
+    commit(ADD_MESSAGE, message_data)
   },
   async [GET_CHANNELS]({ commit }, headers) {
     const channels = await fetchChannels(headers)
     commit(GET_CHANNELS, channels)
   },
   async [ADD_CHANNEL]({ commit }, payload) {
-    // if post success, call commit.
-    let post_succeed = await postChannel(payload.channel, payload.headers)
-    if(! post_succeed) {
-      return false
-    }
-    post_succeed = await postReviewTarget(payload.channel, payload.file)
-    if(! post_succeed){
-      return false
-    }
+    await postChannel(payload.channel, payload.headers)
+    await postReviewTarget(payload.channel, payload.file)
     commit(ADD_CHANNEL, payload.channel)
-    return true
   },
   async [GET_ICON]({ commit }, username) {
     const icon = await fetchUserIcon(username)

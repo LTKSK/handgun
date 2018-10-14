@@ -57,10 +57,10 @@ export default {
         type: "success"
       }).onClose = this._goToAddedChannel
     },
-    addChannelFailed() {
+    addChannelFailed(error) {
       this.$notify({
         title: "Failed!",
-        message: "Add channel failed",
+        message: `Add channel failed! ${error.message}`,
         type: "error"
       })
     },
@@ -72,12 +72,11 @@ export default {
         this.ADD_CHANNEL({file: this.file,
                           channel: this.form.channel,
                           headers: this.header})
-          .then(succeed => {
-            if(succeed){
-              this.addChannelSucceeded()
-              return
-            }
-            this.addChannelFailed()
+          .then(() => {
+            this.addChannelSucceeded()
+          })
+          .catch(error => {
+            this.addChannelFailed(error)
           })
       })
     },

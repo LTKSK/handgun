@@ -65,7 +65,7 @@ export async function login(username, password){
 export async function fetchChannels(headers){
   const response = await fetchWithErrorHandring(channels_url,
                                                 {method: "GET",
-                                                  headers: headers})
+                                                 headers: headers})
   const json = await response.json()
   return json.map(channel => channel.name)
 }
@@ -81,8 +81,8 @@ export async function postChannel(channel_name, headers){
 export async function putChannelUsers(channel_name, user_names, headers){
   const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/users`,
                                                 {method: "PUT",
-                                                  headers: headers,
-                                                  body: JSON.stringify({user_name: user_names})})
+                                                 headers: headers,
+                                                 body: JSON.stringify({user_name: user_names})})
   return response.ok
 }
 
@@ -91,7 +91,7 @@ export async function postReviewTarget(channel_name, file){
   form.append(file.name, file)
   const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/review-targets`,
                                                 {method: "POST",
-                                                  body: form})
+                                                 body: form})
   return response.ok
 }
 
@@ -104,7 +104,7 @@ export async function fetchReviewTarget(channel_name){
 export async function postMessage(channel_name, message_data){
   const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/messages`,
                                                 {method: "POST",
-                                                  body: JSON.stringify(message_data)})
+                                                 body: JSON.stringify(message_data)})
   return response.ok
 }
 
@@ -116,7 +116,7 @@ export async function fetchMessages(channel_name){
 export async function putLayer(channel_name, layer){
   const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/review-targets/layer`,
                                                 {method: "PUT",
-                                                  body: JSON.stringify(layer)})
+                                                 body: JSON.stringify(layer)})
   return response.ok
 }
 
