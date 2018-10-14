@@ -3,16 +3,19 @@ const channels_url = 'http://localhost:5000/channels'
 const users_url = 'http://localhost:5000/users'
 const login_url = 'http://localhost:5000/login'
 
-async function fetch_with_error_handling(url, options) {
-  const response = await fetch(url, options)
+async function fetchWithErrorHandring(url, options) {
+  const response = await fetch(url, options).catch(error => {
+    throw new Error(error)
+  })
   if (response.ok) {
     return response
   }
-  if (response.status == 400) throw Error("BAD_REQUEST")
-  if (response.status == 401) throw Error("UNAUTHORIZED")
-  if (response.status == 404) throw Error("NOT_FOUND")
-  if (response.status == 500) throw Error("INTERNAL_SERVER_ERROR")
-  throw Error("something errro occerrd.")
+  if (response.status == 400) throw new Error("BAD_REQUEST")
+  if (response.status == 401) throw new Error("UNAUTHORIZED")
+  if (response.status == 403) throw new Error("FORBIDDEN")
+  if (response.status == 404) throw new Error("NOT_FOUND")
+  if (response.status == 500) throw new Error("INTERNAL_SERVER_ERROR")
+  throw new Error("something erorr occerrd.")
 }
 
 export async function postUser(username, password){
@@ -59,9 +62,9 @@ export async function login(username, password){
 }
 
 export async function fetchChannels(headers){
-  const response = await fetch(channels_url,
-                              {method: "GET",
-                                headers: headers})
+  const response = await fetchWithErrorHandring(channels_url,
+                                                {method: "GET",
+                                                  headers: headers})
   const json = await response.json()
   return json.map(channel => channel.name)
 }

@@ -18,5 +18,12 @@ export default {
   },
   mounted() {
     this.GET_CHANNELS(this.header)
+      .catch(error => {
+        this.$notify({
+          title: "Failed!",
+          message: error.message,
+          type: "error"
+        })
+    })
   }
 }

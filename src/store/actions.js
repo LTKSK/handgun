@@ -37,7 +37,7 @@ export default {
     const messages = await fetchMessages(channel_name)
     commit(GET_MESSAGES, messages)
   },
-  [ADD_MESSAGE]({ commit }, payload) {
+  async [ADD_MESSAGE]({ commit }, payload) {
     const message_data = {
       "index": payload.index,
       "value": payload.message,
@@ -51,10 +51,9 @@ export default {
         }
       })
   },
-  [GET_CHANNELS]({ commit }, headers) {
-    fetchChannels(headers).then(channels => {
-      commit(GET_CHANNELS, channels)
-    })
+  async [GET_CHANNELS]({ commit }, headers) {
+    const channels = await fetchChannels(headers)
+    commit(GET_CHANNELS, channels)
   },
   async [ADD_CHANNEL]({ commit }, payload) {
     // if post success, call commit.
