@@ -39,14 +39,14 @@ export async function fetchUsers(){
 export async function postUserIcon(username, icon_data){
   const form = new FormData()
   form.append(`${username}_icon`, icon_data)
-  const response = await fetch(`${users_url}/icons/${username}`,
-                               {method: "POST",
-                                body: form})
+  const response = await fetchWithErrorHandring(`${users_url}/icons/${username}`,
+                                                {method: "POST",
+                                                  body: form})
   return response.ok
 }
 
 export async function fetchUserIcon(username){
-  const response = await fetch(`${users_url}/icons/${username}`)
+  const response = await fetchWithErrorHandring(`${users_url}/icons/${username}`)
   const blob = await response.blob()
   return URL.createObjectURL(blob)
 }
@@ -57,7 +57,7 @@ export async function login(username, password){
     password
   }
   const response = await fetchWithErrorHandring(login_url,
-                                               {method: "POST",
+                                                {method: "POST",
                                                  body: JSON.stringify(user_data)})
   return response
 }
@@ -71,57 +71,57 @@ export async function fetchChannels(headers){
 }
 
 export async function postChannel(channel_name, headers){
-  const response = await fetch(channels_url,
-                               {method: "POST",
-                                headers: headers,
-                                body: JSON.stringify({name: channel_name})})
+  const response = await fetchWithErrorHandring(channels_url,
+                                                {method: "POST",
+                                                 headers: headers,
+                                                 body: JSON.stringify({name: channel_name})})
   return response.ok
 }
 
 export async function putChannelUsers(channel_name, user_names, headers){
-  const response = await fetch(`${channels_url}/${channel_name}/users`,
-                               {method: "PUT",
-                                headers: headers,
-                                body: JSON.stringify({user_name: user_names})})
+  const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/users`,
+                                                {method: "PUT",
+                                                  headers: headers,
+                                                  body: JSON.stringify({user_name: user_names})})
   return response.ok
 }
 
 export async function postReviewTarget(channel_name, file){
   const form = new FormData()
   form.append(file.name, file)
-  const response = await fetch(`${channels_url}/${channel_name}/review-targets`,
-                               {method: "POST",
-                                body: form})
+  const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/review-targets`,
+                                                {method: "POST",
+                                                  body: form})
   return response.ok
 }
 
 export async function fetchReviewTarget(channel_name){
-  const response = await fetch(`${channels_url}/${channel_name}/review-targets`)
+  const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/review-targets`)
   const blob = await response.blob()
   return blob
 }
 
 export async function postMessage(channel_name, message_data){
-  const response = await fetch(`${channels_url}/${channel_name}/messages`,
-                               {method: "POST",
-                                body: JSON.stringify(message_data)})
+  const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/messages`,
+                                                {method: "POST",
+                                                  body: JSON.stringify(message_data)})
   return response.ok
 }
 
 export async function fetchMessages(channel_name){
-   const response = await fetch(`${channels_url}/${channel_name}/messages`)
+   const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/messages`)
    return response.json()
 }
 
 export async function putLayer(channel_name, layer){
-  const response = await fetch(`${channels_url}/${channel_name}/review-targets/layer`,
-                               {method: "PUT",
-                                body: JSON.stringify(layer)})
+  const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/review-targets/layer`,
+                                                {method: "PUT",
+                                                  body: JSON.stringify(layer)})
   return response.ok
 }
 
 export async function fetchLayer(channel_name){
-  const response = await fetch(`${channels_url}/${channel_name}/review-targets/layer`)
+  const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/review-targets/layer`)
   const json = await response.json()
   return json
 }
