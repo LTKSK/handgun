@@ -1,13 +1,13 @@
 <el-container class="channel-list">
   <el-aside>
-    <logout-button />
-    <el-menu mode="vertical" v-bind:default-openeds="['2']">
-      <router-link v-bind:to="{name: 'login'}">
-        <el-menu-item index="1">
-          <span class="home-button">Home</span>
-        </el-menu-item>
-      </router-link>
+    <el-menu mode="vertical" v-bind:default-openeds="['3']">
       <el-submenu index="2">
+        <template slot="title">
+          <span style="font-weight: bold;">Menu</span>
+        </template>
+        <menu-list />
+      </el-submenu>
+      <el-submenu index="3">
         <template slot="title">
           <!-- todo: add icon -->
           <span style="font-weight: bold;">Channels</span>

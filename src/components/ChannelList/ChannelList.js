@@ -1,6 +1,6 @@
 import { mapGetters, mapActions } from 'vuex'
 import { GET_CHANNELS } from '@/store/mutation-types'
-import LogoutButton from '@/components/LogoutButton'
+import MenuList from '@/components/MenuList'
 
 export default {
   name: 'channel-list',
@@ -19,7 +19,7 @@ export default {
     ]),
   },
   components: {
-    'logout-button': LogoutButton,
+    "menu-list": MenuList,
   },
   mounted() {
     this.GET_CHANNELS(this.header)
