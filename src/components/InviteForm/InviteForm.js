@@ -9,6 +9,7 @@ import {
 import {
   putChannelUsers,
 } from '@/module/webapiRepository'
+
 export default {
   name: 'invite-form',
   props: ["channelname"],
