@@ -33,7 +33,7 @@ const router = new Router({
       component: Chat
     },
     {
-      path: '/invite',
+      path: '/invite/:channelname',
       name: 'invite',
       component: InviteForm
     },

@@ -2,5 +2,9 @@
   <el-button type="primary" v-on:click="$router.push({path: '/'})">
     Add Channel
   </el-button>
-  <logout-button />
+  <el-button type="primary"
+             v-on:click="$router.push({path: `/invite/${channel}`})">
+    Invite User
+  </el-button>
+  <logout-button/>
 </div>

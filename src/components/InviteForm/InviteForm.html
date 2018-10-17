@@ -1,7 +1,14 @@
 <div class="invite-form">
-  <div>
-    Check invite users
-  </div>
+  <el-row>
+    <el-col v-bind:span="12">
+      Please check invite users to "{{ channel }}"
+    </el-col>
+    <el-col class="back-button-col" v-bind:span="12">
+      <el-button class="back-button" type="info" v-on:click="backToBeforePage">
+        Back
+      </el-button>
+    </el-col>
+  </el-row>
   <div v-for="user in users_data" v-bind:key="user.name">
     <el-row>
       <el-col v-bind:span="2">
@@ -14,8 +21,7 @@
       </el-col>
     </el-row>
   </div>
-  <el-button type="primary"
-             v-on:click="invite" >
+  <el-button type="primary" v-on:click="invite" >
     Invite
   </el-button>
 </div>

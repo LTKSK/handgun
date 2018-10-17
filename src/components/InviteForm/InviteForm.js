@@ -1,18 +1,17 @@
 import {
   mapGetters,
   mapActions
-} from 'vuex'
+} from "vuex"
 import {
   GET_ICON,
   GET_USERS
-} from '@/store/mutation-types'
+} from "@/store/mutation-types"
 import {
   putChannelUsers,
-} from '@/module/webapiRepository'
+} from "@/module/webapiRepository"
 
 export default {
-  name: 'invite-form',
-  props: ["channelname"],
+  name: "invite-form",
   data() {
     return {
       users_data: [],
@@ -25,6 +24,10 @@ export default {
       "header",
       "icon",
     ]),
+    channel() {
+      console.log(this.$route.params.channelname)
+      return this.$route.params.channelname
+    }
   },
   methods: {
     ...mapActions([
@@ -34,13 +37,16 @@ export default {
     getIconSource(username) {
       return this.icon(username)
     },
+    backToBeforePage() {
+      this.$router.go(-1)
+    },
     invite() {
       const enabled_users = this.users_data.filter(user => user.enabled)
       console.log(this.channelname, enabled_users, this.header)
       // todo: get channelname from parent component
       // putChannelUsers(this.channelname, enabled_users, this.header)
     },
-    setupUsers: async function() {
+    _setupUsers: async function() {
       this.users_data = []
       await this.GET_USERS()
       for(let user of this.users) {
@@ -51,6 +57,6 @@ export default {
     }
   },
   mounted() {
-    this.setupUsers()
+    this._setupUsers()
   }
 }

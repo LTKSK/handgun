@@ -8,7 +8,7 @@ export default {
     return {}
   },
   computed: {
-    channel: function() {
+    channel() {
       return this.$route.params.channelname
     }
   },
