@@ -2,36 +2,22 @@
   <el-main>
     <ul>
       <li v-for="msg in messages" v-bind:key="msg.index">
-        <el-row>
-          <el-col v-bind:span="6">
-            <img class="user-icon" v-bind:src="icon(msg.user)" />
-          </el-col>
-          <el-col v-bind:span="18">
-            <el-row>
-              <el-col v-bind:span="8">
-                <div class="grid-content"> <div class="user">{{ msg.user }}</div> </div>
-              </el-col>
-              <el-col v-bind:span="16">
-                <div class="grid-content"> <div class="date">{{ msg.date }}</div> </div>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col v-bind:span="24">
-                <div class="grid-content"> <div class="message">{{ msg.value }}</div> </div>
-              </el-col>
-            </el-row>
-          </el-col>
-        </el-row>
+        <message v-bind:message="msg"></message>
       </li>
     </ul>
   </el-main>
   <el-footer>
     <el-row>
       <el-col v-bind:span="18">
-        <el-input type="textarea" autosize placeholder="Input new message" v-model="message" />
+        <el-input type="textarea"
+                  autosize
+                  placeholder="Input new message"
+                  v-model="message_value" />
       </el-col>
       <el-col v-bind:span="6">
-        <el-button type="primary" v-bind:disabled="!message" v-on:click="sendMessage">
+        <el-button type="primary"
+                   v-bind:disabled="!message_value"
+                   v-on:click="sendMessage">
           Send
         </el-button>
       </el-col>
