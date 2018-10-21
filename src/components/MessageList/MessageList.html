@@ -1,8 +1,11 @@
 <el-container class="msg-list">
   <el-main>
     <ul>
-      <li v-for="msg in messages" v-bind:key="msg.index">
-        <message v-bind:message="msg"></message>
+      <li>
+        <message v-for="msg in messages"
+                 v-bind:message="msg"
+                 v-bind:key="msg.index">
+        </message>
       </li>
     </ul>
   </el-main>

@@ -12,7 +12,7 @@ import { Layer } from "../layer"
 export default {
   name: "image-item",
   watch:{
-    '$route': 'setup',
+    "$route": "setup",
   },
   data() {
     return {

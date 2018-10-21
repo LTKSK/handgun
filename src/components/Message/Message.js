@@ -8,12 +8,9 @@ export default {
   name: 'message',
   props: ["message"],
   data() {
-    return {}
-  },
-  mounted() {
-    this.setupIcon()
-    const content = document.querySelector(".message-content")
-    console.log(content)
+    return {
+      hoverd: false,
+    }
   },
   computed: {
     ...mapGetters([
@@ -34,7 +31,19 @@ export default {
     setupIcon: async function() {
       await this.GET_ICON(this.message.user)
         .catch(error => this._notifyError(`get icon failed! ${error.message}`))
-    }
+    },
+    _mouserover() {
+      this.hoverd = true
+    },
+    _mouseleave() {
+      this.hoverd = false
+    },
+  },
+  mounted() {
+    this.setupIcon()
+    const content = this.$el
+    content.addEventListener("mouseover", this._mouserover)
+    content.addEventListener("mouseleave", this._mouseleave)
   },
 }
 
