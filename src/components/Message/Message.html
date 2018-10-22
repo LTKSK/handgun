@@ -1,13 +1,19 @@
 <div>
   <el-row v-show="hoverd">
     <el-col v-bind:span="8">
-      <div> reply </div>
+      <el-button class="reply-button" type="primary">
+        <div>Reply</div>
+      </el-button>
     </el-col>
     <el-col v-bind:span="8">
-      <div> edit </div>
+      <el-button class="edit-button" type="primary">
+        <div>Edit</div>
+      </el-button>
     </el-col>
     <el-col v-bind:span="8">
-      <div> delete </div>
+      <el-button class="delete-button" type="info">
+        <div>Delete</div>
+      </el-button>
     </el-col>
   </el-row>
   <el-row>
