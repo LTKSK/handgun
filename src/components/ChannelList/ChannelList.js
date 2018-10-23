@@ -12,6 +12,9 @@ export default {
       'channels',
       'header'
     ]),
+    currentChannel() {
+      return this.$route.params.channelname
+    }
   },
   methods: {
     ...mapActions([

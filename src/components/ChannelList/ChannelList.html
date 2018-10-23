@@ -5,7 +5,7 @@
         <template slot="title">
           <span style="font-weight: bold;">Menu</span>
         </template>
-        <menu-list v-bind:channel="$route.params.channelname"/>
+        <menu-list v-bind:channel="currentChannel"/>
       </el-submenu>
       <el-submenu index="3">
         <template slot="title">
@@ -16,8 +16,11 @@
           <router-link v-for="channel in channels"
                        v-bind:key="channel"
                        v-bind:to="{name: 'chat', params: {channelname: channel}}">
-            <el-menu-item index="channel">
+            <el-menu-item index="channel" v-if="channel!=currentChannel">
               <span class="channel-button">{{ channel }}</span>
+            </el-menu-item>
+            <el-menu-item index="channel" v-else>
+              <span class="current-channel">{{ channel }}</span>
             </el-menu-item>
           </router-link>
         </el-menu-item-group>
