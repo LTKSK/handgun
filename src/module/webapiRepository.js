@@ -113,6 +113,19 @@ export async function fetchMessages(channel_name){
    return response.json()
 }
 
+export async function putMessage(channel_name, message_data){
+   const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/messages`,
+                                                 {method: "PUT",
+                                                  body: JSON.stringify(message_data)})
+   return response.ok
+}
+
+export async function deleteMessage(channel_name, index){
+   const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/messages/${index}`,
+                                                 {method: "DELETE"})
+   return response.ok
+}
+
 export async function putLayer(channel_name, layer){
   const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/review-targets/layer`,
                                                 {method: "PUT",

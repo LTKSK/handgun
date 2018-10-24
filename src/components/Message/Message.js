@@ -3,6 +3,10 @@ import {
   mapActions
 } from 'vuex'
 import { GET_ICON } from '@/store/mutation-types'
+import {
+  putMessage,
+  deleteMessage,
+} from "@/module/webapiRepository"
 
 export default {
   name: 'message',
@@ -31,6 +35,12 @@ export default {
     setupIcon: async function() {
       await this.GET_ICON(this.message.user)
         .catch(error => this._notifyError(`get icon failed! ${error.message}`))
+    },
+    replyMessage() {
+    },
+    editMessage() {
+    },
+    deleteMessage() {
     },
     _mouserover() {
       this.hoverd = true

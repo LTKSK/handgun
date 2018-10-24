@@ -48,8 +48,13 @@ export default {
         .catch(error => this._notifyError(`get message failed! ${error.message}`))
     },
     sendMessage() {
+      // new message's index is the biggest index + 1
+      // because some message may be deleted.
+      const index = this.messages
+                        .map(message => message.index)
+                        .reduce((a, b) => a > b ? a : b) + 1
       this.ADD_MESSAGE({"channel_name": this.$route.params.channelname,
-                        "index": this.messages.length,
+                        "index": index,
                         "message":this.message_value,
                         "user": this.logged_in_user})
         .catch(error => this._notifyError(`send message failed! ${error.message}`))

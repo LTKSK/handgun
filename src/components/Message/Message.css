@@ -1,3 +1,4 @@
 .reply-button, .edit-button, .delete-button {
   width: 100%;
+  text-align: center;
 }
