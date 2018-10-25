@@ -3,6 +3,7 @@ import {
   LOGOUT,
   GET_MESSAGES,
   ADD_MESSAGE,
+  DELETE_MESSAGE,
   GET_CHANNELS,
   ADD_CHANNEL,
   GET_ICON,
@@ -24,6 +25,10 @@ export default {
   },
   [ADD_MESSAGE](state, message) {
     state.messages.push(message)
+  },
+  [DELETE_MESSAGE](state, message) {
+    state.messages = state.messages
+                     .filter(exists_message => exists_message.index !== message.index)
   },
   [GET_CHANNELS](state, channels) {
     state.channels = channels

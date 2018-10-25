@@ -2,7 +2,10 @@ import {
   mapGetters,
   mapActions
 } from 'vuex'
-import { GET_ICON } from '@/store/mutation-types'
+import {
+  GET_ICON,
+  DELETE_MESSAGE,
+ } from '@/store/mutation-types'
 import {
   putMessage,
   deleteMessage,
@@ -24,6 +27,7 @@ export default {
   methods: {
     ...mapActions([
       GET_ICON,
+      DELETE_MESSAGE,
     ]),
     _notifyError(message) {
       this.$notify({
@@ -41,6 +45,7 @@ export default {
     editMessage() {
     },
     deleteMessage() {
+      this.DELETE_MESSAGE(this.message)
     },
     _mouserover() {
       this.hoverd = true

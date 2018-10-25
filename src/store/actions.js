@@ -3,6 +3,7 @@ import {
   LOGOUT,
   GET_MESSAGES,
   ADD_MESSAGE,
+  DELETE_MESSAGE,
   GET_CHANNELS,
   ADD_CHANNEL,
   GET_ICON,
@@ -12,6 +13,7 @@ import {
   login,
   fetchMessages,
   postMessage,
+  deleteMessage,
   fetchChannels,
   postChannel,
   postReviewTarget,
@@ -42,6 +44,10 @@ export default {
     }
     await postMessage(payload.channel_name, message_data)
     commit(ADD_MESSAGE, message_data)
+  },
+  async [DELETE_MESSAGE]({ commit }, message) {
+    await deleteMessage(message.channel, message.index)
+    commit(DELETE_MESSAGE, message)
   },
   async [GET_CHANNELS]({ commit }, headers) {
     const channels = await fetchChannels(headers)

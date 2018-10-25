@@ -11,7 +11,9 @@
       </el-button>
     </el-col>
     <el-col v-bind:span="8">
-      <el-button class="delete-button" type="info">
+      <el-button class="delete-button"
+                 type="info"
+                 v-on:click="deleteMessage">
         <div>Delete</div>
       </el-button>
     </el-col>
