@@ -45,21 +45,20 @@
               <el-row>
                 <el-input type="textarea"
                           autosize
-                          placeholder="Input new message"
-                          v-model="message.value" />
+                          v-model="edit_message" />
               </el-row>
               <el-row>
                 <el-col v-bind:span="12">
                   <el-button class="edit-button"
-                            type="primary"
-                            v-on:click="editDone(apply=true)">
+                             type="primary"
+                             v-on:click="editDone(apply=true)">
                     <div>Ok</div>
                   </el-button>
                 </el-col>
                 <el-col v-bind:span="12">
                   <el-button class="edit-button"
-                            type="primary"
-                            v-on:click="editDone">
+                             type="primary"
+                             v-on:click="editDone">
                     <div>Cancel</div>
                   </el-button>
                 </el-col>
