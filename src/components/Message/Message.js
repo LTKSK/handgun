@@ -18,18 +18,19 @@ export default {
   data() {
     return {
       hoverd: false,
+      is_editing: false
     }
   },
   computed: {
     ...mapGetters([
-      "icon",
+      "icon"
     ]),
   },
   methods: {
     ...mapActions([
       GET_ICON,
       EDIT_MESSAGE,
-      DELETE_MESSAGE,
+      DELETE_MESSAGE
     ]),
     _notifyError(message) {
       this.$notify({
@@ -44,13 +45,24 @@ export default {
     },
     replyMessage() {
     },
-    editMessage() {
-      // this.EDIT_MESSAGE(this.message)
+    editStart() {
+      this.is_editing = true
+      // buttons don't show while editing
+      this.hoverd = false
+    },
+    editDone(apply=false) {
+      this.is_editing = false
+      if (apply) {
+        // this.EDIT_MESSAGE(this.message)
+      }
     },
     deleteMessage() {
       this.DELETE_MESSAGE(this.message)
     },
     _mouserover() {
+      if (this.is_editing) {
+        return
+      }
       this.hoverd = true
     },
     _mouseleave() {

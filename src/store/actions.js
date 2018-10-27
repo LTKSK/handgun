@@ -36,10 +36,6 @@ export default {
     const messages = await fetchMessages(channel_name)
     commit(GET_MESSAGES, messages)
   },
-  async [EDIT_MESSAGES]({ commit }, message) {
-    await putMessage(message)
-    commit(GET_MESSAGES, messages)
-  },
   async [ADD_MESSAGE]({ commit }, payload) {
     const message_data = {
       "index": payload.index,
@@ -50,9 +46,17 @@ export default {
     await postMessage(payload.channel_name, message_data)
     commit(ADD_MESSAGE, message_data)
   },
+  async [EDIT_MESSAGE]({ commit }, message) {
+    await putMessage(message)
+    commit(GET_MESSAGES, messages)
+  },
   async [DELETE_MESSAGE]({ commit }, message) {
     await deleteMessage(message.channel, message.index)
     commit(DELETE_MESSAGE, message)
+  },
+  async [GET_CHANNELS]({ commit }, headers) {
+    const channels = await fetchChannels(headers)
+    commit(GET_CHANNELS, channels)
   },
   async [ADD_CHANNEL]({ commit }, payload) {
     await postChannel(payload.channel, payload.headers)
