@@ -113,8 +113,8 @@ export async function fetchMessages(channel_name){
    return response.json()
 }
 
-export async function putMessage(channel_name, message_data){
-   const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/messages`,
+export async function putMessage(message_data){
+   const response = await fetchWithErrorHandring(`${channels_url}/${message_data.channel}/messages`,
                                                  {method: "PUT",
                                                   body: JSON.stringify(message_data)})
    return response.ok

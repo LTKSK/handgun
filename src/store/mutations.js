@@ -2,6 +2,7 @@ import {
   LOGIN,
   LOGOUT,
   GET_MESSAGES,
+  EDIT_MESSAGES,
   ADD_MESSAGE,
   DELETE_MESSAGE,
   GET_CHANNELS,
@@ -22,6 +23,14 @@ export default {
   },
   [GET_MESSAGES](state, messages) {
     state.messages = messages
+  },
+  [EDIT_MESSAGES](state, message) {
+    for (let exists_message of state.messages) {
+      if (exists_message.index !== message.index) {
+        continue
+      }
+      exists_message.value = message.value
+    }
   },
   [ADD_MESSAGE](state, message) {
     state.messages.push(message)

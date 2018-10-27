@@ -4,6 +4,7 @@ import {
 } from 'vuex'
 import {
   GET_ICON,
+  EDIT_MESSAGE,
   DELETE_MESSAGE,
  } from '@/store/mutation-types'
 import {
@@ -27,6 +28,7 @@ export default {
   methods: {
     ...mapActions([
       GET_ICON,
+      EDIT_MESSAGE,
       DELETE_MESSAGE,
     ]),
     _notifyError(message) {
@@ -43,6 +45,7 @@ export default {
     replyMessage() {
     },
     editMessage() {
+      // this.EDIT_MESSAGE(this.message)
     },
     deleteMessage() {
       this.DELETE_MESSAGE(this.message)
