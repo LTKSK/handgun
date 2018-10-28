@@ -14,6 +14,7 @@ import {
   login,
   fetchMessages,
   postMessage,
+  putMessage,
   deleteMessage,
   fetchChannels,
   postChannel,
@@ -48,7 +49,7 @@ export default {
   },
   async [EDIT_MESSAGE]({ commit }, message) {
     await putMessage(message)
-    commit(GET_MESSAGES, messages)
+    commit(EDIT_MESSAGE, message)
   },
   async [DELETE_MESSAGE]({ commit }, message) {
     await deleteMessage(message.channel, message.index)

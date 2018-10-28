@@ -55,8 +55,8 @@ export default {
       if (apply === false || this.edit_message === "") {
         return
       }
-      // this.EDIT_MESSAGE(this.message)
       this.message.value = JSON.parse(JSON.stringify(this.edit_message))
+      this.EDIT_MESSAGE(this.message)
     },
     deleteMessage() {
       this.DELETE_MESSAGE(this.message)
