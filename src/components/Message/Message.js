@@ -59,7 +59,19 @@ export default {
       this.EDIT_MESSAGE(this.message)
     },
     deleteMessage() {
-      this.DELETE_MESSAGE(this.message)
+      this.$confirm(
+        "Do you want to delete message?",
+        "Warning",
+        {
+          confirmButtonText: "Delete",
+          cancelButtonText: "Cancel",
+          type: "warning",
+        }
+      )
+      .then(() => {
+        this.DELETE_MESSAGE(this.message)
+      })
+      .catch(error => {})
     },
     _mouserover() {
       if (this.is_editing) {
