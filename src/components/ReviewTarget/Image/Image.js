@@ -81,6 +81,9 @@ export default {
           this._saveFailed()
         })
     },
+    undoLayer() {
+      console.log("undo")
+    },
     resetLayer() {
       this.layer.reset()
       // overwrite line polygons by drawImage
