@@ -15,6 +15,14 @@ export class Layer {
     this.vertex_counts = []
   }
 
+  undo() {
+    this.vertices.pop()
+    this.vertices.pop()
+    this.vertex_counts.pop()
+    this.start_indices.pop()
+    --this.polygon_count
+  }
+
   beginAddPolygon() {
     ++this.polygon_count
   }
@@ -24,7 +32,7 @@ export class Layer {
     this.start_indices.push(this.vertices.length / 2)
   }
 
-  addVertexFromMouseEvent(event) {
+  addVerticesFromMouseEvent(event) {
     ++this.vertex_counts[this.polygon_count]
     // current potisions normalized by canvas -0.5~0.5
     const rect = event.target.getBoundingClientRect()

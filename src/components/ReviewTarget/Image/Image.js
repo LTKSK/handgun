@@ -36,7 +36,7 @@ export default {
       if(!this.on_click) {
         return
       }
-      this.layer.addVertexFromMouseEvent(event)
+      this.layer.addVerticesFromMouseEvent(event)
       drawImage(this.gl, this.image)
       drawLines(this.gl, this.layer)
     },
@@ -82,7 +82,9 @@ export default {
         })
     },
     undoLayer() {
-      console.log("undo")
+      this.layer.undo()
+      drawImage(this.gl, this.image)
+      drawLines(this.gl, this.layer)
     },
     resetLayer() {
       this.layer.reset()
