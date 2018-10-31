@@ -3,8 +3,11 @@ const setupTexture = (gl, texture_image) => {
   gl.texImage2D(gl.TEXTURE_2D,    //format
                 0,                //mipmap level
                 gl.RGBA,          //internal color format
-                gl.RGBA,          //color format
-                gl.UNSIGNED_BYTE, //data format
+                gl.canvas.width,  //width
+                gl.canvas.height, //height
+                0,                //border
+                gl.RGBA,          //format of texel
+                gl.UNSIGNED_BYTE, //format of texel data
                 texture_image)    //texture
   gl.generateMipmap(gl.TEXTURE_2D)
 }
@@ -20,7 +23,7 @@ const createShaderProgram = (gl, vs_id, fs_id) => {
   const vertex_shader_compile_status = gl.getShaderParameter(vertex_shader, gl.COMPILE_STATUS)
   if(!vertex_shader_compile_status) {
     const info = gl.getShaderInfoLog(vertex_shader)
-    console.log(info)
+    alert(info)
   }
   const fragment_shader= gl.createShader(gl.FRAGMENT_SHADER)
   gl.shaderSource(fragment_shader, fragment_shader_source)
@@ -29,7 +32,7 @@ const createShaderProgram = (gl, vs_id, fs_id) => {
   const fragment_shader_compile_status = gl.getShaderParameter(fragment_shader, gl.COMPILE_STATUS)
   if(!fragment_shader_compile_status) {
     const info = gl.getShaderInfoLog(fragment_shader)
-    console.log(info)
+    alert(info)
   }
   const program = gl.createProgram()
   gl.attachShader(program, vertex_shader)
