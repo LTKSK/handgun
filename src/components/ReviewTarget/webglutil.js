@@ -1,14 +1,14 @@
 const setupTexture = (gl, texture_image) => {
   gl.bindTexture(gl.TEXTURE_2D, gl.createTexture())
-  gl.texImage2D(gl.TEXTURE_2D,    //format
-                0,                //mipmap level
-                gl.RGBA,          //internal color format
-                gl.canvas.width,  //width
-                gl.canvas.height, //height
-                0,                //border
-                gl.RGBA,          //format of texel
-                gl.UNSIGNED_BYTE, //format of texel data
-                texture_image)    //texture
+  gl.texImage2D(gl.TEXTURE_2D,        //format
+                0,                    //mipmap level
+                gl.RGBA,              //internal color format
+                texture_image.width,  //width
+                texture_image.height, //height
+                0,                    //border
+                gl.RGBA,              //format of texel
+                gl.UNSIGNED_BYTE,     //format of texel data
+                texture_image)        //texture
   gl.generateMipmap(gl.TEXTURE_2D)
 }
 
@@ -61,7 +61,7 @@ export function drawImage(gl, image) {
   const vertex_buffer = gl.createBuffer()
   const index_buffer = gl.createBuffer()
   const vertex_attrib_location = gl.getAttribLocation(program, "vertexPosition")
-  const textureAttribLocation = gl.getAttribLocation(program, "texCoord")
+  const texture_attrib_location = gl.getAttribLocation(program, "texCoord")
   const VERTEX_SIZE = 3
   const TEXTURE_SIZE = 2
   const STRIDE = (VERTEX_SIZE + TEXTURE_SIZE) * Float32Array.BYTES_PER_ELEMENT
@@ -72,9 +72,9 @@ export function drawImage(gl, image) {
   gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer)
   // enable 'in' variables
   gl.enableVertexAttribArray(vertex_attrib_location)
-  gl.enableVertexAttribArray(textureAttribLocation)
+  gl.enableVertexAttribArray(texture_attrib_location)
   gl.vertexAttribPointer(vertex_attrib_location, VERTEX_SIZE, gl.FLOAT, false, STRIDE, POSITION_OFFSET)
-  gl.vertexAttribPointer(textureAttribLocation, TEXTURE_SIZE, gl.FLOAT, false, STRIDE, TEXTURE_OFFSET)
+  gl.vertexAttribPointer(texture_attrib_location, TEXTURE_SIZE, gl.FLOAT, false, STRIDE, TEXTURE_OFFSET)
   // merge vertices and colors alternatively for to use interleaving
   const vertices = new Float32Array([
     // upper left
@@ -113,9 +113,9 @@ export function drawLines(gl, layer) {
   const color_attrib_location = gl.getAttribLocation(program, "color")
   const LINE_POSITION_SIZE = 2
   const COLOR_SIZE = 4
+
   // should bind before binding buffer
   gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer)
-  // enable 'in' variables
   gl.enableVertexAttribArray(line_position_attrib_location)
   gl.vertexAttribPointer(line_position_attrib_location, LINE_POSITION_SIZE, gl.FLOAT, false, 0, 0)
 
@@ -144,14 +144,15 @@ export function drawLines(gl, layer) {
 
 // initialize web gl instance
 export function initWebGL(canvas) {
-  let gl = null
   try {
-    gl = canvas.getContext("webgl2")
+    const gl = canvas.getContext("webgl2")
+    if (!gl) {
+      alert("WebGL initialize failed. This browser is not supported.")
+      return
+    }
+    return gl
   }
-  catch (e) { console.log(e) }
-  if (!gl) {
-    alert("WebGL initialize failed. This browser is not supported.")
-    return
+  catch (e) {
+    alert(e)
   }
-  return gl
 }

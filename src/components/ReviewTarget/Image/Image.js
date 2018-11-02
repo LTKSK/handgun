@@ -19,7 +19,6 @@ export default {
       gl: null,
       on_click: false,
       image: null,
-      current_cunvas_image: null,
       current_layer_num: 0,
       layer: null,
     }
@@ -123,18 +122,6 @@ export default {
             this.canvasSetup()
             // write loaded image and loaded layer.
             drawImage(this.gl, this.image)
-
-            this.current_cunvas_image = new Uint8Array(this.gl.canvas.width
-                                                       * this.gl.canvas.height
-                                                       * 4)
-            this.gl.readPixels(0, 0,
-                               this.gl.canvas.width,
-                               this.gl.canvas.height,
-                               this.gl.RGBA,
-                               this.gl.UNSIGNED_BYTE,
-                               this.current_cunvas_image)
-            // drawImage(this.gl, this.current_cunvas_image)
-
             drawLines(this.gl, this.layer)
           })
       })

@@ -19,9 +19,7 @@
   </el-container>
   <script id="image-vs" type="x-shader/x-vertex">#version 300 es
 in vec3 vertexPosition;
-in vec4 color;
 in vec2 texCoord;
-in vec3 drawLinePosition;
 out vec2 textureCoord;
 
 void main() {
@@ -44,13 +42,10 @@ void main() {
   <script id="line-vs" type="x-shader/x-vertex">#version 300 es
 in vec2 linePosition;
 in vec4 color;
-in vec2 texCoord;
-out vec2 textureCoord;
 out vec4 vColor;
 
 void main() {
     vColor = color;
-    //textureCoord = texCoord;
     gl_Position = vec4(linePosition, 0.0, 1.0);
 }
   </script>
@@ -60,7 +55,6 @@ in vec4 vColor;
 out vec4 fragmentColor;
 
 void main() {
-    //fragmentColor = vColor + texture(tex, textureCoord);
     fragmentColor = vColor;
 }
   </script>
