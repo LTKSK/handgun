@@ -7,10 +7,6 @@ import {
   EDIT_MESSAGE,
   DELETE_MESSAGE,
  } from '@/store/mutation-types'
-import {
-  putMessage,
-  deleteMessage,
-} from "@/module/webapiRepository"
 
 export default {
   name: 'message',

@@ -7,6 +7,7 @@ import {
   DELETE_MESSAGE,
   GET_CHANNELS,
   ADD_CHANNEL,
+  DELETE_CHANNEL,
   GET_ICON,
   GET_USERS,
 } from './mutation-types'
@@ -44,6 +45,10 @@ export default {
   },
   [ADD_CHANNEL](state, channel) {
     state.channels.push(channel)
+  },
+  [DELETE_CHANNEL](state, channel){
+    state.channels = state.channels
+                     .filter(exists_channel => exists_channel !== channel)
   },
   [GET_ICON](state, payload) {
     // this code means emit to vue what 'state.icons' change

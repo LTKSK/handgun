@@ -1,4 +1,5 @@
 import LogoutButton from '@/components/LogoutButton'
+import ChannelDeleteButton from '@/components/ChannelDeleteButton'
 
 export default {
   name: 'menu-list',
@@ -8,6 +9,7 @@ export default {
   },
   components: {
     'logout-button': LogoutButton,
+    'delete-button': ChannelDeleteButton
   },
 }
 

@@ -78,6 +78,13 @@ export async function postChannel(channel_name, headers){
   return response.ok
 }
 
+export async function deleteChannel(channel_name, headers){
+  const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}`,
+                                                {method: "DELETE",
+                                                 headers: headers})
+  return response.ok
+}
+
 export async function putChannelUsers(channel_name, user_names, headers){
   const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/users`,
                                                 {method: "PUT",

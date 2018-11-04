@@ -7,6 +7,7 @@ import {
   DELETE_MESSAGE,
   GET_CHANNELS,
   ADD_CHANNEL,
+  DELETE_CHANNEL,
   GET_ICON,
   GET_USERS,
 } from './mutation-types'
@@ -18,10 +19,11 @@ import {
   deleteMessage,
   fetchChannels,
   postChannel,
+  deleteChannel,
   postReviewTarget,
   fetchUsers,
   fetchUserIcon,
-} from '../module/webapiRepository'
+} from '@/module/webapiRepository'
 import moment from 'moment'
 
 export default {
@@ -63,6 +65,10 @@ export default {
     await postChannel(payload.channel, payload.headers)
     await postReviewTarget(payload.channel, payload.file)
     commit(ADD_CHANNEL, payload.channel)
+  },
+  async [DELETE_CHANNEL]({ commit }, payload) {
+    await deleteChannel(payload.channel, payload.headers)
+    commit(DELETE_CHANNEL, payload.channel)
   },
   async [GET_ICON]({ commit }, username) {
     const icon = await fetchUserIcon(username)
