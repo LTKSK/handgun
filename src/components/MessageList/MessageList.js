@@ -52,7 +52,7 @@ export default {
       // because some message may be deleted.
       const index = this.messages
                         .map(message => message.index)
-                        .reduce((a, b) => a > b ? a : b) + 1
+                        .reduce((a, b) => a > b ? a : b, 0) + 1
       this.ADD_MESSAGE({"channel_name": this.$route.params.channelname,
                         "index": index,
                         "message":this.message_value,
