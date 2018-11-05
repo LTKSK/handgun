@@ -12,6 +12,7 @@ import { Layer } from "../layer"
 export default {
   name: "image-item",
   watch:{
+    // watch changing route. because this component needs update canvas image.
     "$route": "setup",
   },
   data() {
@@ -24,16 +25,31 @@ export default {
     }
   },
   methods: {
-    _mouseup(){
+    _mouseup() {
+      // if this.on_click is already false, do nothing.
+      if(! this.on_click) {
+        return
+      }
       this.on_click = false
-      this.layer.beginAddPolygon()
-    },
-    _mousedown(){
-      this.on_click = true
       this.layer.endAddPolygon()
     },
-    _mousemove(event){
-      if(!this.on_click) {
+    _mousedown() {
+      this.on_click = true
+      this.layer.beginAddPolygon()
+    },
+    _mouseout() {
+      if(! this.on_click) {
+        return
+      }
+      this.layer.addVerticesFromMouseEvent(event)
+      this.layer.endAddPolygon()
+      // if mouse is out, draw lines to border of canvas and on_click to false.
+      drawImage(this.gl, this.image)
+      drawLines(this.gl, this.layer)
+      this.on_click = false
+    },
+    _mousemove(event) {
+      if(! this.on_click) {
         return
       }
       this.layer.addVerticesFromMouseEvent(event)
@@ -54,6 +70,7 @@ export default {
       this.gl = initWebGL(canvas)
       // setup mouse callbacks
       canvas.addEventListener("mouseup", this._mouseup)
+      canvas.addEventListener("mouseout", this._mouseout)
       canvas.addEventListener("mousedown", this._mousedown)
       canvas.addEventListener("mousemove", this._mousemove)
     },

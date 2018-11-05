@@ -24,12 +24,12 @@ export class Layer {
   }
 
   beginAddPolygon() {
-    ++this.polygon_count
+    this.vertex_counts.push(0)
+    this.start_indices.push(this.vertices.length / 2)
   }
 
   endAddPolygon() {
-    this.vertex_counts.push(0)
-    this.start_indices.push(this.vertices.length / 2)
+    ++this.polygon_count
   }
 
   addVerticesFromMouseEvent(event) {
