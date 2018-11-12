@@ -16,6 +16,14 @@ export default {
     ...mapActions([
       GET_CHANNELS,
     ]),
+    listThreeOfChannels() {
+      const list_three_of_channels = new Array()
+      for (let index = 0; index < Math.ceil(this.channels.length / 3); ++index) {
+        list_three_of_channels.push(this.channels.slice(index, index + 3))
+      }
+      console.log(list_three_of_channels)
+      return list_three_of_channels
+    }
   },
   mounted() {
     this.GET_CHANNELS(this.header)

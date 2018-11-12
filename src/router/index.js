@@ -6,6 +6,7 @@ import ChannelPage from '@/components/ChannelPage'
 import RegisterForm from '@/components/RegisterForm'
 import LoginForm from '@/components/LoginForm';
 import InviteForm from '@/components/InviteForm';
+import ChannelTable from '@/components/ChannelTable';
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ const router = new Router({
       path: '/',
       name: 'login',
       component: LoginForm
+    },
+    {
+      path: '/table',
+      name: 'channel-table',
+      component: ChannelTable
     },
     {
       path: '/register',
