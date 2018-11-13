@@ -1,4 +1,5 @@
 <div>
-  <img src="thumbnail">
+  <img v-bind:src="thumbnail"
+       v-if="loaded">
   <div>{{ channel }}</div>
 </div>

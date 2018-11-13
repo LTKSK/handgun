@@ -1,10 +1,14 @@
 import { mapGetters, mapActions } from 'vuex'
 import { GET_CHANNELS } from '@/store/mutation-types'
+import ChannelThumbnail from '@/components/ChannelThumbnail'
 
 export default {
   name: 'channel-table',
   data() {
     return {}
+  },
+  components: {
+    "channel-thumbnail": ChannelThumbnail
   },
   computed: {
     ...mapGetters([
@@ -18,10 +22,9 @@ export default {
     ]),
     listThreeOfChannels() {
       const list_three_of_channels = new Array()
-      for (let index = 0; index < Math.ceil(this.channels.length / 3); ++index) {
+      for(let index = 0; index < Math.ceil(this.channels.length / 3); ++index) {
         list_three_of_channels.push(this.channels.slice(index, index + 3))
       }
-      console.log(list_three_of_channels)
       return list_three_of_channels
     }
   },

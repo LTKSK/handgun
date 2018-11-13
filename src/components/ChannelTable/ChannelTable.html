@@ -1,7 +1,15 @@
 <div>
   <ul v-for="channels in listThreeOfChannels()">
     <li>
-      {{ channels[0] }}, {{ channels[1] }}, {{ channels[2] }}
+      <el-col v-bind:span="8">
+        <channel-thumbnail v-bind:channel="channels[0]"/>
+      </el-col>
+      <el-col v-bind:span="8">
+        <channel-thumbnail v-bind:channel="channels[1]"/>
+      </el-col>
+      <el-col v-bind:span="8">
+        <channel-thumbnail v-bind:channel="channels[2]"/>
+      </el-col>
     </li>
   </ul>
 </div>
