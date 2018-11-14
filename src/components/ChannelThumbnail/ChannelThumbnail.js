@@ -9,14 +9,23 @@ export default {
       loaded: false
     }
   },
+  methods: {
+    _resize_image(image, width, height) {
+      const canvas = document.createElement("canvas")
+      canvas.width = width
+      canvas.height = height
+      const context = canvas.getContext("2d")
+      context.drawImage(image, 0, 0, width, height)
+      return canvas.toDataURL()
+    },
+  },
   mounted() {
     fetchReviewTarget(this.channel)
       .then(blob => {
-        this.thumbnail = new Image()
-        const url = URL.createObjectURL(blob)
-        this.thumbnail.src = url
-        this.thumbnail.onload = () => {
-          this.loaded = true
+        const image = new Image()
+        image.src = URL.createObjectURL(blob)
+        image.onload = () => {
+          this.thumbnail = this._resize_image(image, 128, 128)
         }
       }
     )
