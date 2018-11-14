@@ -1,4 +1,6 @@
 <div>
-  <img v-bind:src="thumbnail">
-  <div>{{ channel }}</div>
+  <router-link v-bind:to="{name: 'chat', params: {channelname: channel}}">
+    <img v-bind:src="thumbnail">
+    <div>{{ channel }}</div>
+  </router-link>
 </div>

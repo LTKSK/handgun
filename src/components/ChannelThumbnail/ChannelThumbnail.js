@@ -6,14 +6,11 @@ export default {
   data() {
     return {
       thumbnail: null,
-      loaded: false
     }
   },
   methods: {
     _resize_image(image, width, height) {
       const canvas = document.createElement("canvas")
-      canvas.width = width
-      canvas.height = height
       const context = canvas.getContext("2d")
       context.drawImage(image, 0, 0, width, height)
       return canvas.toDataURL()
