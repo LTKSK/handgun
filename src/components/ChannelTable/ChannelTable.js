@@ -20,12 +20,12 @@ export default {
     ...mapActions([
       GET_CHANNELS,
     ]),
-    listThreeOfChannels() {
-      const list_three_of_channels = new Array()
-      for(let index = 0; index < Math.ceil(this.channels.length / 3); ++index) {
-        list_three_of_channels.push(this.channels.slice(index, index + 3))
+    numOfChannels(num) {
+      const list_num_of_channels = new Array()
+      for(let index = 0; index < Math.ceil(this.channels.length / num); ++index) {
+        list_num_of_channels.push(this.channels.slice(index, index + num))
       }
-      return list_three_of_channels
+      return list_num_of_channels
     }
   },
   mounted() {
