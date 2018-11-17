@@ -2,3 +2,9 @@
   width: 100%;
   text-align: center;
 }
+.message-user {
+  font-weight: bold;
+}
+.message-date {
+  text-align: right
+}
