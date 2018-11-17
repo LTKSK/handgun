@@ -12,11 +12,17 @@ export default {
     _resize_image(image, width, height) {
       const canvas = document.createElement("canvas")
       const context = canvas.getContext("2d")
+
       if(image.width > image.height) {
-        height = Math.ceil(height * image.height / image.width)
+        const aspect_ratio = image.height / image.width
+        height = Math.ceil(height * aspect_ratio)
       } else {
-        width = Math.ceil(width * image.width / image.height)
+        const aspect_ratio = image.width / image.height
+        width = Math.ceil(width * aspect_ratio)
       }
+      canvas.width = width
+      canvas.height = height
+
       context.drawImage(image, 0, 0, width, height)
       return canvas.toDataURL()
     },
@@ -27,7 +33,7 @@ export default {
         const image = new Image()
         image.src = URL.createObjectURL(blob)
         image.onload = () => {
-          this.thumbnail = this._resize_image(image, 128, 128)
+          this.thumbnail = this._resize_image(image, 256, 256)
         }
       }
     )
