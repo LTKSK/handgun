@@ -1,14 +1,8 @@
 <div>
-  <el-row v-for="channels in numOfChannels(3)"
+  <el-row v-for="channels in numOfChannels()"
           v-bind:key="channels[0]">
-    <el-col v-bind:span="8">
-      <channel-thumbnail v-bind:channel="channels[0]"/>
-    </el-col>
-    <el-col v-bind:span="8">
-      <channel-thumbnail v-bind:channel="channels[1]"/>
-    </el-col>
-    <el-col v-bind:span="8">
-      <channel-thumbnail v-bind:channel="channels[2]"/>
+    <el-col v-for="channel in channels" v-bind:span="8" v-bind:key="channel">
+      <channel-thumbnail v-bind:channel="channel"/>
     </el-col>
   </el-row>
 </div>

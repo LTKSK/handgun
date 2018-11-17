@@ -20,7 +20,9 @@ export default {
     ...mapActions([
       GET_CHANNELS,
     ]),
-    numOfChannels(num) {
+    numOfChannels() {
+      // const num = Math.floor(this.$el.clientWidth / 256)
+      const num = 3
       const list_num_of_channels = new Array()
       for(let index = 0; index < Math.ceil(this.channels.length / num); ++index) {
         list_num_of_channels.push(this.channels.slice(index, index + num))
