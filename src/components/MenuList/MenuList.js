@@ -12,4 +12,3 @@ export default {
     'delete-button': ChannelDeleteButton
   },
 }
-
