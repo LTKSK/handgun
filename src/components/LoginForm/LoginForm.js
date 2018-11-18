@@ -18,7 +18,7 @@ export default {
       this.$router.push("/register")
     },
     _goToChannel() {
-      this.$router.push({path: "/channel"})
+      this.$router.push({path: "/table"})
     },
     _loginSucceeded() {
       this.$notify({
