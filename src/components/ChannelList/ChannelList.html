@@ -15,7 +15,7 @@
         <el-menu-item-group>
           <router-link v-for="channel in channels"
                        v-bind:key="channel"
-                       v-bind:to="{name: 'chat', params: {channelname: channel}}">
+                       v-bind:to="{name: 'review-page', params: {channelname: channel}}">
             <el-menu-item index="channel" v-if="channel!=currentChannel">
               <span class="channel-button">{{ channel }}</span>
             </el-menu-item>

@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import store from '@/store'
 import Router from 'vue-router'
-import Chat from '@/components/Chat'
 import ChannelPage from '@/components/ChannelPage'
 import RegisterForm from '@/components/RegisterForm'
 import LoginForm from '@/components/LoginForm';
 import InviteForm from '@/components/InviteForm';
 import ChannelTable from '@/components/ChannelTable';
+import ReviewPage from '@/components/ReviewPage';
 
 Vue.use(Router)
 
@@ -35,8 +35,8 @@ const router = new Router({
     },
     {
       path: '/channel/:channelname',
-      name: 'chat',
-      component: Chat
+      name: 'review-page',
+      component: ReviewPage
     },
     {
       path: '/invite/:channelname',

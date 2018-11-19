@@ -47,7 +47,7 @@ export default {
       ADD_CHANNEL,
     ]),
     _goToAddedChannel(){
-      this.$router.push({name: "chat",
+      this.$router.push({name: "review-page",
                          params: {"channelname": this.form.channel}})
     },
     addChannelSucceeded() {

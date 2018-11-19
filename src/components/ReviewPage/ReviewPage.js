@@ -3,7 +3,7 @@ import MessageList from '@/components/MessageList'
 import Image from '@/components/ReviewTarget/Image'
 
 export default {
-  name: 'chat',
+  name: 'review-page',
   data() {
     return {}
   },
