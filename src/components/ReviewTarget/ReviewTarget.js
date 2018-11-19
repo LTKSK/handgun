@@ -2,13 +2,13 @@ import {
   drawImage,
   drawLines,
   initWebGL
-} from "../webglutil"
+} from "@/module/webglutil"
 import {
   fetchReviewTarget,
   fetchLayer,
   putLayer,
 } from "@/module/webapiRepository"
-import { Layer } from "../layer"
+import { Layer } from "@/module/layer"
 export default {
   name: "image-item",
   watch:{

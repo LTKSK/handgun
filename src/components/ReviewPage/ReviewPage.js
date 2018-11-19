@@ -1,6 +1,6 @@
 import ChannelList from '@/components/ChannelList'
 import MessageList from '@/components/MessageList'
-import Image from '@/components/ReviewTarget/Image'
+import ReviewTarget from '@/components/ReviewTarget'
 
 export default {
   name: 'review-page',
@@ -13,7 +13,7 @@ export default {
     }
   },
   components: {
-    'image-item': Image,
+    'review-target': ReviewTarget,
     'channel-list': ChannelList,
     'message-list': MessageList,
   },
