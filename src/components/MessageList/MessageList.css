@@ -1,9 +1,16 @@
 ul {
   list-style: none;
+  padding: 0px;
+}
+.el-main {
+  padding: 0px;
 }
 .msg-list {
   text-align: left;
   height: 100vh;
+}
+.message-form {
+  text-align: center;
 }
 .user {
   text-align: left;

@@ -1,8 +1,11 @@
 ul {
   list-style: none;
 }
-.message-form {
-  text-align: center;
+.el-button {
+  width: 100%;
+}
+.message-list {
+  width: 20%;
 }
 .review-target {
   text-align: center;

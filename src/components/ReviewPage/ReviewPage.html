@@ -5,7 +5,8 @@
   <el-col v-bind:span="18">
     <review-target />
   </el-col>
-  <el-col v-show="!show_layer_menu" v-bind:span="6">
+  <el-col class="message-list" v-show="!show_layer_menu" v-bind:span="6">
+    <el-button type="primary" v-on:click="show_layer_menu=!show_layer_menu">Open Layer Menu</el-button>
     <message-list v-bind:channel="channel"/>
   </el-col>
   <el-col v-show="show_layer_menu" v-bind:span="6">
