@@ -3,17 +3,15 @@ import {
   drawLines,
   initWebGL
 } from "@/module/webglutil"
-import {
-  fetchReviewTarget,
-  fetchLayer,
-  putLayer,
-} from "@/module/webapiRepository"
-import { Layer } from "@/module/layer"
+import { fetchReviewTarget } from "@/module/webapiRepository"
 export default {
   name: "image-item",
+  props: ["layer"],
   watch:{
     // watch changing route. because this component needs update canvas image.
     "$route": "setup",
+    // watch layer attributes.
+    "layer": "draw",
   },
   data() {
     return {
@@ -21,10 +19,16 @@ export default {
       on_click: false,
       image: null,
       current_layer_num: 0,
-      layer: null,
     }
   },
   methods: {
+    draw() {
+      if(this.gl === null) {
+        return
+      }
+      drawImage(this.gl, this.image)
+      drawLines(this.gl, this.layer)
+    },
     _mouseup() {
       // if this.on_click is already false, do nothing.
       if(! this.on_click) {
@@ -74,40 +78,6 @@ export default {
       canvas.addEventListener("mousedown", this._mousedown)
       canvas.addEventListener("mousemove", this._mousemove)
     },
-    _saveSucceeded() {
-      this.$notify({
-        title: "Success!",
-        message: "Save layer data succeeded",
-        type: "success"
-      })
-    },
-    _saveFailed() {
-      this.$notify({
-        title: "Failed!",
-        message: "Registration failed",
-        type: "error"
-      })
-    },
-    saveLayer() {
-      putLayer(this.$route.params.channelname, this.layer)
-        .then(succeeded => {
-          if (succeeded) {
-            this._saveSucceeded()
-            return
-          }
-          this._saveFailed()
-        })
-    },
-    undoLayer() {
-      this.layer.undo()
-      drawImage(this.gl, this.image)
-      drawLines(this.gl, this.layer)
-    },
-    resetLayer() {
-      this.layer.reset()
-      // overwrite line polygons by drawImage
-      drawImage(this.gl, this.image)
-    },
     setup() {
       // review-target setup
       fetchReviewTarget(this.$route.params.channelname)
@@ -115,32 +85,11 @@ export default {
           this.image = new Image()
           const url = URL.createObjectURL(blob)
           this.image.src = url
-          return new Promise(resolve => {
-            this.image.onload = () => {
-              resolve()
-            }
-          })
-      // after image loaded.
-      }).then(() => {
-        // layer setup
-        fetchLayer(this.$route.params.channelname)
-          .then(layer => {
-            if (Object.keys(layer).length == 0){
-              this.layer = new Layer([1.0, 1.0, 1.0, 1.0], 0, [], [], [])
-            }
-            else {
-              this.layer = new Layer(layer.color,
-                                     layer.polygon_count,
-                                     layer.vertices,
-                                     layer.start_indices,
-                                     layer.vertex_counts)
-            }
-            // canvas setup
+          this.image.onload = () => {
             this.canvasSetup()
-            // write loaded image and loaded layer.
             drawImage(this.gl, this.image)
             drawLines(this.gl, this.layer)
-          })
+          }
       })
     }
   },

@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       layer: null,
-      show_layer_menu: true
+      show_layer_menu: false
     }
   },
   computed: {
@@ -25,7 +25,6 @@ export default {
     'channel-list': ChannelList,
     'message-list': MessageList,
   },
-  // Layer機能はまだまだ移行中
   methods: {
     _saveSucceeded() {
       this.$notify({
@@ -51,25 +50,32 @@ export default {
           this._saveFailed()
         })
     },
+    _layerUpdate(layer) {
+      // update layer for 'watch'.
+      this.layer = new Layer(layer.color,
+                             layer.polygon_count,
+                             layer.vertices,
+                             layer.start_indices,
+                             layer.vertex_counts)
+    },
     undoLayer() {
       this.layer.undo()
+      this._layerUpdate(this.layer)
     },
     resetLayer() {
       this.layer.reset()
+      this._layerUpdate(this.layer)
     },
   },
   mounted() {
     fetchLayer(this.$route.params.channelname)
       .then(layer => {
         if (Object.keys(layer).length == 0){
+          // create default layer.
           this.layer = new Layer([1.0, 1.0, 1.0, 1.0], 0, [], [], [])
         }
         else {
-          this.layer = new Layer(layer.color,
-                                  layer.polygon_count,
-                                  layer.vertices,
-                                  layer.start_indices,
-                                  layer.vertex_counts)
+          this._layerUpdate(layer)
         }
       })
   }

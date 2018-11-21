@@ -1,22 +1,5 @@
-<div>
-  <el-container>
-    <el-main class="canvas-container">
-      <canvas class="glcanvas" />
-    </el-main>
-    <el-footer>
-      <el-row>
-        <el-col v-bind:span="4">
-          <el-button type="plain" v-on:click="resetLayer">Reset Layer</el-button>
-        </el-col>
-        <el-col v-bind:span="4">
-          <el-button type="plain" v-on:click="undoLayer">Undo Layer</el-button>
-        </el-col>
-        <el-col v-bind:span="16">
-          <el-button type="primary" v-on:click="saveLayer">Save Layer</el-button>
-        </el-col>
-      </el-row>
-    </el-footer>
-  </el-container>
+<div class="canvas-container">
+  <canvas class="glcanvas" />
   <script id="image-vs" type="x-shader/x-vertex">#version 300 es
 in vec3 vertexPosition;
 in vec2 texCoord;
