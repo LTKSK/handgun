@@ -4,6 +4,7 @@ import {
   initWebGL
 } from "@/module/webglutil"
 import { fetchReviewTarget } from "@/module/webapiRepository"
+
 export default {
   name: "image-item",
   props: ["layer"],

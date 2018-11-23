@@ -9,7 +9,7 @@
     <el-button type="primary" v-on:click="show_layer_menu=!show_layer_menu">Open Layer Menu</el-button>
     <message-list v-bind:channel="channel"/>
   </el-col>
-  <el-col v-show="show_layer_menu" v-bind:span="6">
+  <el-col class="layer-menu" v-show="show_layer_menu" v-bind:span="6">
     <el-col>
       <el-button type="primary" v-on:click="show_layer_menu=!show_layer_menu">Close Layer Menu</el-button>
     </el-col>
