@@ -14,6 +14,7 @@ const state = {
     users: null,
     jwt: "",
     icons: {},
+    layers: [],
 }
 
 export default new Vuex.Store({

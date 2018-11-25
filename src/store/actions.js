@@ -10,6 +10,8 @@ import {
   DELETE_CHANNEL,
   GET_ICON,
   GET_USERS,
+  GET_LAYERS,
+  UPDATE_LAYERS
 } from './mutation-types'
 import {
   login,
@@ -23,6 +25,10 @@ import {
   postReviewTarget,
   fetchUsers,
   fetchUserIcon,
+  // fetchLayer,
+  // putLayer
+  fetchLayers,
+  putLayers
 } from '@/module/webapiRepository'
 import moment from 'moment'
 
@@ -77,5 +83,13 @@ export default {
   async [GET_USERS]({ commit }) {
     const users = await fetchUsers()
     commit(GET_USERS, users)
+  },
+  async [GET_LAYERS]({ commit }, channel_name) {
+    const layers = await fetchLayers(channel_name)
+    commit(GET_LAYERS, layers)
+  },
+  async [UPDATE_LAYERS]({ commit }, payload) {
+    await putLayers(payload.channel_name, payload.layers)
+    commit(UPDATE_LAYERS, payload.layers)
   },
 }

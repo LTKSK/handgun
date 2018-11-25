@@ -1,6 +1,3 @@
-import ChannelList from '@/components/ChannelList'
-import MessageList from '@/components/MessageList'
-import ReviewTarget from '@/components/ReviewTarget'
 import {
   mapGetters,
   mapActions
@@ -12,24 +9,14 @@ import {
 import store from "@/store"
 
 export default {
-  name: 'review-page',
+  name: 'layer-menu',
   data() {
-    return {
-      show_layer_menu: false
-    }
+    return {}
   },
   computed: {
     ...mapGetters([
       "layers"
     ]),
-    channel() {
-      return this.$route.params.channelname
-    }
-  },
-  components: {
-    'review-target': ReviewTarget,
-    'channel-list': ChannelList,
-    'message-list': MessageList,
   },
   methods: {
     ...mapActions([
@@ -72,3 +59,4 @@ export default {
     this.GET_LAYERS(this.$route.params.channelname)
   }
 }
+

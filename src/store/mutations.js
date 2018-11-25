@@ -10,6 +10,8 @@ import {
   DELETE_CHANNEL,
   GET_ICON,
   GET_USERS,
+  GET_LAYERS,
+  UPDATE_LAYERS
 } from './mutation-types'
 
 
@@ -59,5 +61,12 @@ export default {
   },
   [GET_USERS](state, users) {
     state.users = users
+  },
+  [GET_LAYERS](state, layers) {
+    state.layers = [...layers]
+  },
+  [UPDATE_LAYERS](state, layers) {
+    state.layers = [...layers]
+    console.log(state.layers)
   },
 }

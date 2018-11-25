@@ -4,15 +4,15 @@ import {
   initWebGL
 } from "@/module/webglutil"
 import { fetchReviewTarget } from "@/module/webapiRepository"
+import { mapGetters } from 'vuex'
 
 export default {
   name: "image-item",
-  props: ["layer"],
   watch:{
     // watch changing route. because this component needs update canvas image.
     "$route": "setup",
     // watch layer attributes.
-    "layer": "draw",
+    "layers": "draw",
   },
   data() {
     return {
@@ -22,13 +22,18 @@ export default {
       current_layer_num: 0,
     }
   },
+  computed: {
+    ...mapGetters([
+      "layers"
+    ]),
+  },
   methods: {
     draw() {
       if(this.gl === null) {
         return
       }
       drawImage(this.gl, this.image)
-      drawLines(this.gl, this.layer)
+      drawLines(this.gl, this.layers[0])
     },
     _mouseup() {
       // if this.on_click is already false, do nothing.
@@ -36,30 +41,30 @@ export default {
         return
       }
       this.on_click = false
-      this.layer.endAddPolygon()
+      this.layers[0].endAddPolygon()
     },
     _mousedown() {
       this.on_click = true
-      this.layer.beginAddPolygon()
+      this.layers[0].beginAddPolygon()
     },
     _mouseout() {
       if(! this.on_click) {
         return
       }
-      this.layer.addVerticesFromMouseEvent(event)
-      this.layer.endAddPolygon()
+      this.layers[0].addVerticesFromMouseEvent(event)
+      this.layers[0].endAddPolygon()
       // if mouse is out, draw lines to border of canvas and on_click to false.
       drawImage(this.gl, this.image)
-      drawLines(this.gl, this.layer)
+      drawLines(this.gl, this.layers[0])
       this.on_click = false
     },
     _mousemove(event) {
       if(! this.on_click) {
         return
       }
-      this.layer.addVerticesFromMouseEvent(event)
+      this.layers[0].addVerticesFromMouseEvent(event)
       drawImage(this.gl, this.image)
-      drawLines(this.gl, this.layer)
+      drawLines(this.gl, this.layers[0])
     },
     canvasSetup() {
       // webgl setup
@@ -89,7 +94,7 @@ export default {
           this.image.onload = () => {
             this.canvasSetup()
             drawImage(this.gl, this.image)
-            drawLines(this.gl, this.layer)
+            drawLines(this.gl, this.layers[0])
           }
       })
     }

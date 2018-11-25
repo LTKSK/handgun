@@ -1,7 +1,9 @@
+import { Layer } from "@/module/layer"
 // todo url from config or environ.
 const channels_url = 'http://localhost:5000/channels'
 const users_url = 'http://localhost:5000/users'
 const login_url = 'http://localhost:5000/login'
+const layers_url = 'http://localhost:5000/layers'
 
 async function fetchWithErrorHandring(url, options) {
   const response = await fetch(url, options).catch(() => {
@@ -16,7 +18,7 @@ async function fetchWithErrorHandring(url, options) {
   if (response.status == 404) throw new Error("NOT_FOUND")
   if (response.status == 409) throw new Error("CONFLICT")
   if (response.status == 500) throw new Error("INTERNAL_SERVER_ERROR")
-  throw new Error("something erorr occerrd.")
+  throw new Error("something erorr occurred.")
 }
 
 export async function postUser(username, password){
@@ -144,4 +146,29 @@ export async function fetchLayer(channel_name){
   const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/review-targets/layer`)
   const json = await response.json()
   return json
+}
+
+export async function fetchLayers(channel_name){
+  const response = await fetchWithErrorHandring(`${layers_url}/${channel_name}`)
+  const json = await response.json()
+  // if channel has not layers yet, make a layer.
+  if (json.layers === undefined) {
+    return [new Layer([1.0, 1.0, 1.0, 1.0], 0, [], [], [])]
+  }
+  const layers = []
+  for(let layer_data of json.layers){
+    layers.push(new Layer(layer_data.color,
+                          layer_data.polygon_count,
+                          layer_data.vertices,
+                          layer_data.start_indices,
+                          layer_data.vertex_counts))
+  }
+  return layers
+}
+
+export async function putLayers(channel_name, layers){
+  const response = await fetchWithErrorHandring(`${layers_url}/${channel_name}`,
+                                                {method: "PUT",
+                                                 body: JSON.stringify(layers)})
+  return response.ok
 }

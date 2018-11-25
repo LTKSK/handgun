@@ -3,24 +3,9 @@
     <channel-list />
   </el-aside>
   <el-col v-bind:span="18">
-    <review-target v-bind:layer="layer"/>
+    <review-target />
   </el-col>
-  <el-col class="message-list" v-show="!show_layer_menu" v-bind:span="6">
-    <el-button type="primary" v-on:click="show_layer_menu=!show_layer_menu">Open Layer Menu</el-button>
+  <el-col class="message-list" v-bind:span="6">
     <message-list v-bind:channel="channel"/>
-  </el-col>
-  <el-col class="layer-menu" v-show="show_layer_menu" v-bind:span="6">
-    <el-col>
-      <el-button type="primary" v-on:click="show_layer_menu=!show_layer_menu">Close Layer Menu</el-button>
-    </el-col>
-    <el-col>
-      <el-button type="plain" v-on:click="resetLayer">Reset Layer</el-button>
-    </el-col>
-    <el-col>
-      <el-button type="plain" v-on:click="undoLayer">Undo Layer</el-button>
-    </el-col>
-    <el-col>
-      <el-button type="primary" v-on:click="saveLayer">Save Layer</el-button>
-    </el-col>
   </el-col>
 </el-container>

@@ -20,3 +20,4 @@ export const header = state => {
   return {"Authorization": `Bearer ${state.jwt}`}
 }
 export const icon = state => (username) => state.icons[username]
+export const layers = state => state.layers
