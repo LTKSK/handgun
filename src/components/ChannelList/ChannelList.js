@@ -1,8 +1,5 @@
 import { mapGetters, mapActions } from 'vuex'
 import { GET_CHANNELS } from '@/store/mutation-types'
-import UserMenu from '@/components/UserMenu'
-import LayerMenu from '@/components/LayerMenu'
-import LayerList from '@/components/LayerList'
 
 export default {
   name: 'channel-list',
@@ -22,11 +19,6 @@ export default {
     ...mapActions([
       GET_CHANNELS,
     ]),
-  },
-  components: {
-    "user-menu": UserMenu,
-    "layer-menu": LayerMenu,
-    "layer-list": LayerList,
   },
   mounted() {
     this.GET_CHANNELS(this.header)

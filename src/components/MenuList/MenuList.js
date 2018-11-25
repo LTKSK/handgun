@@ -1,7 +1,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import { GET_CHANNELS } from '@/store/mutation-types'
 import UserMenu from '@/components/UserMenu'
-import ChannelList from '@/components/ChanneLlist'
+import ChannelList from '@/components/ChannelList'
 import LayerMenu from '@/components/LayerMenu'
 import LayerList from '@/components/LayerList'
 
