@@ -11,7 +11,7 @@ export default {
   watch:{
     // watch changing route. because this component needs update canvas image.
     "$route": "setup",
-    // watch layer attributes.
+    // watch layers attributes.
     "layers": "draw",
   },
   data() {

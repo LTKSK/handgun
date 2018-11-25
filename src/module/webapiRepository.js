@@ -135,19 +135,6 @@ export async function deleteMessage(channel_name, index){
   return response.ok
 }
 
-export async function putLayer(channel_name, layer){
-  const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/review-targets/layer`,
-                                                {method: "PUT",
-                                                 body: JSON.stringify(layer)})
-  return response.ok
-}
-
-export async function fetchLayer(channel_name){
-  const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/review-targets/layer`)
-  const json = await response.json()
-  return json
-}
-
 export async function fetchLayers(channel_name){
   const response = await fetchWithErrorHandring(`${layers_url}/${channel_name}`)
   const json = await response.json()
