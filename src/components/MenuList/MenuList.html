@@ -1,14 +1,30 @@
-<div>
-  <el-button type="primary" v-on:click="$router.push({path: '/table'})">
-    Home
-  </el-button>
-  <el-button type="primary" v-on:click="$router.push({path: '/'})">
-    Add Channel
-  </el-button>
-  <el-button type="primary"
-             v-on:click="$router.push({path: `/invite/${channel}`})">
-    Invite User
-  </el-button>
-  <logout-button/>
-  <delete-button v-bind:channel="channel"/>
-</div>
+<el-container class="menu-list">
+  <el-aside>
+    <el-menu mode="vertical" v-bind:default-openeds="['3']">
+      <el-submenu index="2">
+        <template slot="title">
+          <span style="font-weight: bold;">Menu</span>
+        </template>
+        <user-menu v-bind:channel="currentChannel"/>
+      </el-submenu>
+      <el-submenu index="3">
+        <template slot="title">
+          <span style="font-weight: bold;">Channels</span>
+        </template>
+        <channel-list />
+      </el-submenu>
+      <el-submenu index="4">
+        <template slot="title">
+          <span style="font-weight: bold;">Layers</span>
+        </template>
+        <layer-list />
+      </el-submenu>
+      <el-submenu index="5">
+        <template slot="title">
+          <span style="font-weight: bold;">Layer Menu</span>
+        </template>
+        <layer-menu />
+      </el-submenu>
+    </el-menu>
+  </el-aside>
+</el-container>

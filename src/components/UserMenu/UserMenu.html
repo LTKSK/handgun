@@ -1,0 +1,15 @@
+<div>
+  <el-button type="primary" v-on:click="$router.push({path: '/table'})">
+    Home
+  </el-button>
+  <el-button type="primary" v-on:click="$router.push({path: '/'})">
+    Add Channel
+  </el-button>
+  <el-button type="primary"
+             v-on:click="$router.push({path: `/invite/${channel}`})">
+    Invite User
+  </el-button>
+  <delete-button v-bind:channel="channel"/>
+  <logout-button/>
+</div>
+

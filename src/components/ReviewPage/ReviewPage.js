@@ -1,3 +1,4 @@
+import MenuList from '@/components/MenuList'
 import ChannelList from '@/components/ChannelList'
 import MessageList from '@/components/MessageList'
 import ReviewTarget from '@/components/ReviewTarget'
@@ -14,9 +15,7 @@ import store from "@/store"
 export default {
   name: 'review-page',
   data() {
-    return {
-      show_layer_menu: false
-    }
+    return {}
   },
   computed: {
     ...mapGetters([
@@ -28,6 +27,7 @@ export default {
   },
   components: {
     'review-target': ReviewTarget,
+    'menu-list': MenuList,
     'channel-list': ChannelList,
     'message-list': MessageList,
   },

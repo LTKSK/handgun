@@ -1,35 +1,12 @@
-<el-container class="channel-list">
-  <el-aside>
-    <el-menu mode="vertical" v-bind:default-openeds="['3']">
-      <el-submenu index="2">
-        <template slot="title">
-          <span style="font-weight: bold;">Menu</span>
-        </template>
-        <menu-list v-bind:channel="currentChannel"/>
-      </el-submenu>
-      <el-submenu index="3">
-        <template slot="title">
-          <span style="font-weight: bold;">Channels</span>
-        </template>
-        <el-menu-item-group>
-          <router-link v-for="channel in channels"
-                       v-bind:key="channel"
-                       v-bind:to="{name: 'review-page', params: {channelname: channel}}">
-            <el-menu-item index="channel" v-if="channel!=currentChannel">
-              <span class="channel-button">{{ channel }}</span>
-            </el-menu-item>
-            <el-menu-item index="channel" v-else>
-              <span class="current-channel">{{ channel }}</span>
-            </el-menu-item>
-          </router-link>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="4">
-        <template slot="title">
-          <span style="font-weight: bold;">Layer Menu</span>
-        </template>
-        <layer-menu />
-      </el-submenu>
-    </el-menu>
-  </el-aside>
-</el-container>
+<el-menu-item-group>
+  <router-link v-for="channel in channels"
+                v-bind:key="channel"
+                v-bind:to="{name: 'review-page', params: {channelname: channel}}">
+    <el-menu-item index="channel" v-if="channel!=currentChannel">
+      <span class="channel-button">{{ channel }}</span>
+    </el-menu-item>
+    <el-menu-item index="channel" v-else>
+      <span class="current-channel">{{ channel }}</span>
+    </el-menu-item>
+  </router-link>
+</el-menu-item-group>
