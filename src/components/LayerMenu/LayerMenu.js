@@ -37,6 +37,9 @@ export default {
         type: "error"
       })
     },
+    addLayer() {
+      console.log("add")
+    },
     saveLayers() {
       this.UPDATE_LAYERS({"channel_name": this.$route.params.channelname,
                           "layers": this.layers})
