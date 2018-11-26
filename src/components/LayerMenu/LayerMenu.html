@@ -11,4 +11,16 @@
   <el-col>
     <el-button type="primary" v-on:click="saveLayers">Save Layer</el-button>
   </el-col>
+  <el-row>
+    <el-col v-bind:span="6"><input type="button" class="red-button" v-on:click="setColor([1.0, 0.0, 0.0, 1.0])"></el-col>
+    <el-col v-bind:span="6"><input type="button" class="blue-button" v-on:click="setColor([0.0, 0.0, 1.0, 1.0])"></el-col>
+    <el-col v-bind:span="6"><input type="button" class="green-button" v-on:click="setColor([0.0, 1.0, 0.0, 1.0])"></el-col>
+    <el-col v-bind:span="6"><input type="button" class="yellow-button" v-on:click="setColor([1.0, 0.0, 1.0, 1.0])"></el-col>
+  </el-row>
+  <el-row>
+    <el-col v-bind:span="6"><input type="button" class="sian-button" v-on:click="setColor([0.0, 1.0, 1.0, 1.0])"></el-col>
+    <el-col v-bind:span="6"><input type="button" class="magenta-button" v-on:click="setColor([1.0, 0.0, 1.0, 1.0])"></el-col>
+    <el-col v-bind:span="6"><input type="button" class="white-button" v-on:click="setColor([1.0, 1.0, 1.0, 1.0])"></el-col>
+    <el-col v-bind:span="6"><input type="button" class="black-button" v-on:click="setColor([1.0, 1.0, 1.0, 1.0])"></el-col>
+  </el-row>
 </el-col>

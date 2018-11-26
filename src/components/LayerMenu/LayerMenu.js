@@ -37,8 +37,11 @@ export default {
         type: "error"
       })
     },
+    setColor(color) {
+      console.log(color)
+    },
     addLayer() {
-      console.log("add")
+
     },
     saveLayers() {
       this.UPDATE_LAYERS({"channel_name": this.$route.params.channelname,

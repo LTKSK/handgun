@@ -1,3 +1,39 @@
+input {
+  width: 16px;
+  height: 16px;
+}
+.el-col .red-button {
+  border-radius: 50%;
+  background-color: #ff0000;
+}
+.el-col .blue-button {
+  border-radius: 50%;
+  background-color: #0000ff;
+}
+.el-col .green-button {
+  border-radius: 50%;
+  background-color: #00ff00;
+}
+.el-col .yellow-button {
+  border-radius: 50%;
+  background-color: #ffff00;
+}
+.el-col .sian-button {
+  border-radius: 50%;
+  background-color: #00ffff;
+}
+.el-col .magenta-button {
+  border-radius: 50%;
+  background-color: #ff00ff;
+}
+.el-col .white-button {
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+.el-col .black-button {
+  border-radius: 50%;
+  background-color: #000000;
+}
 .el-button {
   width: 100%;
 }
