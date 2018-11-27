@@ -6,12 +6,16 @@ import {
   GET_LAYERS,
   UPDATE_LAYERS
 } from '@/store/mutation-types'
+import { Layer } from "@/module/layer"
 import store from "@/store"
 
 export default {
   name: 'layer-menu',
   data() {
-    return {}
+    return {
+      // this flag is in layer add process or not.
+      layer_adding: false
+    }
   },
   computed: {
     ...mapGetters([
@@ -38,10 +42,21 @@ export default {
       })
     },
     setColor(color) {
-      console.log(color)
+      if (! layer_adding) {
+        return
+      }
+      // store.commit(UPDATE_LAYERS, this.layers)
+    },
+    startAdd() {
+      this.layer_adding = true
+    },
+    cancelAdd() {
+      this.layer_adding = false
     },
     addLayer() {
-
+      this.layer_adding = true
+      // this.layers.push(new Layer([1.0, 1.0, 1.0, 1.0], 0, [], [], []))
+      // store.commit(UPDATE_LAYERS, this.layers)
     },
     saveLayers() {
       this.UPDATE_LAYERS({"channel_name": this.$route.params.channelname,
