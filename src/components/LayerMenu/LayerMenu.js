@@ -14,7 +14,8 @@ export default {
   data() {
     return {
       // this flag is in layer add process or not.
-      layer_adding: false
+      layer_adding: false,
+      add_layer_color: [1.0, 1.0, 1.0, 1.0]
     }
   },
   computed: {
@@ -42,9 +43,10 @@ export default {
       })
     },
     setColor(color) {
-      if (! layer_adding) {
+      if (! this.layer_adding) {
         return
       }
+      this.add_layer_color = color
       // store.commit(UPDATE_LAYERS, this.layers)
     },
     startAdd() {
