@@ -14,6 +14,7 @@ const state = {
     users: null,
     jwt: "",
     icons: {},
+    current_layer: null,
     layers: [],
 }
 

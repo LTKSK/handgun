@@ -43,11 +43,7 @@ export default {
       })
     },
     setColor(color) {
-      if (! this.layer_adding) {
-        return
-      }
       this.add_layer_color = color
-      // store.commit(UPDATE_LAYERS, this.layers)
     },
     startAdd() {
       this.layer_adding = true
@@ -57,8 +53,8 @@ export default {
     },
     addLayer() {
       this.layer_adding = true
-      // this.layers.push(new Layer([1.0, 1.0, 1.0, 1.0], 0, [], [], []))
-      // store.commit(UPDATE_LAYERS, this.layers)
+      this.layers.push(new Layer(this.add_layer_color, 0, [], [], []))
+      store.commit(UPDATE_LAYERS, this.layers)
     },
     saveLayers() {
       this.UPDATE_LAYERS({"channel_name": this.$route.params.channelname,

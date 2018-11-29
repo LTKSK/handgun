@@ -1,5 +1,5 @@
 <el-col class="layer-menu">
-  <el-col v-show="! layer_adding">
+  <el-row v-show="! layer_adding">
     <el-col>
       <el-button type="primary" v-on:click="startAdd">Add Layer</el-button>
     </el-col>
@@ -12,25 +12,21 @@
     <el-col>
       <el-button type="primary" v-on:click="saveLayers">Save Layer</el-button>
     </el-col>
-  </el-col>
-  <el-col v-show="layer_adding">
+  </el-row>
+  <el-row v-show="layer_adding">
+    <el-col v-bind:span="6"><input type="button" class="red-button" v-on:click="setColor([1.0, 0.0, 0.0, 1.0])"></el-col>
+    <el-col v-bind:span="6"><input type="button" class="blue-button" v-on:click="setColor([0.0, 0.0, 1.0, 1.0])"></el-col>
+    <el-col v-bind:span="6"><input type="button" class="green-button" v-on:click="setColor([0.0, 1.0, 0.0, 1.0])"></el-col>
+    <el-col v-bind:span="6"><input type="button" class="yellow-button" v-on:click="setColor([1.0, 0.0, 1.0, 1.0])"></el-col>
+    <el-col v-bind:span="6"><input type="button" class="sian-button" v-on:click="setColor([0.0, 1.0, 1.0, 1.0])"></el-col>
+    <el-col v-bind:span="6"><input type="button" class="magenta-button" v-on:click="setColor([1.0, 0.0, 1.0, 1.0])"></el-col>
+    <el-col v-bind:span="6"><input type="button" class="black-button" v-on:click="setColor([1.0, 1.0, 1.0, 1.0])"></el-col>
+    <el-col v-bind:span="6"><input type="button" class="white-button" v-on:click="setColor([1.0, 1.0, 1.0, 1.0])"></el-col>
     <el-col v-bind:span="12">
       <el-button type="primary" v-on:click="addLayer">Add</el-button>
     </el-col>
     <el-col v-bind:span="12">
       <el-button type="info" v-on:click="cancelAdd">Cancel</el-button>
     </el-col>
-    <el-row>
-      <el-col v-bind:span="6"><input type="button" class="red-button" v-on:click="setColor([1.0, 0.0, 0.0, 1.0])"></el-col>
-      <el-col v-bind:span="6"><input type="button" class="blue-button" v-on:click="setColor([0.0, 0.0, 1.0, 1.0])"></el-col>
-      <el-col v-bind:span="6"><input type="button" class="green-button" v-on:click="setColor([0.0, 1.0, 0.0, 1.0])"></el-col>
-      <el-col v-bind:span="6"><input type="button" class="yellow-button" v-on:click="setColor([1.0, 0.0, 1.0, 1.0])"></el-col>
-    </el-row>
-    <el-row>
-      <el-col v-bind:span="6"><input type="button" class="sian-button" v-on:click="setColor([0.0, 1.0, 1.0, 1.0])"></el-col>
-      <el-col v-bind:span="6"><input type="button" class="magenta-button" v-on:click="setColor([1.0, 0.0, 1.0, 1.0])"></el-col>
-      <el-col v-bind:span="6"><input type="button" class="black-button" v-on:click="setColor([1.0, 1.0, 1.0, 1.0])"></el-col>
-      <el-col v-bind:span="6"><input type="button" class="white-button" v-on:click="setColor([1.0, 1.0, 1.0, 1.0])"></el-col>
-    </el-row>
-  </el-col>
+  </el-row>
 </el-col>

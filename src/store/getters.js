@@ -21,3 +21,4 @@ export const header = state => {
 }
 export const icon = state => (username) => state.icons[username]
 export const layers = state => state.layers
+export const current_layer = state => state.current_layer

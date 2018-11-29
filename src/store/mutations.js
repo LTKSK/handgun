@@ -11,7 +11,9 @@ import {
   GET_ICON,
   GET_USERS,
   GET_LAYERS,
-  UPDATE_LAYERS
+  UPDATE_LAYERS,
+  GET_CURRENT_LAYER,
+  SET_CURRENT_LAYER
 } from './mutation-types'
 
 
@@ -64,9 +66,16 @@ export default {
   },
   [GET_LAYERS](state, layers) {
     state.layers = [...layers]
+    state.current_layer = state.layers[state.layers.length-1]
   },
   [UPDATE_LAYERS](state, layers) {
     state.layers = [...layers]
-    console.log(state.layers)
+    if(state.layers === null) {
+      return
+    }
+    state.current_layer = state.layers[state.layers.length-1]
+  },
+  [SET_CURRENT_LAYER](state, layer) {
+    state.current_layer = layer
   },
 }

@@ -25,8 +25,6 @@ import {
   postReviewTarget,
   fetchUsers,
   fetchUserIcon,
-  // fetchLayer,
-  // putLayer
   fetchLayers,
   putLayers
 } from '@/module/webapiRepository'
