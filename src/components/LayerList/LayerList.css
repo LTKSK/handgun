@@ -1,3 +1,28 @@
 input {
   width: 100%;
 }
+
+.el-row .red-button {
+  background-color: #ff0000;
+}
+.el-row .blue-button {
+  background-color: #0000ff;
+}
+.el-row .green-button {
+  background-color: #00ff00;
+}
+.el-row .yellow-button {
+  background-color: #ffff00;
+}
+.el-row .sian-button {
+  background-color: #00ffff;
+}
+.el-row .magenta-button {
+  background-color: #ff00ff;
+}
+.el-row .white-button {
+  background-color: #ffffff;
+}
+.el-row .black-button {
+  background-color: #000000;
+}

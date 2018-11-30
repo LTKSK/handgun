@@ -11,6 +11,9 @@ export default {
     ...mapGetters([
       "layers"
     ]),
+    layer_color() {
+      return "red-button"
+    }
   },
   methods: {
     set_current_layer(layer_index) {
