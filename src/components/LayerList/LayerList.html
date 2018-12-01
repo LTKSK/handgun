@@ -1,5 +1,5 @@
 <el-col>
   <el-row v-for="(layer, index) in layers" v-bind:key="index">
-    <input type="button" v-bind:class="layer_color" v-on:click="set_current_layer(index)">
+    <input type="button" v-bind:class="layer_color(layer)" v-on:click="set_current_layer(index)">
   </el-row>
 </el-col>

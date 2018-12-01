@@ -53,7 +53,7 @@ export default {
                           "layers": this.layers})
         .then(() => {
           this._saveSucceeded()
-        }).catch(err => {
+        }).catch(_ => {
           this._saveFailed()
         })
     },

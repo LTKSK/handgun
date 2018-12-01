@@ -13,18 +13,19 @@ export default {
     "$route": "setup",
     // watch layers attributes.
     "layers": "draw",
+    "current_layer": "draw"
   },
   data() {
     return {
       gl: null,
       on_click: false,
-      image: null,
-      current_layer_num: 0,
+      image: null
     }
   },
   computed: {
     ...mapGetters([
-      "layers"
+      "layers",
+      "current_layer"
     ]),
   },
   methods: {
@@ -33,7 +34,7 @@ export default {
         return
       }
       drawImage(this.gl, this.image)
-      drawLines(this.gl, this.layers[0])
+      drawLines(this.gl, this.current_layer)
     },
     _mouseup() {
       // if this.on_click is already false, do nothing.
@@ -41,30 +42,30 @@ export default {
         return
       }
       this.on_click = false
-      this.layers[0].endAddPolygon()
+      this.current_layer.endAddPolygon()
     },
     _mousedown() {
       this.on_click = true
-      this.layers[0].beginAddPolygon()
+      this.current_layer.beginAddPolygon()
     },
     _mouseout() {
       if(! this.on_click) {
         return
       }
-      this.layers[0].addVerticesFromMouseEvent(event)
-      this.layers[0].endAddPolygon()
+      this.current_layer.addVerticesFromMouseEvent(event)
+      this.current_layer.endAddPolygon()
       // if mouse is out, draw lines to border of canvas and on_click to false.
       drawImage(this.gl, this.image)
-      drawLines(this.gl, this.layers[0])
+      drawLines(this.gl, this.current_layer)
       this.on_click = false
     },
     _mousemove(event) {
       if(! this.on_click) {
         return
       }
-      this.layers[0].addVerticesFromMouseEvent(event)
+      this.current_layer.addVerticesFromMouseEvent(event)
       drawImage(this.gl, this.image)
-      drawLines(this.gl, this.layers[0])
+      drawLines(this.gl, this.current_layer)
     },
     canvasSetup() {
       // webgl setup
@@ -94,7 +95,7 @@ export default {
           this.image.onload = () => {
             this.canvasSetup()
             drawImage(this.gl, this.image)
-            drawLines(this.gl, this.layers[0])
+            drawLines(this.gl, this.current_layer)
           }
       })
     }
