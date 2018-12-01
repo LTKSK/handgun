@@ -11,6 +11,9 @@ export default {
     ...mapGetters([
       "layers"
     ]),
+    reversed_layers() {
+      return this.layers.reverse()
+    }
   },
   methods: {
     set_current_layer(layer_index) {

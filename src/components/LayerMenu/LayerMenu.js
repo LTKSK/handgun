@@ -54,9 +54,9 @@ export default {
       this.layer_adding = false
     },
     addLayer() {
-      this.layer_adding = true
       this.layers.push(new Layer(this.add_layer_color, 0, [], [], []))
       store.commit(UPDATE_LAYERS, this.layers)
+      this.layer_adding = false
     },
     saveLayers() {
       this.UPDATE_LAYERS({"channel_name": this.$route.params.channelname,
@@ -80,4 +80,3 @@ export default {
     this.GET_LAYERS(this.$route.params.channelname)
   }
 }
-

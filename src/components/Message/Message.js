@@ -20,7 +20,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "icon"
+      "icon",
+      "current_layer"
     ]),
   },
   methods: {
@@ -67,7 +68,7 @@ export default {
       .then(() => {
         this.DELETE_MESSAGE(this.message)
       })
-      .catch(error => {})
+      .catch(_ => {})
     },
     _mouserover() {
       if (this.is_editing) {
