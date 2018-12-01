@@ -20,7 +20,9 @@ export class Layer {
     this.vertices.pop()
     this.vertex_counts.pop()
     this.start_indices.pop()
-    --this.polygon_count
+    if (this.polygon_count > 0) {
+      --this.polygon_count
+    }
   }
 
   beginAddPolygon() {
