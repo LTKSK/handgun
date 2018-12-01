@@ -1,3 +1,4 @@
+import { Layer } from "@/module/layer"
 import {
   LOGIN,
   LOGOUT,
@@ -12,7 +13,6 @@ import {
   GET_USERS,
   GET_LAYERS,
   UPDATE_LAYERS,
-  GET_CURRENT_LAYER,
   SET_CURRENT_LAYER
 } from './mutation-types'
 
@@ -76,6 +76,10 @@ export default {
     state.current_layer = state.layers[state.layers.length-1]
   },
   [SET_CURRENT_LAYER](state, layer) {
-    state.current_layer = layer
+    state.current_layer = new Layer(layer.color,
+                                    layer.polygon_count,
+                                    layer.vertices,
+                                    layer.start_indices,
+                                    layer.vertex_counts)
   },
 }

@@ -4,7 +4,8 @@ import {
 } from 'vuex'
 import {
   GET_LAYERS,
-  UPDATE_LAYERS
+  UPDATE_LAYERS,
+  SET_CURRENT_LAYER
 } from '@/store/mutation-types'
 import { Layer } from "@/module/layer"
 import store from "@/store"
@@ -20,7 +21,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "layers"
+      "layers",
+      "current_layer"
     ]),
   },
   methods: {
@@ -61,17 +63,17 @@ export default {
                           "layers": this.layers})
         .then(() => {
           this._saveSucceeded()
-        }).catch(err => {
+        }).catch(_ => {
           this._saveFailed()
         })
     },
     undoLayer() {
-      this.layers[0].undo()
-      store.commit(UPDATE_LAYERS, this.layers)
+      this.current_layer.undo()
+      store.commit(SET_CURRENT_LAYER, this.current_layer)
     },
     resetLayer() {
-      this.layers[0].reset()
-      store.commit(UPDATE_LAYERS, this.layers)
+      this.current_layer.reset()
+      store.commit(SET_CURRENT_LAYER, this.current_layer)
     },
   },
   mounted() {
