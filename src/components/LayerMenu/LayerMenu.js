@@ -54,8 +54,9 @@ export default {
       this.layer_adding = false
     },
     addLayer() {
-      this.layers.push(new Layer(this.add_layer_color, 0, [], [], []))
-      store.commit(UPDATE_LAYERS, this.layers)
+      // add to head of layers
+      store.commit(UPDATE_LAYERS, [new Layer(this.add_layer_color, 0, [], [], []),
+                                   ...this.layers])
       this.layer_adding = false
     },
     saveLayers() {

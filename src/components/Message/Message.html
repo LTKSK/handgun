@@ -1,72 +1,77 @@
 <div>
-  <el-row v-show="hoverd">
-    <el-col v-bind:span="8">
-      <el-button class="reply-button" type="primary">
-        <div>Reply</div>
-      </el-button>
-    </el-col>
-    <el-col v-bind:span="8">
-      <el-button class="edit-button"
-                 type="primary"
-                 v-on:click="editStart">
-        <div>Edit</div>
-      </el-button>
-    </el-col>
-    <el-col v-bind:span="8">
-      <el-button class="delete-button"
-                 type="info"
-                 v-on:click="deleteMessage">
-        <div>Delete</div>
-      </el-button>
-    </el-col>
-  </el-row>
-  <el-row>
-    <el-col v-bind:span="6">
-      <img class="user-icon" v-bind:src="icon(message.user)" />
-    </el-col>
-    <el-col v-bind:span="18">
-      <el-row>
-        <el-col v-bind:span="8">
-          <div class="message-user">
-            <div>{{ message.user }}</div>
-          </div>
-        </el-col>
-        <el-col v-bind:span="16">
-          <div class="message-date">
-            <div>{{ message.date }}</div>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col v-bind:span="24">
-          <div class="message-value">
-            <div v-if="! is_editing">{{ message.value }}</div>
-            <div v-else message-editor>
-              <el-row>
-                <el-input type="textarea"
-                          autosize
-                          v-model="edit_message" />
-              </el-row>
-              <el-row>
-                <el-col v-bind:span="12">
-                  <el-button class="edit-button"
-                             type="primary"
-                             v-on:click="editDone(apply=true)">
-                    <div>Ok</div>
-                  </el-button>
-                </el-col>
-                <el-col v-bind:span="12">
-                  <el-button class="edit-button"
-                             type="primary"
-                             v-on:click="editDone">
-                    <div>Cancel</div>
-                  </el-button>
-                </el-col>
-              </el-row>
+  <el-col class="layer-color" v-bind:span="1">
+    a
+  </el-col>
+  <el-col v-bind:span="23">
+    <el-row v-show="hoverd">
+      <el-col v-bind:span="8">
+        <el-button class="reply-button" type="primary">
+          <div>Reply</div>
+        </el-button>
+      </el-col>
+      <el-col v-bind:span="8">
+        <el-button class="edit-button"
+                  type="primary"
+                  v-on:click="editStart">
+          <div>Edit</div>
+        </el-button>
+      </el-col>
+      <el-col v-bind:span="8">
+        <el-button class="delete-button"
+                  type="info"
+                  v-on:click="deleteMessage">
+          <div>Delete</div>
+        </el-button>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col v-bind:span="6">
+        <img class="user-icon" v-bind:src="icon(message.user)" />
+      </el-col>
+      <el-col v-bind:span="18">
+        <el-row>
+          <el-col v-bind:span="8">
+            <div class="message-user">
+              <div>{{ message.user }}</div>
             </div>
-          </div>
-        </el-col>
-      </el-row>
-    </el-col>
-  </el-row>
+          </el-col>
+          <el-col v-bind:span="16">
+            <div class="message-date">
+              <div>{{ message.date }}</div>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col v-bind:span="24">
+            <div class="message-value">
+              <div v-if="! is_editing">{{ message.value }}</div>
+              <div v-else message-editor>
+                <el-row>
+                  <el-input type="textarea"
+                            autosize
+                            v-model="edit_message" />
+                </el-row>
+                <el-row>
+                  <el-col v-bind:span="12">
+                    <el-button class="edit-button"
+                              type="primary"
+                              v-on:click="editDone(apply=true)">
+                      <div>Ok</div>
+                    </el-button>
+                  </el-col>
+                  <el-col v-bind:span="12">
+                    <el-button class="edit-button"
+                              type="primary"
+                              v-on:click="editDone">
+                      <div>Cancel</div>
+                    </el-button>
+                  </el-col>
+                </el-row>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+      </el-col>
+    </el-row>
+  </el-col>
 </div>
