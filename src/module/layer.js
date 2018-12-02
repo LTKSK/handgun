@@ -8,7 +8,6 @@ export class Layer {
   }
 
   reset() {
-    this.color = [1.0, 1.0, 1.0, 1.0]
     this.vertices = []
     this.polygon_count = 0
     this.start_indices = []

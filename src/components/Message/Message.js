@@ -23,6 +23,11 @@ export default {
       "icon",
       "current_layer"
     ]),
+    styleObject() {
+      return {
+        backgroundColor: this._layerColorToStyle()
+      }
+    }
   },
   methods: {
     ...mapActions([
@@ -30,6 +35,23 @@ export default {
       EDIT_MESSAGE,
       DELETE_MESSAGE
     ]),
+    _isSameColor(layer, color) {
+      return layer.color[0] === color[0]
+             && layer.color[1] === color[1]
+             && layer.color[2] === color[2]
+    },
+    _layerColorToStyle() {
+      //TODO: layer from layers at index that message has.
+      const layer = this.current_layer
+      if(this._isSameColor(layer, [1, 0, 0, 1])) { return "#ff0000" }
+      if(this._isSameColor(layer, [0, 1, 0, 1])) { return "#00ff00" }
+      if(this._isSameColor(layer, [0, 0, 1, 1])) { return "#0000ff" }
+      if(this._isSameColor(layer, [1, 1, 0, 1])) { return "#ffff00" }
+      if(this._isSameColor(layer, [0, 1, 1, 1])) { return "#00ffff" }
+      if(this._isSameColor(layer, [1, 0, 1, 1])) { return "#ff00ff" }
+      if(this._isSameColor(layer, [0, 0, 0, 1])) { return "#000000" }
+      if(this._isSameColor(layer, [1, 1, 1, 1])) { return "#ffffff" }
+    },
     _notifyError(message) {
       this.$notify({
         title: "Failded!",
