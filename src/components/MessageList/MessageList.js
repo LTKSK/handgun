@@ -55,13 +55,11 @@ export default {
       const index = this.messages
                         .map(message => message.index)
                         .reduce((a, b) => a > b ? a : b, 0) + 1
-      const layer_index = this.layers.indexOf(this.current_layer)
-      console.log(layer_index)
-      // this.ADD_MESSAGE({"channel_name": this.$route.params.channelname,
-      //                   "index": index,
-      //                   "message":this.message_value,
-      //                   "user": this.logged_in_user})
-      //   .catch(error => this._notifyError(`send message failed! ${error.message}`))
+      this.ADD_MESSAGE({"channel_name": this.$route.params.channelname,
+                        "index": index,
+                        "message":this.message_value,
+                        "user": this.logged_in_user})
+        .catch(error => this._notifyError(`send message failed! ${error.message}`))
       this.message_value = "";
     }
   }

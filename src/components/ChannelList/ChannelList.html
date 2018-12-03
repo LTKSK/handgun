@@ -1,12 +1,13 @@
 <div>
-  <router-link v-for="channel in channels"
-                v-bind:key="channel"
-                v-bind:to="{name: 'review-page', params: {channelname: channel}}">
-    <div index="channel" v-if="channel!=currentChannel">
-      <span class="channel-button">{{ channel }}</span>
+  <router-link class="channel-links"
+               v-for="channel in channels"
+               v-bind:key="channel"
+               v-bind:to="{name: 'review-page', params: {channelname: channel}}">
+    <div class="channel-button" index="channel" v-if="channel!=currentChannel">
+      <span>{{ channel }}</span>
     </div>
-    <div index="channel" v-else>
-      <span class="current-channel">{{ channel }}</span>
+    <div class="current-channel" index="channel" v-else>
+      <span>{{ channel }}</span>
     </div>
   </router-link>
 </div>
