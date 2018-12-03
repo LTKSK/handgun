@@ -109,5 +109,3 @@ export default {
     content.addEventListener("mouseleave", this._mouseleave)
   },
 }
-
-

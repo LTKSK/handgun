@@ -1,12 +1,12 @@
-<el-menu-item-group>
+<div>
   <router-link v-for="channel in channels"
                 v-bind:key="channel"
                 v-bind:to="{name: 'review-page', params: {channelname: channel}}">
-    <el-menu-item index="channel" v-if="channel!=currentChannel">
+    <div index="channel" v-if="channel!=currentChannel">
       <span class="channel-button">{{ channel }}</span>
-    </el-menu-item>
-    <el-menu-item index="channel" v-else>
+    </div>
+    <div index="channel" v-else>
       <span class="current-channel">{{ channel }}</span>
-    </el-menu-item>
+    </div>
   </router-link>
-</el-menu-item-group>
+</div>
