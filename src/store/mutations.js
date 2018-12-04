@@ -73,7 +73,7 @@ export default {
     if(state.layers === null) {
       return
     }
-    state.current_layer = state.layers[state.layers.length-1]
+    state.current_layer = state.layers[0]
   },
   [SET_CURRENT_LAYER](state, layer) {
     state.current_layer = new Layer(layer.color,

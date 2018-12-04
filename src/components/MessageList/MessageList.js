@@ -55,6 +55,13 @@ export default {
       const index = this.messages
                         .map(message => message.index)
                         .reduce((a, b) => a > b ? a : b, 0) + 1
+      const layer_index = this.layers.indexOf(this.current_layer)
+      console.log(this.current_layer)
+      for (let layer of this.layers) {
+        console.log(layer == this.current_layer)
+        console.log(layer === this.current_layer)
+        console.log("================================================")
+      }
       this.ADD_MESSAGE({"channel_name": this.$route.params.channelname,
                         "index": index,
                         "message":this.message_value,
