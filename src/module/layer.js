@@ -1,10 +1,11 @@
 export class Layer {
-  constructor(color, polygon_count, vertices, start_indices, vertex_counts) {
+  constructor(color, polygon_count, vertices, start_indices, vertex_counts, id) {
     this.color = color
     this.polygon_count = polygon_count
     this.vertices = vertices
     this.start_indices = start_indices
     this.vertex_counts = vertex_counts
+    this.id = id
   }
 
   reset() {

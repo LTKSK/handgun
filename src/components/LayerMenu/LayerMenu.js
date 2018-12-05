@@ -55,7 +55,7 @@ export default {
     },
     addLayer() {
       // add to head of layers
-      store.commit(UPDATE_LAYERS, [new Layer(this.add_layer_color, 0, [], [], []),
+      store.commit(UPDATE_LAYERS, [new Layer(this.add_layer_color, 0, [], [], [], this.layers.length),
                                    ...this.layers])
       this.layer_adding = false
     },

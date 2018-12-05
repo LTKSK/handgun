@@ -140,7 +140,7 @@ export async function fetchLayers(channel_name){
   const json = await response.json()
   // if channel has not layers yet, make a layer.
   if (json.layers === undefined) {
-    return [new Layer([1.0, 1.0, 1.0, 1.0], 0, [], [], [])]
+    return [new Layer([1.0, 1.0, 1.0, 1.0], 0, [], [], [], 0)]
   }
   const layers = []
   for(let layer_data of json.layers){

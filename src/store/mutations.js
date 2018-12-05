@@ -80,6 +80,7 @@ export default {
                                     layer.polygon_count,
                                     layer.vertices,
                                     layer.start_indices,
-                                    layer.vertex_counts)
+                                    layer.vertex_counts,
+                                    layer.id)
   },
 }
