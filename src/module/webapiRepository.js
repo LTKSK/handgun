@@ -148,7 +148,8 @@ export async function fetchLayers(channel_name){
                           layer_data.polygon_count,
                           layer_data.vertices,
                           layer_data.start_indices,
-                          layer_data.vertex_counts))
+                          layer_data.vertex_counts,
+                          layer_data.id))
   }
   return layers
 }

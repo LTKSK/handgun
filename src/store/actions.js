@@ -49,6 +49,7 @@ export default {
       "value": payload.message,
       "date": moment().utc().toISOString(),
       "user": payload.user,
+      "layer_id": payload.layer_id
     }
     await postMessage(payload.channel_name, message_data)
     commit(ADD_MESSAGE, message_data)
