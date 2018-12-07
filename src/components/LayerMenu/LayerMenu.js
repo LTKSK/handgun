@@ -58,6 +58,11 @@ export default {
       store.commit(UPDATE_LAYERS, [new Layer(this.add_layer_color, 0, [], [], [], this.layers.length),
                                    ...this.layers])
       this.layer_adding = false
+      this.UPDATE_LAYERS({"channel_name": this.$route.params.channelname,
+                          "layers": this.layers})
+        .catch(_ => {
+          this._saveFailed()
+        })
     },
     saveLayers() {
       this.UPDATE_LAYERS({"channel_name": this.$route.params.channelname,

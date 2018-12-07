@@ -21,6 +21,7 @@ export default {
   computed: {
     ...mapGetters([
       "icon",
+      "layers",
       "current_layer"
     ]),
     styleObject() {
@@ -40,8 +41,8 @@ export default {
              && layer.color[1] === color[1]
              && layer.color[2] === color[2]
     },
-    layerFromId(id) {
-      for (let layer of this.layers) {
+    _layerFromId(id) {
+      for (let layer of this.layers || []) {
         if (layer.id !== id) {
           continue
         }
@@ -49,9 +50,7 @@ export default {
       }
     },
     _layerColorToStyle() {
-      //TODO: layer from layers at index that message has.
-      const layer = this.current_layer
-      console.log(this.message.layer_id)
+      const layer = this._layerFromId(this.message.layer_id)
       if(this._isSameColor(layer, [1, 0, 0, 1])) { return "#ff0000" }
       if(this._isSameColor(layer, [0, 1, 0, 1])) { return "#00ff00" }
       if(this._isSameColor(layer, [0, 0, 1, 1])) { return "#0000ff" }
