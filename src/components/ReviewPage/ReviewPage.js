@@ -5,12 +5,29 @@ import {
   mapGetters,
   mapActions
 } from 'vuex'
-import { GET_LAYERS } from '@/store/mutation-types'
+import {
+  GET_LAYERS,
+  UPDATE_LAYERS
+} from '@/store/mutation-types'
 
 export default {
   name: 'review-page',
   watch:{
-    "$route": "GET_LAYERS",
+    "$route" (to, from) {
+      if (! /channel\/.*/.test(from.path)) {
+        this.GET_LAYERS(to.params.channelname)
+        return
+      }
+      this.UPDATE_LAYERS({"channel_name": from.params.channelname,
+                          "layers": this.layers})
+        .then(() => {
+          // if to.path is channel/*, update layers.
+          if (/channel\/.*/.test(to.path)) {
+            this.GET_LAYERS(to.params.channelname)
+          }
+        })
+    },
+
   },
   data() {
     return {}
@@ -30,7 +47,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      GET_LAYERS
+      GET_LAYERS,
+      UPDATE_LAYERS
     ]),
   },
   mounted() {
