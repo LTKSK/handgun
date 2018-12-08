@@ -5,14 +5,13 @@ import {
   mapGetters,
   mapActions
 } from 'vuex'
-import {
-  GET_LAYERS,
-  UPDATE_LAYERS
-} from '@/store/mutation-types'
-import store from "@/store"
+import { GET_LAYERS } from '@/store/mutation-types'
 
 export default {
   name: 'review-page',
+  watch:{
+    "$route": "GET_LAYERS",
+  },
   data() {
     return {}
   },
@@ -31,40 +30,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      GET_LAYERS,
-      UPDATE_LAYERS
+      GET_LAYERS
     ]),
-    _saveSucceeded() {
-      this.$notify({
-        title: "Success!",
-        message: "Save layers data succeeded",
-        type: "success"
-      })
-    },
-    _saveFailed() {
-      this.$notify({
-        title: "Failed!",
-        message: "Save layers data failed",
-        type: "error"
-      })
-    },
-    saveLayers() {
-      this.UPDATE_LAYERS({"channel_name": this.$route.params.channelname,
-                          "layers": this.layers})
-        .then(() => {
-          this._saveSucceeded()
-        }).catch(_ => {
-          this._saveFailed()
-        })
-    },
-    undoLayer() {
-      this.layers[0].undo()
-      store.commit(UPDATE_LAYERS, this.layers)
-    },
-    resetLayer() {
-      this.layers[0].reset()
-      store.commit(UPDATE_LAYERS, this.layers)
-    },
   },
   mounted() {
     this.GET_LAYERS(this.$route.params.channelname)

@@ -12,6 +12,9 @@
     <el-col>
       <el-button type="primary" v-on:click="saveLayers">Save Layers</el-button>
     </el-col>
+    <el-col>
+      <el-button type="danger" v-on:click="deleteLayer">Delete Layer</el-button>
+    </el-col>
   </el-row>
   <el-row v-show="layer_adding">
     <el-col v-bind:span="6"><input type="button" class="red-button" v-on:click="setColor([1.0, 0.0, 0.0, 1.0])"></el-col>

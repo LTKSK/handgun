@@ -81,6 +81,8 @@ export default {
       this.current_layer.reset()
       store.commit(SET_CURRENT_LAYER, this.current_layer)
     },
+    deleteLayer() {
+    },
   },
   mounted() {
     this.GET_LAYERS(this.$route.params.channelname)

@@ -1,5 +1,8 @@
 import { mapGetters, mapActions } from 'vuex'
-import { GET_CHANNELS } from '@/store/mutation-types'
+import {
+  GET_CHANNELS,
+  GET_LAYERS
+} from '@/store/mutation-types'
 
 export default {
   name: 'channel-list',
@@ -18,6 +21,7 @@ export default {
   methods: {
     ...mapActions([
       GET_CHANNELS,
+      GET_LAYERS
     ]),
   },
   mounted() {

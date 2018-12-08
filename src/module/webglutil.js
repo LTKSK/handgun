@@ -105,6 +105,9 @@ export function drawImage(gl, image) {
 }
 
 export function drawLines(gl, layer) {
+  if (! layer) {
+    return
+  }
   const program = createShaderProgram(gl, "#line-vs", "#line-fs")
   //prepare buffers
   const vertex_buffer = gl.createBuffer()
