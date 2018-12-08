@@ -51,6 +51,8 @@ export default {
     },
     _layerColorToStyle() {
       const layer = this._layerFromId(this.message.layer_id)
+      if(layer === undefined) { return "#ffffff"}
+
       if(this._isSameColor(layer, [1, 0, 0, 1])) { return "#ff0000" }
       if(this._isSameColor(layer, [0, 1, 0, 1])) { return "#00ff00" }
       if(this._isSameColor(layer, [0, 0, 1, 1])) { return "#0000ff" }
