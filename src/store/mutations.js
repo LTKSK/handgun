@@ -13,7 +13,8 @@ import {
   GET_USERS,
   GET_LAYERS,
   UPDATE_LAYERS,
-  SET_CURRENT_LAYER
+  SET_CURRENT_LAYER,
+  DELETE_LAYER
 } from './mutation-types'
 
 
@@ -83,4 +84,7 @@ export default {
                                     layer.vertex_counts,
                                     layer.id)
   },
+  [DELETE_LAYER](state, layer) {
+    state.layers = state.layers.filter(exists_layer => exists_layer.id !== layer.id)
+  }
 }

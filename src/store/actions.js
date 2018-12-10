@@ -11,7 +11,8 @@ import {
   GET_ICON,
   GET_USERS,
   GET_LAYERS,
-  UPDATE_LAYERS
+  UPDATE_LAYERS,
+  DELETE_LAYER
 } from './mutation-types'
 import {
   login,
@@ -90,5 +91,9 @@ export default {
   async [UPDATE_LAYERS]({ commit }, payload) {
     await putLayers(payload.channel_name, payload.layers)
     commit(UPDATE_LAYERS, payload.layers)
+  },
+  async [DELETE_LAYER]({ commit }, payload) {
+    await deleteLayer(payload.channel_name, payload.layer)
+    commit(DELETE_LAYER, payload.layer)
   },
 }

@@ -160,3 +160,9 @@ export async function putLayers(channel_name, layers){
                                                  body: JSON.stringify(layers)})
   return response.ok
 }
+
+export async function deleteLayer(channel_name, layer){
+  const response = await fetchWithErrorHandring(`${layers_url}/${channel_name}/${layer.id}`,
+                                                {method: "DELETE"})
+  return response.ok
+}
