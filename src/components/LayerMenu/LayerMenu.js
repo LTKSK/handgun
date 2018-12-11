@@ -5,7 +5,8 @@ import {
 import {
   GET_LAYERS,
   UPDATE_LAYERS,
-  SET_CURRENT_LAYER
+  SET_CURRENT_LAYER,
+  DELETE_LAYER
 } from '@/store/mutation-types'
 import { Layer } from "@/module/layer"
 import store from "@/store"
@@ -28,7 +29,8 @@ export default {
   methods: {
     ...mapActions([
       GET_LAYERS,
-      UPDATE_LAYERS
+      UPDATE_LAYERS,
+      DELETE_LAYER
     ]),
     _saveSucceeded() {
       this.$notify({
@@ -82,6 +84,8 @@ export default {
       store.commit(SET_CURRENT_LAYER, this.current_layer)
     },
     deleteLayer() {
+      this.DELETE_LAYER({"channel_name": this.$route.params.channelname,
+                         "layer": this.current_layer})
     },
   },
   mounted() {

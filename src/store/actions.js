@@ -27,7 +27,8 @@ import {
   fetchUsers,
   fetchUserIcon,
   fetchLayers,
-  putLayers
+  putLayers,
+  deleteLayer
 } from '@/module/webapiRepository'
 import moment from 'moment'
 
