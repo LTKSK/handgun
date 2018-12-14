@@ -86,5 +86,6 @@ export default {
   },
   [DELETE_LAYER](state, layer) {
     state.layers = state.layers.filter(exists_layer => exists_layer.id !== layer.id)
+    state.current_layer = state.layers[0]
   }
 }
