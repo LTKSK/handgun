@@ -13,7 +13,7 @@
       <el-button type="primary" v-on:click="saveLayers">Save Layers</el-button>
     </el-col>
     <el-col>
-      <el-button type="danger" v-on:click="deleteLayer">Delete Layer</el-button>
+      <el-button type="danger" v-on:click="deleteLayer" v-bind:disabled="layers.length<=1">Delete Layer</el-button>
     </el-col>
   </el-row>
   <el-row v-show="layer_adding">
