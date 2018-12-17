@@ -96,7 +96,7 @@ export default {
   async [DELETE_LAYER]({ commit }, payload) {
     await deleteLayer(payload.channel_name, payload.layer)
     commit(DELETE_LAYER, payload.layer)
-    const messages = await fetchMessages(channel_name)
+    const messages = await fetchMessages(payload.channel_name)
     commit(GET_MESSAGES, messages)
   },
 }

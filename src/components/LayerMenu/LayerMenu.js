@@ -1,3 +1,4 @@
+import * as uuid from 'uuid'
 import {
   mapGetters,
   mapActions
@@ -57,7 +58,12 @@ export default {
     },
     addLayer() {
       // add to head of layers
-      store.commit(UPDATE_LAYERS, [new Layer(this.add_layer_color, 0, [], [], [], this.layers.length),
+      store.commit(UPDATE_LAYERS, [new Layer(this.add_layer_color,
+                                             0,
+                                             [],
+                                             [],
+                                             [],
+                                             uuid.v4()),
                                    ...this.layers])
       this.layer_adding = false
       this.UPDATE_LAYERS({"channel_name": this.$route.params.channelname,
