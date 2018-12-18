@@ -64,12 +64,14 @@ export default {
     await deleteMessage(message.channel, message.index)
     commit(DELETE_MESSAGE, message)
   },
-  async [GET_CHANNELS]({ commit }, headers) {
-    const channels = await fetchChannels(headers)
+  async [GET_CHANNELS]({ commit, state }) {
+    const header = {"Authorization": `Bearer ${state.jwt}`}
+    const channels = await fetchChannels(header)
     commit(GET_CHANNELS, channels)
   },
-  async [ADD_CHANNEL]({ commit }, payload) {
-    await postChannel(payload.channel, payload.headers)
+  async [ADD_CHANNEL]({ commit, state }, payload) {
+    const header = {"Authorization": `Bearer ${state.jwt}`}
+    await postChannel(payload.channel, header)
     await postReviewTarget(payload.channel, payload.file)
     commit(ADD_CHANNEL, payload.channel)
   },

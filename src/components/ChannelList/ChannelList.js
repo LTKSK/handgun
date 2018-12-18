@@ -11,8 +11,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'channels',
-      'header'
+      'channels'
     ]),
     currentChannel() {
       return this.$route.params.channelname
@@ -25,7 +24,7 @@ export default {
     ]),
   },
   mounted() {
-    this.GET_CHANNELS(this.header)
+    this.GET_CHANNELS()
       .catch(error => {
         this.$notify({
           title: "Failed!",
