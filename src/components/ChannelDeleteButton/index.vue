@@ -8,7 +8,7 @@
 <script>
 import { DELETE_CHANNEL } from '@/store/mutation-types'
 import { deleteChannel } from '@/module/webapiRepository'
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: 'delete-button',
   props: ["channel"],
@@ -16,9 +16,6 @@ export default {
     return {}
   },
   computed: {
-    ...mapGetters([
-      'header'
-    ]),
   },
   methods: {
     ...mapActions([
@@ -34,7 +31,7 @@ export default {
           type: "warning",
         }
       ).then(() => {
-        this.DELETE_CHANNEL({channel: this.channel, headers: this.header})
+        this.DELETE_CHANNEL(this.channel)
           .then(() => {
             this.$notify({
               title: "Success!",

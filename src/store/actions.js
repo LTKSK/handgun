@@ -75,9 +75,10 @@ export default {
     await postReviewTarget(payload.channel, payload.file)
     commit(ADD_CHANNEL, payload.channel)
   },
-  async [DELETE_CHANNEL]({ commit }, payload) {
-    await deleteChannel(payload.channel, payload.headers)
-    commit(DELETE_CHANNEL, payload.channel)
+  async [DELETE_CHANNEL]({ commit, state }, channel) {
+    const header = {"Authorization": `Bearer ${state.jwt}`}
+    await deleteChannel(channel, header)
+    commit(DELETE_CHANNEL, channel)
   },
   async [GET_ICON]({ commit }, username) {
     const icon = await fetchUserIcon(username)
