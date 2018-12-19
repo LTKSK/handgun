@@ -8,5 +8,5 @@ export default {
   components: {
     'channel-form': ChannelForm,
     'channel-list': ChannelList
-  },
+  }
 }

@@ -1,6 +1,13 @@
 <el-container class="channel">
   <el-aside class="channel-list">
-    <channel-list />
+    <el-menu mode="vertical" v-bind:default-openeds="['1']">
+      <el-submenu index="1">
+        <template slot="title">
+          <span style="font-weight: bold;">Channels</span>
+        </template>
+        <channel-list />
+      </el-submenu>
+    </el-menu>
   </el-aside>
   <el-main>
     <channel-form />
