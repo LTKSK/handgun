@@ -57,7 +57,7 @@ export default {
   async [types.ADD_CHANNEL]({ commit, state }, payload) {
     const header = {"Authorization": `Bearer ${state.jwt}`}
     await postChannel(payload.channel, header)
-    await postReviewTarget(payload.channel, payload.file)
+    await postReviewTarget(payload.channel, payload.file, header)
     commit(types.ADD_CHANNEL, payload.channel)
   },
   async [types.DELETE_CHANNEL]({ commit, state }, channel) {

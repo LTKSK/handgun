@@ -95,11 +95,12 @@ export async function putChannelUsers(channel_name, user_names, headers){
   return response.ok
 }
 
-export async function postReviewTarget(channel_name, file){
+export async function postReviewTarget(channel_name, file, headers) {
   const form = new FormData()
   form.append(file.name, file)
   const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/review-targets`,
                                                 {method: "POST",
+                                                 headers: headers,
                                                  body: form})
   return response.ok
 }
