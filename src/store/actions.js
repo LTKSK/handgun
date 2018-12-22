@@ -73,8 +73,9 @@ export default {
     const users = await fetchUsers()
     commit(types.GET_USERS, users)
   },
-  async [types.GET_LAYERS]({ commit }, channel_name) {
-    const layers = await fetchLayers(channel_name)
+  async [types.GET_LAYERS]({ commit, state }, channel_name) {
+    const header = {"Authorization": `Bearer ${state.jwt}`}
+    const layers = await fetchLayers(channel_name, header)
     commit(types.GET_LAYERS, layers)
   },
   async [types.UPDATE_LAYERS]({ commit }, payload) {

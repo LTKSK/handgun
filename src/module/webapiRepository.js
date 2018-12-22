@@ -136,8 +136,9 @@ export async function deleteMessage(channel_name, index){
   return response.ok
 }
 
-export async function fetchLayers(channel_name){
-  const response = await fetchWithErrorHandring(`${layers_url}/${channel_name}`)
+export async function fetchLayers(channel_name, headers){
+  const response = await fetchWithErrorHandring(`${layers_url}/${channel_name}`,
+                                                {method: "GET", headers})
   const json = await response.json()
   // if channel has not layers yet, make a layer.
   if (json.layers === undefined) {
