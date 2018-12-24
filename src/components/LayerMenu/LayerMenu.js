@@ -105,5 +105,8 @@ export default {
   mounted() {
     this.GET_LAYERS(this.$route.params.channelname)
     document.onkeydown = this.onKeyDown
+  },
+  beforeDestroy() {
+    document.onkeydown = null
   }
 }
