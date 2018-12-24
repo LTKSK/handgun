@@ -93,8 +93,17 @@ export default {
       this.DELETE_LAYER({"channel_name": this.$route.params.channelname,
                          "layer": this.current_layer})
     },
+    onKeyDown(event) {
+      if (event.key === "z" && event.ctrlKey) {
+        this.undoLayer()
+      }
+      if (event.key === "s" && event.ctrlKey) {
+        this.saveLayers()
+      }
+    }
   },
   mounted() {
     this.GET_LAYERS(this.$route.params.channelname)
+    document.onkeydown = this.onKeyDown
   }
 }
