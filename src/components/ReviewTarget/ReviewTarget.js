@@ -25,7 +25,8 @@ export default {
   computed: {
     ...mapGetters([
       "layers",
-      "current_layer"
+      "current_layer",
+      "header"
     ]),
   },
   methods: {
@@ -87,7 +88,7 @@ export default {
     },
     setup() {
       // review-target setup
-      fetchReviewTarget(this.$route.params.channelname)
+      fetchReviewTarget(this.$route.params.channelname, this.header)
         .then(blob => {
           this.image = new Image()
           const url = URL.createObjectURL(blob)

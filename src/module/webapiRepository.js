@@ -105,8 +105,9 @@ export async function postReviewTarget(channel_name, file, headers) {
   return response.ok
 }
 
-export async function fetchReviewTarget(channel_name){
-  const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/review-targets`)
+export async function fetchReviewTarget(channel_name, headers){
+  const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/review-targets`,
+                                                {method: "GET", headers})
   const blob = await response.blob()
   return blob
 }

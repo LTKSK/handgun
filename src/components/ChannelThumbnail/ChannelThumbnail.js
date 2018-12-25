@@ -1,4 +1,5 @@
 import { fetchReviewTarget } from "@/module/webapiRepository"
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'channel-thumbnail',
@@ -7,6 +8,11 @@ export default {
     return {
       thumbnail: null,
     }
+  },
+  computed: {
+    ...mapGetters([
+      "header"
+    ]),
   },
   methods: {
     _resize_image(image, width, height) {
@@ -28,7 +34,7 @@ export default {
     },
   },
   mounted() {
-    fetchReviewTarget(this.channel)
+    fetchReviewTarget(this.channel, this.header)
       .then(blob => {
         const image = new Image()
         image.src = URL.createObjectURL(blob)
