@@ -20,6 +20,7 @@ export default {
   computed: {
     ...mapGetters([
       "logged_in_user",
+      "header",
       "users",
       "icon",
     ]),
@@ -40,9 +41,7 @@ export default {
     },
     invite() {
       const enabled_users = this.users_data.filter(user => user.enabled)
-      console.log(this.channel, enabled_users)
-      // todo: get channelname from parent component
-      // putChannelUsers(this.channel, enabled_users, this.header)
+      putChannelUsers(this.channel, enabled_users, this.header)
     },
     _setupUsers: async function() {
       this.users_data = []

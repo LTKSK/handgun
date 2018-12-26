@@ -87,11 +87,11 @@ export async function deleteChannel(channel_name, headers){
   return response.ok
 }
 
-export async function putChannelUsers(channel_name, user_names, headers){
+export async function putChannelUsers(channel_name, users, headers){
   const response = await fetchWithErrorHandring(`${channels_url}/${channel_name}/users`,
                                                 {method: "PUT",
                                                  headers: headers,
-                                                 body: JSON.stringify({user_name: user_names})})
+                                                 body: JSON.stringify({users})})
   return response.ok
 }
 
