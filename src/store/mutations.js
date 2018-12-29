@@ -46,7 +46,9 @@ export default {
                      .filter(exists_message => exists_message.index !== message.index)
   },
   [GET_CHANNELS](state, channels) {
-    state.channels = channels
+    state.channels = [
+      ...channels
+    ]
   },
   [ADD_CHANNEL](state, channel) {
     state.channels.push(channel)
@@ -58,7 +60,7 @@ export default {
   [GET_ICON](state, payload) {
     // this code means emit to vue what 'state.icons' change
     state.icons = {
-      ...state.icons,
+      ...state.icons
     }
     state.icons[payload.username] = payload.icon
   },

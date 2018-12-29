@@ -22,7 +22,8 @@ export default {
       "logged_in_user",
       "header",
       "users",
-      "icon",
+      "channel_users",
+      "icon"
     ]),
     channel() {
       return this.$route.params.channelname
@@ -41,6 +42,7 @@ export default {
     },
     invite() {
       const enabled_users = this.users_data.filter(user => user.enabled)
+      // console.log(this.channel_users(this.channel))
       putChannelUsers(this.channel, enabled_users, this.header)
     },
     _setupUsers: async function() {

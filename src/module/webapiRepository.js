@@ -68,8 +68,7 @@ export async function fetchChannels(headers){
   const response = await fetchWithErrorHandring(channels_url,
                                                 {method: "GET",
                                                  headers: headers})
-  const json = await response.json()
-  return json.map(channel => channel.name)
+  return await response.json()
 }
 
 export async function postChannel(channel_name, headers){
