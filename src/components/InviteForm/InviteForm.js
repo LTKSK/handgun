@@ -7,7 +7,7 @@ import {
   GET_USERS
 } from "@/store/mutation-types"
 import {
-  putChannelUsers,
+  putChannelUsers
 } from "@/module/webapiRepository"
 
 export default {
@@ -32,7 +32,7 @@ export default {
   methods: {
     ...mapActions([
       GET_ICON,
-      GET_USERS,
+      GET_USERS
     ]),
     getIconSource(username) {
       return this.icon(username)
@@ -51,7 +51,6 @@ export default {
         }
         return true
       })
-      // console.log(this.channel_users(this.channel))
       putChannelUsers(this.channel, enabled_users, this.header)
     },
     _setupUsers: async function() {
