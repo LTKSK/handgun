@@ -41,17 +41,26 @@ export default {
       this.$router.go(-1)
     },
     invite() {
-      const enabled_users = this.users_data.filter(user => {
-        if (!user.enabled) {
-          return false
-        }
-        // User should not exist in channel_users.
-        if (this.channel_users(this.channel).filter(channel_user => channel_user.name === user.name).length === 0) {
-          return false
-        }
-        return true
-      })
+      const enabled_users = this.users_data
+        .filter(user => {
+          if (!user.enabled) {
+            return false
+          }
+          // User should not exist in channel_users.
+          if (this.channel_users(this.channel).filter(channel_user => channel_user.name === user.name).length === 0) {
+            return false
+          }
+          return true
+        })
+        .map(user => user.name)
       putChannelUsers(this.channel, enabled_users, this.header)
+        .then(() => {
+          this.$notify({
+            title: "Success!",
+            message: `Channel users updated!`,
+            type: "success"
+          })
+      })
     },
     _setupUsers: async function() {
       this.users_data = []
