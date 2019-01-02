@@ -15,7 +15,7 @@ export const messages = state => {
 }
 export const channels = state => state.channels.map(channel => channel.name)
 export const channel_users = state => channel => {
-  const channels = state.channels.filter(exists_channel => exists_channel === channel)
+  const channels = state.channels.filter(exists_channel => exists_channel.name === channel)
   if (channels.length === 0) {
     return []
   }
