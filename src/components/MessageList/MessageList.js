@@ -12,15 +12,15 @@ export default {
   name: "message-list",
   props: ["channel"],
   watch:{
-    "$route": "setupMessages",
+    "$route": "setupMessages"
   },
   data() {
     return {
-      message_value: "",
+      message_value: ""
     }
   },
   components: {
-    "message": Message,
+    "message": Message
   },
   beforeMount() {
     this.setupMessages()
@@ -35,7 +35,7 @@ export default {
   methods: {
     ...mapActions([
       GET_MESSAGES,
-      ADD_MESSAGE,
+      ADD_MESSAGE
     ]),
     _notifyError(message) {
       this.$notify({
