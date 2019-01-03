@@ -6,9 +6,7 @@ import {
   GET_ICON,
   GET_USERS
 } from "@/store/mutation-types"
-import {
-  putChannelUsers
-} from "@/module/webapiRepository"
+import { putChannelUsers } from "@/module/webapiRepository"
 
 export default {
   name: "invite-form",
@@ -41,14 +39,9 @@ export default {
       this.$router.go(-1)
     },
     invite() {
-      const channel_users = this.channel_users(this.channel)
       const enabled_users = this.users_data
         .filter(user => {
           if (!user.enabled) {
-            return false
-          }
-          // User should not exist in channel_users.
-          if (channel_users.filter(channel_user => channel_user.name === user.name).length === 0) {
             return false
           }
           return true
@@ -62,14 +55,20 @@ export default {
             message: `Channel users updated!`,
             type: "success"
           })
-      })
+        })
+        .then(this._setupUsers)
     },
     _setupUsers: async function() {
       this.users_data = []
+      const channel_users = this.channel_users(this.channel)
       await this.GET_USERS()
       for(let user of this.users) {
         // ignore logged in user
         if (user.name === this.logged_in_user) {
+          continue
+        }
+          // User should not exist in channel_users.
+        if (channel_users.filter(channel_user => channel_user.name === user.name).length !== 0) {
           continue
         }
         await this.GET_ICON(user.name)
