@@ -1,6 +1,6 @@
 import MenuList from '@/components/MenuList'
 import MessageList from '@/components/MessageList'
-import ReviewTarget from '@/components/ReviewTarget'
+import ReviewTargetImage from '@/components/ReviewTargetImage'
 import {
   mapGetters,
   mapActions
@@ -41,7 +41,7 @@ export default {
     }
   },
   components: {
-    'review-target': ReviewTarget,
+    'review-target': ReviewTargetImage,
     'menu-list': MenuList,
     'message-list': MessageList,
   },
